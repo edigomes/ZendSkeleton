@@ -18,7 +18,30 @@ class IndexController extends AbstractActionController {
     public $em;
     
     public function indexAction() {
+        
+        // Query Builder
+        
+        $qb = $this->getEm()->createQueryBuilder();
+        //$qb ->select('c','s')
+        $qb ->select(
+                'c.id AS id',
+                'c.content AS content',
+                's.content AS subcontent'
+            )
+            ->from('Application\Entity\Content', 'c')
+            ->leftJoin('Application\Entity\Subcontent', 's',
+            \Doctrine\ORM\Query\Expr\Join::WITH, 'c.id = s.content2'
+        );
 
+        $contents = $qb->getQuery()->getResult();
+        $vars['contents'] = $contents;
+        
+        //var_dump($vars);
+        
+        //->where('u = :user')
+        //->setParameter('user', $users)
+        //->orderBy('a.created_at', 'DESC');
+        
         // New
         /*$entity = new Content();
         $entity->setContent("new new content!");
@@ -38,8 +61,8 @@ class IndexController extends AbstractActionController {
         //------------------------------------------------------------*/
         
         // List
-        $contents = $this->getEm()->getRepository('Application\Entity\Content')->findAll();
-        $vars['contents'] = $contents;
+        //$contents = $this->getEm()->getRepository('Application\Entity\Content')->findAll();
+        //$vars['contents'] = $contents;
         
         return new ViewModel($vars);
         

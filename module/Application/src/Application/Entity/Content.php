@@ -1,14 +1,17 @@
 <?php
+
 namespace Application\Entity;
-  
+
 use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Content
  *
  * @ORM\Table(name="content")
  * @ORM\Entity
  */
-class Content {
+class Content
+{
     /**
      * @var integer
      *
@@ -17,6 +20,7 @@ class Content {
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
     /**
      * @var string
      *
@@ -24,18 +28,21 @@ class Content {
      */
     private $content;
     
-    public function getId() {
+    function getId() {
         return $this->id;
     }
-    public function setId($id) {
-        $this->id = $id;
-        return $this;
-    }
-    public function getContent() {
+
+    function getContent() {
         return $this->content;
     }
-    public function setContent($content) {
-        $this->content = $content;
-        return $this;
+
+    function setId($id) {
+        $this->id = $id;
     }
+
+    function setContent($content) {
+        $this->content = $content;
+    }
+
 }
+
