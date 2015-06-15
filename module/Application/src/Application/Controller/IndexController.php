@@ -12,6 +12,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Entity\Content;
+use Zend\View\Model\JsonModel;
 
 class IndexController extends AbstractActionController {
     
@@ -21,7 +22,7 @@ class IndexController extends AbstractActionController {
         
         // Query Builder
         
-        $qb = $this->getEm()->createQueryBuilder();
+        /*$qb = $this->getEm()->createQueryBuilder();
         //$qb ->select('c','s')
         $qb ->select(
                 'c.id AS id',
@@ -35,36 +36,46 @@ class IndexController extends AbstractActionController {
 
         $contents = $qb->getQuery()->getResult();
         $vars['contents'] = $contents;
-        
+
         //var_dump($vars);
-        
+
         //->where('u = :user')
         //->setParameter('user', $users)
         //->orderBy('a.created_at', 'DESC');
-        
+
         // New
         /*$entity = new Content();
         $entity->setContent("new new content!");
         // Persist
         $this->getEm()->persist($entity);
         $this->getEm()->flush();
-        
+
         //------------------------------------------------------------
-        
+
         // Update
         $entity_update = $this->getEm()->getRepository('Application\Entity\Content')->find(1);
         $entity_update->setContent('new updated content!');
         // Persist
         $this->getEm()->persist($entity);
         $this->getEm()->flush();
-        
+
         //------------------------------------------------------------*/
-        
+
         // List
-        //$contents = $this->getEm()->getRepository('Application\Entity\Content')->findAll();
-        //$vars['contents'] = $contents;
+        $contents = $this->getEm()->getRepository('Application\Entity\Content')->findAll();
+        $vars['contents'] = $contents;
         
         return new ViewModel($vars);
+        
+    }
+    
+    public function listaAction() {
+        
+        // List
+        $contents = $this->getEm()->getRepository('Application\Entity\Content')->findAll();
+        $vars['contents'] = $contents;
+        
+        return new JsonModel($vars);
         
     }
     

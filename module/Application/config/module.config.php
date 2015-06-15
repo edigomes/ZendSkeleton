@@ -15,10 +15,20 @@ return array(
             'home' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/',
+                    'route'    => '[/:action]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
                         'action'     => 'index',
+                    ),
+                ),
+            ),
+            'lista' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/lista',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'lista',
                     ),
                 ),
             ),

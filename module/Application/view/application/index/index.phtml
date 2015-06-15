@@ -2,7 +2,7 @@
 <div class="row">
     <?php foreach ($contents as $content) : ?>
         <div class="col-md-12">
-            <p><?php echo $content['id']." ".$content['content']." ".$content['subcontent']; //echo $content->getContent(); ?></p>
+            <p><?php echo $content->getId() . ";" . $content->getContent(); ?></p>
         </div>
     <?php endforeach; ?>
 </div>
