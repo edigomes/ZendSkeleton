@@ -72,17 +72,20 @@ class IndexController extends AbstractActionController {
     public function listaAction() {
         
         // List
-        $contents = $this->getEm()->getRepository('Application\Entity\Content')->findAll();
-        $vars['contents'] = $contents;
+        //$contents = $this->getEm()->getRepository('Application\Entity\Content')->findAll();
+        //$vars['contents'] = $contents;
         
-        return new JsonModel($vars);
+        $ContentService = $this->getServiceLocator()->get("Application\Service\Content");
+        $contents = array("contents" => $ContentService->fetchAll());
         
+        return new ViewModel($contents);
     }
     
+    /* Será descartado */
     protected function getEm() {
         if (null === $this->em) {
             $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        }
+    }
         return $this->em;
     }
     

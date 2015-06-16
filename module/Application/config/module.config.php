@@ -71,6 +71,15 @@ return array(
         ),
         'factories' => array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'Application\Service\Content' => function($sm){
+                $ContentService = new \Application\Service\Content();
+                $ContentService->setServiceLocator($sm);
+                
+                return $ContentService;
+            }
+        ),
+        'invokables' => array(
+            'Application\ContentService' => "Application\Service\Content"
         ),
     ),
     'translator' => array(
