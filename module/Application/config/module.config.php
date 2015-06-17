@@ -32,6 +32,19 @@ return array(
                     ),
                 ),
             ),
+            'abs' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    //'route' => '/system[/:table][/:id][/:data]',
+                    'route' => '/abs[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Abstract',
+                    ),
+                ),
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -94,10 +107,11 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Abstract' => 'Application\Controller\AbstractController',
         ),
     ),
-    'view_manager' => array(
+    /*'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
@@ -111,6 +125,12 @@ return array(
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
+        ),
+    )*/
+    // Saída somente em JSON
+    'view_manager' => array(//Add this config
+        'strategies' => array(
+            'ViewJsonStrategy',
         ),
     ),
     // Placeholder for console routes
