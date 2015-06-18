@@ -1,0 +1,77 @@
+/* 
+    Created on : 23/11/2014, 00:37:07
+    Author     : Edi
+*/
+
+.sucess {
+    z-index: 9999 !important;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.ngGrid {
+    height: 400px;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000;
+}
+
+.control-label {
+    margin-right: 5px !important;
+}
+
+form td {
+    height: 36px;
+}
+
+body {
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: #FDFDFD;
+}
+
+/* Create a medium height at 40px */
+.navbar-md {min-height:40px}
+.navbar-md .navbar-brand,
+.navbar-md .navbar-nav>li>a {padding-top:10px; padding-bottom:10px}
+.navbar-md .navbar-brand {height: 40px}  
+.navbar-md .navbar-toggle {margin: 6px 12px 6px 0px; padding: 6px 7px 6px 7px;}
+.navbar-md .navbar-toggle .icon-bar {width: 19px;}
+
+.ng-table th {
+  text-align: left !important;
+}
+
+.ng-table-pager {
+    padding: 15px !important;
+}
+
+.ng-table-pagination {
+    margin: 0 !important;
+}
+
+@media (max-width:370px) { 
+
+    .test {
+        margin-top: 10px;
+    }
+    
+}
+
+.modal-dialog-center {
+    margin-top: 25%;
+}
+
+.breadcrumb {
+    background-color: #F7F7F7 !important;
+    border: 1px solid #E2E2E2 !important;
+}

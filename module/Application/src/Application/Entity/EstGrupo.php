@@ -5,28 +5,28 @@ namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Content
+ * EstGrupo
  *
- * @ORM\Table(name="content")
+ * @ORM\Table(name="EST_grupo")
  * @ORM\Entity
  */
-class Content
+class EstGrupo
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="PK_grupo", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $pkGrupo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="string", length=127, nullable=false)
+     * @ORM\Column(name="xGrupo", type="string", length=60, nullable=false)
      */
-    private $content;
+    private $xgrupo;
 
 
 }

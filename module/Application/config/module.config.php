@@ -32,16 +32,16 @@ return array(
                     ),
                 ),
             ),
-            'abs' => array(
+            'cliente' => array(
                 'type' => 'Segment',
                 'options' => array(
                     //'route' => '/system[/:table][/:id][/:data]',
-                    'route' => '/abs[/:id]',
+                    'route' => '/cliente[/:id]',
                     'constraints' => array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Abstract',
+                        'controller' => 'Application\Controller\Cliente',
                     ),
                 ),
             ),
@@ -109,6 +109,7 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Abstract' => 'Application\Controller\AbstractController',
+            'Application\Controller\Cliente' => 'Application\Controller\ClienteController',
         ),
     ),
     /*'view_manager' => array(
