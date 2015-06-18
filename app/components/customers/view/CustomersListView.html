@@ -47,7 +47,11 @@
                 <td data-title="'CPF/CNPJ'">{{user.CNPJ_CPF}}</td>
                 <td data-title="'Nome'"><a href="#/customers/edit/{{user.PK_cliente}}">{{user.xNome}}</a></td>
                 <td data-title="'Fantasia'">{{user.xFant}}</td>
-                <td data-title="'Fantasia'">{{user.xEnder}}</td>
+                <td data-title="'Endereço'">{{user.xLgr}}</td>
+                <td data-title="'Fone'">{{user.fone}}</td>
+                <td>
+                    <a class="btn btn-danger"  ng-click="deleteMovie(movie)">Delete</a>
+                </td>
             </tr>
         </table>
     </div>

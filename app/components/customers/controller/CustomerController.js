@@ -18,7 +18,9 @@ app.controller('CustomerController', function($rootScope, $location, $scope, $st
     // Update customer
     $scope.update = function() {
         if ($stateParams.id) {
-            CustomersService.update({id: $stateParams.id, customer: $scope.customer}, function(data) {
+            // Seta o id que será atualizado
+            $scope.customer.id = $stateParams.id;
+            CustomersService.update($scope.customer, function(data) {
                 if (data.status) {
                     $scope.$root.$broadcast("updateList");
                     $.notify(data.message, {globalPosition: "bottom right", className: 'success'});
@@ -32,7 +34,7 @@ app.controller('CustomerController', function($rootScope, $location, $scope, $st
     // Show the customer in a form
     $scope.show = function(PK_cliente) {
         CustomersService.show({id: PK_cliente}, function(data) {
-            $scope.customer = data.result[0];
+            $scope.customer = data.result;
         });
     };
     

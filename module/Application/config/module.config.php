@@ -12,7 +12,7 @@ namespace Application;
 return array(
     'router' => array(
         'routes' => array(
-            'home' => array(
+            /*'home' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '[/:action]',
@@ -32,24 +32,11 @@ return array(
                     ),
                 ),
             ),
-            'cliente' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    //'route' => '/system[/:table][/:id][/:data]',
-                    'route' => '/cliente[/:id]',
-                    'constraints' => array(
-                        'id'     => '[0-9]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Cliente',
-                    ),
-                ),
-            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
-            'application' => array(
+            /*'application' => array(
                 'type'    => 'Literal',
                 'options' => array(
                     'route'    => '/application',
@@ -72,6 +59,19 @@ return array(
                             'defaults' => array(
                             ),
                         ),
+                    ),
+                ),
+            ),*/
+            'cliente' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    //'route' => '/system[/:table][/:id][/:data]',
+                    'route' => '/cliente[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Cliente',
                     ),
                 ),
             ),
@@ -107,8 +107,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Abstract' => 'Application\Controller\AbstractController',
+            //'Application\Controller\Index' => 'Application\Controller\IndexController',
+            //'Application\Controller\Abstract' => 'Application\Controller\AbstractController',
             'Application\Controller\Cliente' => 'Application\Controller\ClienteController',
         ),
     ),
@@ -128,11 +128,11 @@ return array(
             __DIR__ . '/../view',
         ),
     )*/
-    // Saída somente em JSON
+    // SaÃ­da somente em JSON
     'view_manager' => array(//Add this config
         'strategies' => array(
             'ViewJsonStrategy',
-        ),
+        ),   
     ),
     // Placeholder for console routes
     'console' => array(

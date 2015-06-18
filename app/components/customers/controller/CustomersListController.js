@@ -28,8 +28,8 @@ app.controller("CustomersListController", function($rootScope, $location, $scope
                 CustomersService.query({page : params.page()}, function(data) {
                     // update table params
                     params.total(data.pageCount);
-                    console.log(params.page());
-                    console.log(params.count());
+                    //console.log(params.page());
+                    //console.log(params.count());
                     // set new data
                     $defer.resolve(data.result);
                 });

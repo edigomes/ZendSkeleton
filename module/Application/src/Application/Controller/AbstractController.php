@@ -14,7 +14,11 @@ use Zend\View\Model\JsonModel;
 class AbstractController extends AbstractRestfulController {
     
     public function create($data) {
-        parent::create($data);
+        $responseData = new JsonModel(array(
+            'id' => '2',            
+            'data' => $data            
+        ));
+        return $responseData ;
     }
 
     public function delete($id) {
@@ -34,7 +38,12 @@ class AbstractController extends AbstractRestfulController {
     }
 
     public function update($id, $data) {
-        parent::update($id, $data);
+        // to handle update
+        $responseData = new JsonModel(array(
+            'id' => $id,            
+            'data' => $data            
+        ));
+        return $responseData ;
     }
-    
+
 }
