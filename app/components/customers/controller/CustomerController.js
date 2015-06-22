@@ -5,7 +5,7 @@ app.controller('CustomerController', function($rootScope, $location, $scope, $st
     
     // Create new customer
     $scope.create = function() {
-        CustomersService.create({customer: $scope.customer}, function(data){
+        CustomersService.create($scope.customer, function(data){
             if (data.status) {
                 $stateParams.id = data.id;
                 $.notify(data.message, {globalPosition: "bottom right", className: 'success'});

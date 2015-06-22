@@ -17,11 +17,15 @@
                 </a>
             </div>
             
+            <a ng-click="keywords = ''; $root.$broadcast('updateList')" class="btn btn-primary pull-right col-xs-1">Limpar</a>
+            
             <!-- Search input -->
-            <div class="btn-toolbar pull-right" style="margin-left: 5px;">
-                <input type="text" class="form-control pull-right" placeholder="Search">
+            <div class="btn-toolbar pull-right col-xs-3">
+                <input type="text" class="form-control pull-right col-xs-3" placeholder="Search" ng-model="keywords" ng-enter="$root.$broadcast('updateList')">
+                
             </div>
-
+            
+            
             <!-- Single button -->
             <div class="btn-group pull-right test">
                 <button type="button" style="height: 34px" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -41,7 +45,7 @@
             <div class="table table-striped gridStyle" ng-grid="gridOptions"></div>
         </div>-->
         <!-- Table -->
-        <table ng-table="customersList" class="table table-striped">
+        <table ng-table="customersList" class="table table-striped ng-table-responsive">
             <tr ng-repeat="user in $data">
                 <td style="text-align: left" data-title="'#'">{{user.PK_cliente}}</td>
                 <td data-title="'CPF/CNPJ'">{{user.CNPJ_CPF}}</td>
@@ -49,9 +53,9 @@
                 <td data-title="'Fantasia'">{{user.xFant}}</td>
                 <td data-title="'Endereço'">{{user.xLgr}}</td>
                 <td data-title="'Fone'">{{user.fone}}</td>
-                <td>
+                <!--<td>
                     <a class="btn btn-danger"  ng-click="deleteMovie(movie)">Delete</a>
-                </td>
+                </td>-->
             </tr>
         </table>
     </div>

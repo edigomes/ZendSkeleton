@@ -90,6 +90,13 @@ class CadCliente
      * @ORM\Column(name="UF", type="integer", nullable=false)
      */
     private $UF;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dhAniversario", type="datetime", nullable=true)
+     */
+    private $dhAniversario = null;
 
     /**
      * @var integer
@@ -104,7 +111,7 @@ class CadCliente
      * @ORM\Column(name="IE", type="string", length=9, nullable=true)
      */
     private $IE;
-    
+
     function getPK_cliente() {
         return $this->PK_cliente;
     }
@@ -207,6 +214,14 @@ class CadCliente
 
     function setIE($IE) {
         $this->IE = $IE;
+    }
+    
+    function getDhAniversario() {
+        return $this->dhAniversario;
+    }
+
+    function setDhAniversario($dhAniversario) {
+        $this->dhAniversario = new \DateTime($dhAniversario['date']);
     }
 
 }

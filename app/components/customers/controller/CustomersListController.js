@@ -4,6 +4,7 @@ app.controller("CustomersListController", function($rootScope, $location, $scope
     
     // Sets active tab on menu
     $rootScope.activetab = $location.path();
+    $scope.keywords = "";
     
     $scope.new = function() {
         ModalFormService.openModal('../components/customers/CustomersFormView.html', $scope, {PK: PK_cliente});
@@ -18,24 +19,23 @@ app.controller("CustomersListController", function($rootScope, $location, $scope
         // Load initial data
         $scope.customersList = new ngTableParams({
             page: 1,            // show first page
-            count: 1,          // count per page
+            count: 5,
             sorting: {
                 xNome: 'ASC'     // initial sorting
             }
         }, {
             total: 0,           // length of data
             getData: function($defer, params) {
-                CustomersService.query({page : params.page()}, function(data) {
+                CustomersService.query({page : params.page(), count: params.count(), keywords: $scope.keywords}, function(data) {
                     // update table params
-                    params.total(data.pageCount);
-                    //console.log(params.page());
-                    //console.log(params.count());
+                    console.log(params.count);
+                    params.total(data.pageCount*params.count());
                     // set new data
                     $defer.resolve(data.result);
                 });
             }
         });
-    }; 
+    };
     
     $scope.loadList();
     

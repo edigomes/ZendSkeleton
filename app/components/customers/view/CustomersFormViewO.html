@@ -1,0 +1,228 @@
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!-- FormulÃ¡rio Modal -->
+<div class="modal-content" ng-controller="CustomerController">
+    
+    <!-- CabeÃ§alho -->
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()" aria-hidden="true">
+            <span class="glyphicon glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+        </button>
+        <h4 class="modal-title" ng-model="customer.myModalLabel">
+            <span class="" aria-label="Left Align">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <!--&nbsp;Novo Cliente <pre>{{customer | json}}</pre>-->
+                {{ title }}
+            </span>
+
+        </h4>
+    </div>
+    
+    <!-- FormulÃ¡rio Corpo -->
+    <div class="modal-body">
+        
+        <tabset>
+            <tab heading="Informações">
+                <div class="panel-body">
+                    <form role="form" name="form1" method="post" action="">
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <label for="codigo">Código</label>
+                                <input type="text" class="form-control" ng-model="customer.PK_cliente" disabled />
+                            </div>
+
+                            <div class="checkbox col-xs-3">
+                              <label>
+                                <input type="checkbox" value="">
+                                Bloqueado
+                              </label>
+                            </div>
+
+                            <div class="form-group col-xs-3">
+                                <label for="cadastro">Cadastro</label>
+                                <input type="text" class="form-control" ng-model="customer.dhCadastro" disabled />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            
+                            <div class="form-group col-xs-6">
+                                    <label for="cnpjCpf">CNPJ/CPF</label>
+                                    <div class="input-group">
+                                    <input type="text" class="form-control" ng-model="customer.CNPJ_CPF" />
+                                    <span class="input-group-btn">
+                                        <button style="margin-top: -1px;" class="btn btn-default glyphicon glyphicon-search" type="button"></button>
+                                    </span>
+                                    </div>
+                            </div>
+
+                            <div class="form-group col-xs-6">
+                                <label for="razaoSocial">Razão Social</label>
+                                <input type="text" class="form-control" ng-model="customer.xNome" />
+                            </div>
+
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <label for="nomeFantasia">Nome Fantasia</label>
+                                <input type="text" class="form-control" ng-model="customer.xFant" />
+
+                            </div>
+
+                            <div class="form-group col-xs-6">
+                                <label for="ieRg">IE/RG</label>
+                                <input type="text" class="form-control" ng-model="customer.IE" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <label for="form-control">Regime</label>
+                                <select class="form-control">
+                                    <option>COM ST</option>
+                                    <option>SEM ST(Isento)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-xs-6">
+                                <label for="aniversario">Aniversário</label>
+                                <input type="text" class="form-control" ng-model="customer.dhAniversario" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-xs-4">
+                                    <label for="cep">CEP</label>
+                                    <div class="input-group">
+                                    <input type="text" class="form-control" ng-model="customer.CEP" />
+                                    <span class="input-group-btn">
+                                        <button style="margin-top: -1px;" class="btn btn-default glyphicon glyphicon-search" type="button"></button>
+                                    </span>
+                                    </div>
+                            </div>
+                            <div class="form-group col-xs-8">
+                                <label for="endereco">Endereço</label>
+                                <input type="text" class="form-control" ng-model="customer.xLgr" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <label for="form-control">Estado</label>
+                                <select class="form-control">
+                                    <option>Escolha um estado</option>
+                                    <option>Pernambuco</option>
+                                    <option>João Pessoa</option>
+                                    <option>Bahia</option>
+                                    <option>Natal</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-xs-6">
+                                <label for="form-control">Município</label>
+                                <select class="form-control">
+                                    <option>Escolha um estado</option>
+                                    <option>Pernambuco</option>
+                                    <option>João Pessoa</option>
+                                    <option>Bahia</option>
+                                    <option>Natal</option>
+                                </select>
+                            </div>
+
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-xs-4">
+                                <label for="numCli">Número</label>
+                                <input type="text" class="form-control" ng-model="customer.nro" />
+                            </div>
+
+                            <div class="form-group col-xs-4">
+                                <label for="complemento">Complemento</label>
+                                <input type="text" class="form-control" ng-model="customer.xCpl" />
+                            </div>
+
+                            <div class="form-group col-xs-4">
+                                <label for="pontoRef">Ponto de Referência</label>
+                                <input type="text" class="form-control" ng-model="customer.xPontoRef" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-xs-4">
+                                <label for="contato">Contato</label>
+                                <input type="text" class="form-control" ng-model="customer.contato" />
+                            </div>
+
+                            <div class="form-group col-xs-4">
+                                <label for="emailCli">Email</label>
+                                <input type="text" class="form-control" ng-model="customer.email" />
+                            </div>
+
+                            <div class="form-group col-xs-4">
+                                <label for="foneCli">Telefone</label>
+                                <input type="text" class="form-control" ng-model="customer.fone" />
+                            </div>
+                        </div>
+
+                            <div class="row">
+                                    <div class="form-group col-xs-6">
+                                        <label for="form-control">Vendedor</label>
+                                        <select class="form-control">
+                                            <option>EDIMÁRIO GOMES JÁ SENTE PINTO</option>
+                                            <option>ROBERTO JACINTO PINTO AQUINO REGO</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-xs-6">
+                                        <label for="creditoCli">Crédito</label>
+                                        <input type="text" class="form-control" ng-model="customer.vCredito" placeholder="Créditos em R$" />
+                                    </div>
+                            </div>
+
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <label for="nfe">Inf. NF-e</label>
+                                <input type="text" class="form-control" ng-model="customer.infCpl" placeholder="Informações complementares da NF-e" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <label for="obs">Obs.</label>
+                                <input type="text" class="form-control" ng-model="customer.obs" placeholder="Observações" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </tab>
+            <tab heading="Contacts" active="tab.active" disabled="tab.disabled">
+
+                <!-- Table -->
+                <table ng-table="tableParams2" class="table table-striped">
+                    <tr ng-repeat="contact in $data">
+                        <td data-title="'Name'" style="text-align: left">{{contact.xNome}}</td>
+                        <td data-title="'Phone'"><a>{{contact.phone}}</a></td>
+                    </tr>
+                </table>
+
+            </tab>
+            <!--<tab select="alert('selecteddd')">
+                <tab-heading>
+                    <i class="glyphicon glyphicon-bell"></i> Alert!
+                </tab-heading>
+                I've got an HTML heading, and a select callback. Pretty cool!
+            </tab>-->
+        </tabset>
+        
+    </div>
+    
+    <!-- Modal Footer -->
+    <div class="modal-footer">
+        <button ng-click="update()" type="button" class="btn btn-primary pull-left">Salvar</button>
+        <button ng-click="cancel()" type="button" class="btn btn-default pull-left">Fechar</button>
+    </div>
+
+</div>

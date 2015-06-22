@@ -34,6 +34,10 @@ app.controller('cadastros', function($rootScope, $location, $scope, $http, ngTab
         
     };
     
+    $scope.search = function(keyword) {
+        
+    };
+    
     $scope.loadList();
 
     $scope.edit = function(PK) {
