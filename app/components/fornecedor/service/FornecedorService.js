@@ -1,9 +1,8 @@
-app.factory('CustomersService', function ($resource) {
-    return $resource('../public/clientes/:id', {id: '@id'}, {
+app.factory('FornecedorService', function ($resource) {
+    return $resource('../public/fornecedor/:id', {id: '@id'}, {
         query: { method: 'GET'},
         create: { method: 'POST'},
         show: { method: 'GET'},
-        //update: { method: 'PUT', params: {id: '@id', data: '@customer'} },
         update: { method: 'PUT'},
         delete: { method: 'DELETE', params: {id: '@id'}}
     });

@@ -20,7 +20,7 @@
                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cadastros <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a ui-sref="customers">Clientes</a></li>
-                        <li><a ui-sref="fornecedores">Fornecedores</a></li>
+                        <li><a ui-sref="fornecedor">Fornecedor</a></li>
                         <li><a ui-sref="usuarios">Usuários</a></li>
                         <!--<li class="divider"></li>
                         <li><a href="#">Separated link</a></li>
@@ -29,10 +29,10 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estoque <span class="caret"></span></a>
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estoque <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Produtos</a></li>
-                        <li><a href="#">Entrada de Mercadoria</a></li>
+                        <li><a ui-sref="estoque">Estoque</a></li>
+                        <li><a ui-sref="estoque">Entrada de Mercadoria</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

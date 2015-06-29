@@ -18,7 +18,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         onEnter: function ($stateParams, ModalFormService) {
             ModalFormService.openModal(
                 'components/customers/view/CustomersFormView.html', 
-                {title: "Edit Customer"}
+                {title: "Editar Cliente"}
             );
         }
     }).state('customers.new', {
@@ -26,7 +26,55 @@ app.config(function($stateProvider, $urlRouterProvider){
         onEnter: function (ModalFormService) {
             ModalFormService.openModal(
                 'components/customers/view/CustomersFormView.html', 
-                {title: "New Customer"}
+                {title: "Novo Cliente"}
+            );
+        }
+    })
+    
+    /*********************************************************/
+    
+    .state('fornecedor', {
+        url: "/fornecedor",
+        templateUrl: 'components/fornecedor/view/FornecedorListView.html',
+        controller: 'FornecedorListController'
+    }).state('fornecedor.edit', {
+        url: "/edit/{id}",
+        onEnter: function ($stateParams, ModalFormService) {
+            ModalFormService.openModal(
+                'components/fornecedor/view/FornecedorFormView.html', 
+                {title: "Editar Fornecedor"}
+            );
+        }
+    }).state('fornecedor.new', {
+        url: "/new",
+        onEnter: function (ModalFormService) {
+            ModalFormService.openModal(
+                'components/fornecedor/view/FornecedorFormView.html', 
+                {title: "Novo Fornecedor"}
+            );
+        }
+    })
+    
+    /*********************************************************/
+    
+    .state('estoque', {
+        url: "/estoque",
+        templateUrl: 'components/estoque/view/EstoqueListView.html',
+        controller: 'EstoqueListController'
+    }).state('estoque.edit', {
+        url: "/edit/{id}",
+        onEnter: function ($stateParams, ModalFormService) {
+            ModalFormService.openModal(
+                'components/estoque/view/EstoqueFormView.html', 
+                {title: "Editar Estoque"}
+            );
+        }
+    }).state('estoque.new', {
+        url: "/new",
+        onEnter: function (ModalFormService) {
+            ModalFormService.openModal(
+                'components/estoque/view/EstoqueFormView.html', 
+                {title: "Novo Estoque"}
             );
         }
     });

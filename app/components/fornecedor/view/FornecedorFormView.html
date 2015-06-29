@@ -1,0 +1,133 @@
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!-- FormulÃ¡rio Modal -->
+<div class="modal-content" ng-controller="FornecedorController">
+    <!-- CabeÃ§alho -->
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()" aria-hidden="true">
+            <span class="glyphicon glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+            <span class="" aria-label="Left Align">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <!--&nbsp;Novo Cliente <pre>{{defaultData | json}}</pre>-->
+                <!--<pre>{{teste | json}}</pre>-->
+                {{title}}
+            </span>
+
+        </h4>
+    </div>
+
+    <!-- FormulÃ¡rio Corpo -->
+    <div class="modal-body">
+
+        <tabset>
+            <tab heading="Informações">
+                <div class="panel-body">
+                    <form role="form" id="form1" name="form1" method="post" action="">
+                        <div class="group-sm">
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td width="47%"><label class="control-label small" for="text">CNPJ / CPF:<br>
+                                        </label>
+                                        <input ng-model="defaultObject.CNPJ_CPF" class="form-control input-sm" type="text" />
+                                    </td>
+                                    <td width="2%">&nbsp;</td>
+                                    <td width="51%"><label class="control-label small" for="text">Endereço:</label>
+                                        <br>
+                                        <input ng-model="defaultObject.xLgr" class="form-control input-sm" type="text" /></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label small" for="text">Razão Sócial:</label>
+                                        <br><input ng-model="defaultObject.xNome" class="form-control input-sm" type="text" /></td>
+                                    <td>&nbsp;</td>
+                                    <td><label class="control-label small" for="text">Estado:</label>
+                                        <br>
+                                        <input ng-model="defaultObject.UF" class="form-control input-sm" type="text" /></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label small" for="text">Nome Fantasia:</label>
+                                        <br><input ng-model="defaultObject.xFant" class="form-control input-sm" type="text" /></td>
+                                    <td>&nbsp;</td>
+                                    <td><label class="control-label small" for="text">Cidade:</label>
+                                        <br>
+                                        <input ng-model="defaultObject.cMun" class="form-control input-sm" type="text" /></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label small" for="text">Inscrição Estadual:</label>
+                                        <br><input ng-model="defaultObject.IE" class="form-control input-sm" type="text" /></td>
+                                    <td>&nbsp;</td>
+                                    <td><label class="control-label small" for="text">Bairro:</label>
+                                        <br>
+                                        <input ng-model="defaultObject.xBairro" class="form-control input-sm" type="text" /></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label small" for="text">CEP:</label>
+                                        <br>
+                                        <input ng-model="defaultObject.fone" class="form-control input-sm" type="text" /></td>
+                                    <td>&nbsp;</td>
+                                    <td><label class="control-label small" for="text">Fone:</label>
+                                        <br>
+                                        <input ng-model="defaultObject.CEP" class="form-control input-sm" type="text" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="control-label small" for="text"></label>
+                                        <br>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td><label class="control-label small" for="text">Número:</label>
+                                        <br>
+                                        <input ng-model="defaultObject.nro" class="form-control input-sm" type="text"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </tab>
+            <tab heading="Contacts" active="tab.active" disabled="tab.disabled" ng-controller="ContatoFornecedorListController">
+                <div class="panel-body">
+                    <!--<pre>{{teste | json}}</pre>-->
+                    <form>
+                        <div class="group-sm">
+                            <div class="row">
+                                <div class="form-group col-xs-3">
+                                    <label>Nome</label>
+                                    <input ng-model="defaultObject.xNome" class="form-control input-sm" type="text" />
+                                </div>
+                                <div class="form-group col-xs-3">
+                                    <label>Fone</label>
+                                    <input ng-model="defaultObject.fone" class="form-control input-sm" type="text" />
+                                </div>
+                            </div>
+                            <button ng-click="update()" type="button" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </form> 
+                    <table ng-table="contatoList" class="table table-striped">
+                        <tr ng-repeat="contato in $data">
+                            <td data-title="'Name'" style="text-align: left">
+                                <a href="javascript:void(0)" ng-click="show(contato.PK_contato)">{{contato.xNome}}</a>
+                            </td>
+                            <td data-title="'Phone'">{{contato.fone}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </tab>
+            <!--<tab select="alert('selecteddd')">
+                <tab-heading>
+                    <i class="glyphicon glyphicon-bell"></i> Alert!
+                </tab-heading>
+                I've got an HTML heading, and a select callback. Pretty cool!
+            </tab>-->
+        </tabset>
+
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="modal-footer">
+        <button ng-click="update(em.CadFornecedor)" type="button" class="btn btn-primary pull-left">Salvar</button>
+        <button ng-click="cancel()" type="button" class="btn btn-default pull-left">Fechar</button>
+    </div>
+
+</div>

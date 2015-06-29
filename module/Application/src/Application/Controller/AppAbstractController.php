@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
+use Zend\Json\Json;
 use Application\Entity\CadCliente;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
@@ -30,6 +31,10 @@ class AppAbstractController extends AbstractRestfulController {
     private $countPerPage = 10;
     // Paginas
     private $pageCount = 1;
+    // Controller desc
+    private $xController = "Registro";
+    // Where
+    private $where = null;
 
     /**
      * Cria um novo registro
@@ -37,19 +42,18 @@ class AppAbstractController extends AbstractRestfulController {
      * @return JsonModel
      */
     public function create($data) {
-
+        
         try {
-            $this->getEm()->persist($this->getHydrator()->hydrate($data, new CadCliente()));
+            $this->getEm()->persist($this->getHydrator()->hydrate($data, new $this->entity));
             $this->getEm()->flush();
-        } catch (Exception $e ) {
-            echo 'Code : ' . $e->getPortableCode();
-            echo 'Message : ' . $e->getPortableMessage();
+        } catch (\Exception $e) {
+            var_dump($e);
         }
         
         return new JsonModel(
             array(
                 "status"=>true,
-                "message"=>"O cliente foi salvo"
+                "message"=>"O ".$this->xController." foi salvo"
             )
         );
 
@@ -71,12 +75,15 @@ class AppAbstractController extends AbstractRestfulController {
     public function get($id) {
         
         $qb = $this->getEm()->createQueryBuilder();
-        $qb->select($this->alias)
-            ->from($this->entity, $this->alias)
-            ->where($this->alias.'.'.$this->getPK().' = :id')
-            ->setParameter('id', $id);
-
-        $data["result"] = $this->getHydrator()->extract($qb->getQuery()->getResult()[0]);
+        $qb->select($this->alias)->from($this->entity, $this->alias);
+        
+        // Verify if where has setted
+        if (is_null($this->where)) {
+            $qb->where($this->alias.'.'.$this->getPK().' = :id')->setParameter('id', $id);
+        }
+        
+        //$data[$this->getEntityName()] = $this->getHydrator()->extract($qb->getQuery()->getResult()[0]);
+        $data = $this->getHydrator()->extract($qb->getQuery()->getResult()[0]);
         
         return new JsonModel($data);
         
@@ -88,15 +95,23 @@ class AppAbstractController extends AbstractRestfulController {
      */
     public function getList() {
         
+        $clientes = array();
+        
         $qb = $this->getEm()->createQueryBuilder();
-        $qb->select($this->alias)
-            ->from($this->entity, $this->alias);
-            //->where('c.xNome = :all')
-            //->setParameter('all', 'keyword');
+        $qb->select($this->alias)->from($this->entity, $this->alias);
+        //->where('c.xNome = :all')->setParameter('all', 'keyword');
+        
+        // Set where from query
+        $Where = Json::decode($this->params()->fromQuery('where'));
+        if (!is_null($Where)) {
+            foreach ($Where as $key => $value) {
+                $qb->where($this->alias.".$key = :$key")->setParameter($key, $value);
+            }
+        }
         
         // Seta a busca
         $this->setSearchKeywords($qb);
-        
+
         $clientes["result"] = $this->paginate($qb);
         $clientes["pageCount"] = $this->getPageCount();
 
@@ -118,7 +133,12 @@ class AppAbstractController extends AbstractRestfulController {
         }
         
         $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($qb)));
-        $paginator->setCurrentPageNumber($this->params()->fromQuery('page'))->setItemCountPerPage($this->getCountPerPage());
+        
+        try {
+            $paginator->setCurrentPageNumber($this->params()->fromQuery('page'))->setItemCountPerPage($this->getCountPerPage());
+        } catch (\Exception $e) {
+            var_dump($e);
+        }
         
         $this->setPageCount(ceil($paginator->getTotalItemCount()/$this->getCountPerPage()));
         
@@ -133,13 +153,14 @@ class AppAbstractController extends AbstractRestfulController {
         $keywords = $this->params()->fromQuery('keywords');
         // Busca
         if (!empty($keywords)) {
-        
+            
             $searchIn = null;
             //$hydrator = new DoctrineObject($this->getEm(), $entity);
-
+            ini_set('xdebug.max_nesting_level', 1000);
             // Varre os campos para montar a busca
             //foreach ($hydrator->extract(new CadCliente()) as $field => $value) {
             foreach ($this->getEm()->getClassMetadata($this->entity)->getFieldNames() as $field) {
+
                 // Caso o cancat de busca não tenha sido inicializado, inicia
                 if (!isset($searchIn)) {
                     $searchIn = $qb->expr()->concat($qb->expr()->literal(''), $this->alias.".".$field);
@@ -162,7 +183,9 @@ class AppAbstractController extends AbstractRestfulController {
             );
 
             $qb->setParameter('keywords', '%'.$keywords.'%');
+
         }
+
     }
 
     /**
@@ -185,7 +208,7 @@ class AppAbstractController extends AbstractRestfulController {
 
         return new JsonModel(array(
             'status' => true,
-            'message' => "O cliente foi salvo"          
+            'message' => "O ".$this->xController." foi salvo"          
         ));
     }
     
@@ -258,6 +281,27 @@ class AppAbstractController extends AbstractRestfulController {
 
     function setEntity($entity) {
         $this->entity = $entity;
+    }
+    
+    function getAlias() {
+        return $this->alias;
+    }
+
+    function getXController() {
+        return $this->xController;
+    }
+
+    function setAlias($alias) {
+        $this->alias = $alias;
+    }
+
+    function setXController($xController) {
+        $this->xController = $xController;
+    }
+    
+    function getEntityName() {
+        $p = explode("\\", $this->entity);
+        return end($p);
     }
     
 }

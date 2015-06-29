@@ -7,11 +7,11 @@ app.controller("CustomersListController", function($rootScope, $location, $scope
     $scope.keywords = "";
     
     $scope.new = function() {
-        ModalFormService.openModal('../components/customers/CustomersFormView.html', $scope, {PK: PK_cliente});
+        ModalFormService.openModal('../components/customers/CustomersFormView.html', $scope, {id: id});
     };
     
-    $scope.edit = function(PK_cliente) {
-        ModalFormService.openModal('../components/customers/CustomersFormView.html', $scope, {PK: PK_cliente});
+    $scope.edit = function(id) {
+        ModalFormService.openModal('../components/customers/CustomersFormView.html', $scope, {id: id});
     };
    
     // Load list of customers

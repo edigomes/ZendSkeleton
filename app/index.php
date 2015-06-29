@@ -17,19 +17,36 @@
         <script src="libs/notify.min.js"></script>
         <script src="modules/ng-table/ng-table.js"></script>
         <script src="modules/angular-resource.min.js"></script>
+
         <!-- APP -->
         <script src="app.js"></script>
+
         <!-- SERVICES -->
         <script src="factory/ModalFormService.js"></script>
-        <script src="factory/DataService.js"></script>
+        
         <!-- CONTROLLERS -->
-        <script src="controller/system/BasicDataController.js"></script>
+        <script src="controller/system/AbstractListController.js"></script>
+        <script src="controller/system/AbstractController.js"></script>
+        
         <script src="components/customers/service/CustomersService.js"></script>
-        <script src="components/customers/controller/CustomerController.js"></script>
+        <script src="components/customers/controller/CustomersController.js"></script>
         <script src="components/customers/controller/CustomersListController.js"></script>
+        
+        <script src="components/fornecedor/service/FornecedorService.js"></script>
+        <script src="components/fornecedor/controller/FornecedorController.js"></script>
+        <script src="components/fornecedor/controller/FornecedorListController.js"></script>
+        
+        <script src="components/fornecedor/service/ContatoFornecedorService.js"></script>
+        <!--<script src="components/fornecedor/controller/FornecedorController.js"></script>-->
+        <script src="components/fornecedor/controller/ContatoFornecedorListController.js"></script>
+        
+        <script src="components/estoque/service/EstoqueService.js"></script>
+        <script src="components/estoque/controller/EstoqueController.js"></script>
+        <script src="components/estoque/controller/EstoqueListController.js"></script>
+        
+        
         <script src="route/routes.js"></script>
-        
-        
+
     </head>
     <body ng-app="app">
         <?php require 'view/system/menu.php'; ?>

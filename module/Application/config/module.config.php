@@ -62,16 +62,55 @@ return array(
                     ),
                 ),
             ),*/
-            'cliente' => array(
+            'clientes' => array(
                 'type' => 'Segment',
                 'options' => array(
                     //'route' => '/system[/:table][/:id][/:data]',
-                    'route' => '/cliente[/:id]',
+                    'route' => '/clientes[/:id]',
                     'constraints' => array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Cliente',
+                        'controller' => 'Application\Controller\Clientes',
+                    ),
+                ),
+            ),
+            'fornecedor' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    //'route' => '/system[/:table][/:id][/:data]',
+                    'route' => '/fornecedor[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Fornecedor',
+                    ),
+                ),
+            ),
+            'contatofornecedor' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    //'route' => '/system[/:table][/:id][/:data]',
+                    'route' => '/contatofornecedor[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\ContatoFornecedor',
+                    ),
+                ),
+            ),
+            'estoque' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    //'route' => '/system[/:table][/:id][/:data]',
+                    'route' => '/estoque[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Estoque',
                     ),
                 ),
             ),
@@ -109,7 +148,10 @@ return array(
         'invokables' => array(
             //'Application\Controller\Index' => 'Application\Controller\IndexController',
             //'Application\Controller\Abstract' => 'Application\Controller\AbstractController',
-            'Application\Controller\Cliente' => 'Application\Controller\ClienteController',
+            'Application\Controller\Clientes' => 'Application\Controller\ClientesController',
+            'Application\Controller\Fornecedor' => 'Application\Controller\FornecedorController',
+            'Application\Controller\ContatoFornecedor' => 'Application\Controller\ContatoFornecedorController',
+            'Application\Controller\Estoque' => 'Application\Controller\EstoqueController'
         ),
     ),
     /*'view_manager' => array(

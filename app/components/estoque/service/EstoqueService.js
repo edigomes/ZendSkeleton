@@ -1,5 +1,5 @@
-app.factory('CustomersService', function ($resource) {
-    return $resource('../public/clientes/:id', {id: '@id'}, {
+app.factory('EstoqueService', function ($resource) {
+    return $resource('../public/estoque/:id', {id: '@id'}, {
         query: { method: 'GET'},
         create: { method: 'POST'},
         show: { method: 'GET'},

@@ -2,16 +2,14 @@
 
 namespace Application\Controller;
 
-use \Application\Entity\CadCliente;
-
 /**
  * Description of AbstractController
  * @author Edi
  */
-class ClienteController extends AppAbstractController {
+class EstoqueController extends AppAbstractController {
     
     function __construct() {
-        $this->setEntity('Application\Entity\CadCliente');
+        $this->setEntity('Application\Entity\EstItem');
     }
 
     public function create($data) {
@@ -34,5 +32,4 @@ class ClienteController extends AppAbstractController {
         return parent::update($id, $data);
     }
 
-    
 }

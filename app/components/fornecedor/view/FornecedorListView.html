@@ -1,0 +1,62 @@
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<ol class="breadcrumb">
+  <li><a href="#">Cadastro</a></li>
+  <li class="active">Fornecedor</li>
+</ol>
+
+<div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading clearfix">
+
+            <!-- Botão Adicionar -->
+            <div class="btn-toolbar pull-left">
+                <a ui-sref="fornecedor.new" class="btn btn-primary btn-primary pull-left">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                    Adicionar
+                </a>
+            </div>
+
+            <a ng-click="keywords = ''; $root.$broadcast('updateList')" class="btn btn-primary pull-right col-xs-1">Limpar</a>
+
+            <!-- Search input -->
+            <div class="btn-toolbar pull-right col-xs-3">
+                <input type="text" class="form-control pull-right col-xs-3" placeholder="Search" ng-model="keywords" ng-enter="$root.$broadcast('updateList')">
+            </div>
+
+            <!-- Single button -->
+            <div class="btn-group pull-right test">
+                <button type="button" style="height: 34px" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="glyphicon glyphicon-filter"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <!--<div class="container-fluid">
+            <div class="table table-striped gridStyle" ng-grid="gridOptions"></div>
+        </div>-->
+        <!-- Table -->
+        <table ng-table="defaultList" class="table table-striped ng-table-responsive">
+            <tr ng-repeat="list in $data">
+                <td style="text-align: left" data-title="'#'">{{list.PK_fornecedor}}</td>
+                <td data-title="'CPF/CNPJ'">{{list.CNPJ_CPF}}</td>
+                <td data-title="'Nome'"><a href="#/fornecedor/edit/{{list.PK_fornecedor}}">{{list.xNome}}</a></td>
+                <td data-title="'Fantasia'">{{list.xFant}}</td>
+                <td data-title="'Endereço'">{{list.xLgr}}</td>
+                <td data-title="'Fone'">{{list.fone}}</td>
+                <!--<td>
+                    <a class="btn btn-danger"  ng-click="deleteMovie(movie)">Delete</a>
+                </td>-->
+            </tr>
+        </table>
+
+    </div>
+</div>
