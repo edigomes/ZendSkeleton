@@ -4,10 +4,14 @@ app.controller("ContatoFornecedorListController", function($controller, $scope, 
     
     angular.extend(this,
         $controller(
-            'AbstractListController', {$scope: $scope, defaultObject: $scope.ContatoCadFornecedor, defaultService: ContatoFornecedorService}
+            'AbstractListController', {
+                $scope: $scope, 
+                formObject: $scope.ContatoCadFornecedor, 
+                defaultService: ContatoFornecedorService
+            }
         )
     );
     
-    $scope.contatoList = $scope.loadList({FK_fornecedor: $stateParams.id});
+    $scope.contatoList = $scope.loadList($scope.ContatoCadFornecedor);
 
 });

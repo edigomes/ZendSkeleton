@@ -1,11 +1,14 @@
 app.controller("FornecedorListController", function($controller, $scope, FornecedorService) {
     
+    $scope.CadFornecedor = {};
+
+    // Load abstract
     angular.extend(
         this,
         $controller(
             'AbstractListController', {
                 $scope: $scope,
-                defaultObject: $scope.CadFornecedor = {},
+                formObject: $scope.CadFornecedor,
                 defaultService: FornecedorService
             }
         )

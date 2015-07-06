@@ -216,7 +216,7 @@ class AppAbstractController extends AbstractRestfulController {
      * Get doctrine entity manager
      * @return EntityManager
      */
-    protected function getEm() {
+    public function getEm() {
         
         if (null === $this->entity) {
             throw new \Exception("Entity não setada");
@@ -232,7 +232,7 @@ class AppAbstractController extends AbstractRestfulController {
      * Retorna o hydrator padrão
      * @return DoctrineObject
      */
-    private function getHydrator() {
+    public function getHydrator() {
         if (null === $this->hydrator) {
             $this->hydrator = new DoctrineObject($this->getEm(), $this->entity);
         }

@@ -22,20 +22,6 @@ class EstEntradaItem
     private $pkEntradaItem;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="FK_entrada", type="integer", nullable=false)
-     */
-    private $fkEntrada;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="FK_item", type="integer", nullable=false)
-     */
-    private $fkItem;
-
-    /**
      * @var float
      *
      * @ORM\Column(name="qTrib", type="float", precision=15, scale=3, nullable=false)
@@ -49,6 +35,65 @@ class EstEntradaItem
      */
     private $vuntrib;
 
+    /**
+     * @var \Application\Entity\EstItem
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\EstItem")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="FK_item", referencedColumnName="PK_item")
+     * })
+     */
+    private $fkItem;
+
+    /**
+     * @var \Application\Entity\EstEntrada
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\EstEntrada")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="FK_entrada", referencedColumnName="PK_entrada")
+     * })
+     */
+    private $fkEntrada;
+    
+    function getPkEntradaItem() {
+        return $this->pkEntradaItem;
+    }
+
+    function getQtrib() {
+        return $this->qtrib;
+    }
+
+    function getVuntrib() {
+        return $this->vuntrib;
+    }
+
+    function getFkItem() {
+        return $this->fkItem;
+    }
+
+    function getFkEntrada() {
+        return $this->fkEntrada;
+    }
+
+    function setPkEntradaItem($pkEntradaItem) {
+        $this->pkEntradaItem = $pkEntradaItem;
+    }
+
+    function setQtrib($qtrib) {
+        $this->qtrib = $qtrib;
+    }
+
+    function setVuntrib($vuntrib) {
+        $this->vuntrib = $vuntrib;
+    }
+
+    function setFkItem(\Application\Entity\EstItem $fkItem) {
+        $this->fkItem = $fkItem;
+    }
+
+    function setFkEntrada(\Application\Entity\EstEntrada $fkEntrada) {
+        $this->fkEntrada = $fkEntrada;
+    }
 
 }
 

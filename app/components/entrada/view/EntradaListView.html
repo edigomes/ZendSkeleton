@@ -2,7 +2,7 @@
 
 <ol class="breadcrumb">
   <li><a href="#">Cadastro</a></li>
-  <li class="active">Estoque</li>
+  <li class="active">Entrada</li>
 </ol>
 
 <div>
@@ -44,7 +44,7 @@
             <div class="table table-striped gridStyle" ng-grid="gridOptions"></div>
         </div>-->
         <!-- Table -->
-        <table ng-table="EstoqueList" class="table table-striped ng-table-responsive">
+        <table ng-table="EntradaList" class="table table-striped ng-table-responsive">
             <tr ng-repeat="list in $data">
                 <td style="text-align: left" data-title="'#'">{{list.PK_item}}</td>
                 <td data-title="'Código'">{{list.codigo}}</td>

@@ -1,26 +1,19 @@
-//app.controller("AbstractListController", function($rootScope, $location, $scope, defaultService, ngTableParams, ModalFormService) {
-app.controller("AbstractListController", function($rootScope, $location, $stateParams, $scope, formObject, defaultService, ngTableParams) {
-    
-    // Sets active tab on menu
-    $rootScope.activetab = $location.path();
-    $scope.keywords = "";
-    
-    // Required
-    $scope.defaultService = defaultService;
-    $scope.masterDefaultObject = formObject; // Stores original object
-    $scope.formObject = formObject;
-    
+app.service('AbstractService', function() {
+
     // Show the fornecedor in a form
-    $scope.show = function(id) {
-        $scope.defaultService.show({id: id}, function(obj) {
-            $scope.formObject = obj;
+    this.show = function(id, service, callback) {
+        if (!id || !service || !callback) {
+            throw new Error("Verifique os parametros", this, 15);
+        }
+        service.show({id: id}, function(object) {
+            callback(object);
         });
     };
     
     // Create new fornecedor
-    $scope.create = function() {
-        console.log($scope.formObject);
-        $scope.defaultService.create($scope.formObject, function(data){
+    /*$scope.create = function() {
+        console.log($scope.defaultObject);
+        $scope.defaultService.create($scope.defaultObject, function(data){
             if (data.status) {
                 $.notify(data.message, {globalPosition: "bottom right", className: 'success'});
                 $scope.$root.$broadcast("updateList");
@@ -33,7 +26,7 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
     $scope.update = function() {
         
         var id = null;
-        var object = $scope.formObject;
+        var object = $scope.defaultObject;
         
         // First item
         if (Object.keys(object)[0].substring(0,2) === "PK") {
@@ -46,8 +39,8 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
                 if (data.status) {
                     $scope.$root.$broadcast("updateList");
                     $.notify(data.message, {globalPosition: "bottom right", className: 'success'});
-                    //$scope.reset();
-                    console.log($scope.formObject);
+                    $scope.reset();
+                    console.log($scope.defaultObject);
                 }
             });
         } else {
@@ -90,7 +83,7 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
     };
     
     $scope.reset = function() {
-        $scope.formObject = angular.copy($scope.masterDefaultObject);
-    };
+        $scope.defaultObject = angular.copy($scope.masterDefaultObject);
+    };*/
     
 });

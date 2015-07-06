@@ -1,11 +1,11 @@
-app.controller('EstoqueController', function($scope, $controller, $stateParams, EstoqueService) {
+app.controller('EntradaController', function($scope, $controller, $stateParams, EntradaService) {
     angular.extend(
         this,
         $controller(
             'AbstractListController', {
                 $scope: $scope,
-                formObject: $scope.EstItem = {},
-                defaultService: EstoqueService
+                formObject: $scope.EstEntrada = {},
+                defaultService: EntradaService
             }
         )
     );

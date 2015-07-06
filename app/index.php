@@ -23,10 +23,10 @@
 
         <!-- SERVICES -->
         <script src="factory/ModalFormService.js"></script>
+        <script src="factory/AbstractService.js"></script>
         
         <!-- CONTROLLERS -->
         <script src="controller/system/AbstractListController.js"></script>
-        <script src="controller/system/AbstractController.js"></script>
         
         <script src="components/customers/service/CustomersService.js"></script>
         <script src="components/customers/controller/CustomersController.js"></script>
