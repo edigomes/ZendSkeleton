@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="CAD_fornecedor")
  * @ORM\Entity
  */
-class CadFornecedor {
+class CadFornecedor implements \Serializable {
 
     /**
      * @var integer
@@ -208,5 +208,13 @@ class CadFornecedor {
     function setIE($IE) {
         $this->IE = $IE;
     }
-    
+
+    public function serialize() {
+        
+    }
+
+    public function unserialize($serialized) {
+        
+    }
+
 }

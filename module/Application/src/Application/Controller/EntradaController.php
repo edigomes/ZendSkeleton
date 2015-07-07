@@ -2,8 +2,9 @@
 
 namespace Application\Controller;
 use Zend\View\Model\JsonModel;
-use \Doctrine\ORM\Query;
+use \Doctrine\ORM\AbstractQuery;
 use Zend\Json\Expr;
+use Application\Entity\CadFornecedor;
 /**
  * Description of AbstractController
  * @author Edi
@@ -32,10 +33,20 @@ class EntradaController extends AppAbstractController {
         $qb = $this->getEm()->createQueryBuilder();
         $qb->select(array('c','f'))->from('Application\Entity\EstEntrada', 'c')
         ->leftJoin('c.fkFornecedor', 'f');
-
-        //$data = $this->getEm()->getRepository('Application\Entity\EstEntradaItem')->findAll(Query::HYDRATE_ARRAY);
         
-        $data = $this->getHydrator()->extract($qb->getQuery()->getResult()[0]);
+        //$data = $this->getHydrator()->extract($qb->getQuery()->getResult()[0]);
+        //foreach ($data as $row) {
+          //  var_dump($row);
+        //}
+        
+        $data = $qb->getQuery()
+            ->getResult(AbstractQuery::HYDRATE_ARRAY);
+        
+        //var_dump($data); exit;
+        
+        //var_dump(get_object_vars($qb->getQuery()->getResult()[0])); exit;
+        //var_dump(get_object_vars($data['fkFornecedor'])); exit;
+        //var_dump(get_object_vars($data['dhabertura'])); exit;
         
         //var_dump(Json::encode($qb->getQuery()->getResult()[0])); exit;
         
