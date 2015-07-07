@@ -37,7 +37,7 @@ class EntradaController extends AppAbstractController {
         //$data = $this->getHydrator()->extract($qb->getQuery()->getResult()[0]);
         //foreach ($data as $row) {
           //  var_dump($row);
-        //}
+        //} //teste git
         
         $data = $qb->getQuery()
             ->getResult(AbstractQuery::HYDRATE_ARRAY);
