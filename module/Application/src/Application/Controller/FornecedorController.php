@@ -9,7 +9,7 @@ namespace Application\Controller;
 class FornecedorController extends AppAbstractController {
     
     function __construct() {
-        $this->setEntity('Application\Entity\CadFornecedor');
+        $this->setEntity('Application\Entity\CadFornecedor', 'c');
     }
 
     public function create($data) {

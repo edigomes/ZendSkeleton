@@ -74,6 +74,13 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
                 service.query({page : params.page(), count: params.count(), keywords: $scope.keywords, where: where}, function(data) {
                     // update table params
                     params.total(data.pageCount*params.count());
+                    
+                    if (data.result.length < 10) {
+                        params.settings().counts = 0;
+                    }
+                    
+                    //Log return data
+                    console.log(data);
                     // set new data
                     $defer.resolve(data.result);
                 });

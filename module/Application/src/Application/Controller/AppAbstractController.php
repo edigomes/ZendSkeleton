@@ -5,12 +5,12 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
 use Zend\Json\Json;
-use Application\Entity\CadCliente;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\AbstractQuery;
 
 /**
  * Description of AbstractController
@@ -23,10 +23,9 @@ class AppAbstractController extends AbstractRestfulController {
     // Hydrator
     private $hydrator;
     // Default Entity
-    //private $entity = 'Application\Entity\CadCliente';
-    private $entity = null;
+    private $entity = array();
     // Default alias
-    protected $alias = 'c';
+    protected $alias = null;
     // Registros por página
     private $countPerPage = 10;
     // Paginas
@@ -35,6 +34,8 @@ class AppAbstractController extends AbstractRestfulController {
     private $xController = "Registro";
     // Where
     private $where = null;
+    // Join
+    private $join = array();
 
     /**
      * Cria um novo registro
@@ -75,7 +76,13 @@ class AppAbstractController extends AbstractRestfulController {
     public function get($id) {
         
         $qb = $this->getEm()->createQueryBuilder();
-        $qb->select($this->alias)->from($this->entity, $this->alias);
+        //$qb->select($this->alias)->from($this->entity, $this->alias);
+        $qb->select($this->getFullAlias())->from($this->entity, $this->alias);
+        
+        // Iterate entity and joins
+        foreach ($this->join as $join) {
+            $qb->leftJoin("$this->alias.$join[join]", $join['alias']);
+        }
         
         // Verify if where has setted
         if (is_null($this->where)) {
@@ -83,7 +90,8 @@ class AppAbstractController extends AbstractRestfulController {
         }
         
         //$data[$this->getEntityName()] = $this->getHydrator()->extract($qb->getQuery()->getResult()[0]);
-        $data = $this->getHydrator()->extract($qb->getQuery()->getResult()[0]);
+        //$data = $this->getHydrator()->extract($qb->getQuery()->getResult()[0]);
+        $data = $qb->getQuery()->getResult(AbstractQuery::HYDRATE_ARRAY)[0];
         
         return new JsonModel($data);
         
@@ -98,8 +106,14 @@ class AppAbstractController extends AbstractRestfulController {
         $clientes = array();
         
         $qb = $this->getEm()->createQueryBuilder();
-        $qb->select($this->alias)->from($this->entity, $this->alias);
+        //$qb->select($this->alias)->from($this->entity, $this->alias);
+        $qb->select($this->getFullAlias())->from($this->entity, $this->alias);
         //->where('c.xNome = :all')->setParameter('all', 'keyword');
+        
+        // Iterate entity and joins
+        foreach ($this->join as $join) {
+            $qb->leftJoin("$this->alias.$join[join]", $join['alias']);
+        }
         
         // Set where from query
         $Where = Json::decode($this->params()->fromQuery('where'));
@@ -111,7 +125,7 @@ class AppAbstractController extends AbstractRestfulController {
         
         // Seta a busca
         $this->setSearchKeywords($qb);
-
+        
         $clientes["result"] = $this->paginate($qb);
         $clientes["pageCount"] = $this->getPageCount();
 
@@ -132,7 +146,10 @@ class AppAbstractController extends AbstractRestfulController {
             $this->setCountPerPage($countPerPage);
         }
         
-        $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($qb)));
+        $query = $this->getEm()->createQuery($qb->getDQL())
+            ->setHydrationMode(AbstractQuery::HYDRATE_ARRAY);
+        
+        $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($query)));
         
         try {
             $paginator->setCurrentPageNumber($this->params()->fromQuery('page'))->setItemCountPerPage($this->getCountPerPage());
@@ -241,11 +258,12 @@ class AppAbstractController extends AbstractRestfulController {
     
     private function paginationToArray($paginator) {
         
-        $hydrator = new DoctrineObject($this->getEm(), 'Application\Entity\CadCliente');
+        //$hydrator = new DoctrineObject($this->getEm(), 'Application\Entity\CadCliente');
         
         $arr = array();
         foreach ($paginator as $item) {
-            $arr[] = $hydrator->extract($item);
+            //$arr[] = $hydrator->extract($item);
+            $arr[] = $item;
         }
         
         return $arr;
@@ -279,12 +297,26 @@ class AppAbstractController extends AbstractRestfulController {
         return $this->entity;
     }
 
-    function setEntity($entity) {
+    function setEntity($entity, $alias) {
         $this->entity = $entity;
+        $this->alias = $alias;
     }
     
     function getAlias() {
         return $this->alias;
+    }
+    
+    /**
+     * Return alias of entity and all joins
+     * @return array
+     */
+    function getFullAlias() {
+        $fullAlias = array();
+        $fullAlias[] = $this->alias;
+        foreach ($this->getJoin() as $value) {
+            $fullAlias[] = $value['alias'];
+        }
+        return $fullAlias;
     }
 
     function getXController() {
@@ -304,4 +336,12 @@ class AppAbstractController extends AbstractRestfulController {
         return end($p);
     }
     
+    public function getJoin() {
+        return $this->join;
+    }
+
+    public function addJoin($join, $alias) {
+        $this->join[] = array("join"=>$join, "alias"=>$alias);
+    }
+
 }

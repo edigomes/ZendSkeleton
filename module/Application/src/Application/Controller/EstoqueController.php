@@ -9,7 +9,7 @@ namespace Application\Controller;
 class EstoqueController extends AppAbstractController {
     
     function __construct() {
-        $this->setEntity('Application\Entity\EstItem');
+        $this->setEntity('Application\Entity\EstItem', 'e');
     }
 
     public function create($data) {

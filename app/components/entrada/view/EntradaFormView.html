@@ -25,194 +25,81 @@
             <tab heading="Informações">
                 <div class="panel-body">
                     <form role="form" id="form1" name="form1" method="post" action="">
-                        <div class="row">
-                            <div class="form-group col-xs-6">
-                                <label for="codigo">Código</label>
-                                <input type="text" ng-model="formObject.PK_item" class="form-control" id="codigo" disabled />
+                        
+                        <fieldset>
+                            <legend>Dados da Entrada</legend>
+                            <div class="row">
+                                <div class="col-sm-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="codigo">Fornecedor</label>
+                                        <input type="text" ng-model="formObject.CadFornecedor.PK_fornecedor" class="form-control" />
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="form-group checkbox col-xs-6" style="margin-top:3%;">
-                              <label>
-                                <input type="checkbox" value="" ng-model="formObject.bloqueado">
-                                Bloqueado
-                              </label>
-                            </div>
-                        </div>
-
-                        <!--<div class="row">
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">Grupo</label>
-                                <select class="form-control" ng-model="formObject.FK_grupo">
-                                    <option>Escolha um grupo</option>
-                                    <option>Grupo 1</option>
-                                    <option>Grupo 2</option>
-                                    <option>Grupo 3</option>
-                                    <option>Grupo 4</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">Unidade</label>
-                                <select class="form-control" ng-model="formObject.FK_unidade">
-                                    <option>Escolha uma unidade</option>
-                                    <option>Unidade 1</option>
-                                    <option>Unidade 2</option>
-                                    <option>Unidade 3</option>
-                                    <option>Unidade 4</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">Grupo</label>
-                                <select class="form-control" ng-model="formObject.FK_fabricante">
-                                    <option>Escolha um estado</option>
-                                    <option>Fabricante 1</option>
-                                    <option>Fabricante 2</option>
-                                    <option>Fabricante 3</option>
-                                    <option>Fabricante 4</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="razaoSocial">Data de cadastro</label>
-                                <input type="text" class="form-control" ng-disabled="true" ng-model="formObject.dhCadastro.date" id="razaoSocial" disabled />
-                            </div>
-                        </div>-->
-
-                        <div class="row">
-                            <div class="form-group col-xs-6">
-                                <label for="nomeFantasia">Nome</label>
-                                <input type="text" class="form-control" ng-model="formObject.xProd" id="nomeFantasia" />
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="ieRg">Marca</label>
-                                <input type="text" class="form-control" ng-model="formObject.marca" id="ieRg" />
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="ieRg">Cor</label>
-                                <input type="text" class="form-control" ng-model="formObject.cor" id="ieRg" />
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="ieRg">NCM</label>
-                                <input type="text" class="form-control" ng-model="formObject.NCM" id="ieRg" />
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="ieRg">EAN</label>
-                                <input type="text" class="form-control" ng-model="formObject.cEAN" id="ieRg" />
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">Origem</label>
-                                <select class="form-control" ng-model="formObject.origem">
-                                    <option>Escolha uma origem</option>
-                                    <option value="0">Adiquirida de Terceiros</option>
-                                    <option value="1">Produção do Estabelecimento</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="foneCli">Quantidade</label>
-                                <input type="text" class="form-control" id="foneCli" ng-model="formObject.quantidade" />
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">Natureza</label>
-                                <select class="form-control" ng-model="formObject.natureza">
-                                    <option>Escolha uma natureza</option>
-                                    <option value="0">Nacional</option>
-                                    <option value="1">Importado</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">CST</label>
-                                <select class="form-control" ng-model="formObject.CST">
-                                    <option>Escolha uma CST</option>
-                                    <option>CST 1</option>
-                                    <option>CST 2</option>
-                                    <option>CST 3</option>
-                                    <option>CST 4</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-xs-6">
-                                <label for="endereco">Custo</label>
-                                <input type="text" class="form-control" id="endereco" ng-model="formObject.custo" />
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="endereco">IPI</label>
-                                <input type="text" class="form-control" id="endereco" ng-model="formObject.pIPI" />
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="endereco">ST</label>
-                                <input type="text" class="form-control" id="endereco" ng-model="formObject.pST" />
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="endereco">Aliquota</label>
-                                <input type="text" class="form-control" id="endereco" ng-model="formObject.pDifAliquota" />
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="endereco">Frete</label>
-                                <input type="text" class="form-control" id="endereco" ng-model="formObject.pFrete" />
-                            </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">PIS CONFINS</label>
-                                <select class="form-control" ng-model="formObject.isentoPisConfins">
-                                    <option>Escolha uma opção</option>
-                                    <option>Sim</option>
-                                    <option>Não</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row">
+                        </fieldset>
+                        
+                        <fieldset ng-controller="EntradaItemController">
+                            <legend>Produtos</legend>
                             
-                            <div class="form-group col-xs-6">
-                                <label for="numCli">Desconto Máximo</label>
-                                <input type="text" class="form-control" id="numCli" ng-model="formObject.pDescMaximo"/>
+                            <div class="row">
+                                
+                                <div class="col-sm-12 col-lg-8">
+                                    <div class="form-group">
+                                        <label for="codigo">Produto</label>
+                                        <input type="text" ng-model="formObject.EstItem.PK_item" class="form-control" />
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-6 col-lg-2">
+                                    <div class="form-group">
+                                        <label for="codigo">Quantidade</label>
+                                        <input type="text" ng-model="formObject.qtrib" class="form-control" />
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-6 col-lg-2">
+                                    <div class="form-group">
+                                        <label for="codigo">Valor</label>
+                                        <input type="text" ng-model="formObject.vuntrib" class="form-control" />
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="form-group col-xs-6">
-                                <label for="numCli">Valor Venda</label>
-                                <input type="text" class="form-control" id="numCli" ng-model="formObject.vUnTrib"/>
+                            
+                            <div class="row">
+                                <div class="col-sm-12 col-lg-12">
+                                    <table ng-table="itemList" class="table table-striped">
+                                        <tr ng-repeat="item in $data">
+                                            <td data-title="'Código'">{{item.EstItem.PK_item}}</td>
+                                            <td data-title="'Descrição'"><a ng-click="show(item.pkEntradaItem)">{{item.EstItem.xProd}}</a></td>
+                                            <td data-title="'QTDE'">{{item.qtrib}}</td>
+                                            <td data-title="'Preço'">{{item.vuntrib}}</td>
+                                            <td data-title="'Total'">{{(item.vuntrib * item.qtrib).toFixed(2)}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
+                            
+                        </fieldset>
 
-                        </div>
                     </form>
                 </div>
             </tab>
-            <tab heading="Contacts" active="tab.active" disabled="tab.disabled">
+            <tab heading="Pagamento" active="tab.active" disabled="tab.disabled">
                 
-                <!-- Table -->
-                <table ng-table="tableParams2" class="table table-striped">
-                    <tr ng-repeat="contact in $data">
-                        <td data-title="'Name'" style="text-align: left">{{contact.xNome}}</td>
-                        <td data-title="'Phone'"><a>{{contact.phone}}</a></td>
-                    </tr>
-                </table>
+                <div class="table-responsive">
+                    <!-- Table -->
+                    <table ng-table="tableParams2" class="table">
+                        <tr ng-repeat="contact in $data">
+                            <td data-title="'Name'" style="text-align: left">{{contact.xNome}}</td>
+                            <td data-title="'Phone'"><a>{{contact.phone}}</a></td>
+                        </tr>
+                    </table>
+                </div>
 
             </tab>
-            <!--<tab select="alert('selecteddd')">
-                <tab-heading>
-                    <i class="glyphicon glyphicon-bell"></i> Alert!
-                </tab-heading>
-                I've got an HTML heading, and a select callback. Pretty cool!
-            </tab>-->
+            <tab heading="Nota Fiscal" active="tab.active" disabled="tab.disabled">
+
+            </tab>
         </tabset>
         
     </div>

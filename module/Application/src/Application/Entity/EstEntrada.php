@@ -64,7 +64,7 @@ class EstEntrada
      *   @ORM\JoinColumn(name="FK_fornecedor", referencedColumnName="PK_fornecedor")
      * })
      */
-    private $fkFornecedor;
+    private $CadFornecedor;
     
     /**
      * @var string
@@ -95,8 +95,12 @@ class EstEntrada
         return $this->obs;
     }
 
-    function getFkFornecedor() {
-        return $this->fkFornecedor;
+    function getCadFornecedor() {
+        return $this->CadFornecedor;
+    }
+
+    function getXFornecedor() {
+        return $this->xFornecedor;
     }
 
     function setPkEntrada($pkEntrada) {
@@ -123,16 +127,12 @@ class EstEntrada
         $this->obs = $obs;
     }
 
-    function setFkFornecedor(\Application\Entity\CadFornecedor $fkFornecedor) {
-        $this->fkFornecedor = $fkFornecedor;
+    function setCadFornecedor(\Application\Entity\CadFornecedor $CadFornecedor) {
+        $this->CadFornecedor = $CadFornecedor;
     }
-    
-    function getXFornecedor() {
-        return $this->fkFornecedor->getXNome();
-    }
-    
-    function setXFornecedor($xNome) {
-        $this->fkFornecedor->setXNome($xNome);
+
+    function setXFornecedor($xFornecedor) {
+        $this->xFornecedor = $xFornecedor;
     }
 
 }

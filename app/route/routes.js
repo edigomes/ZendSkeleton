@@ -77,6 +77,30 @@ app.config(function($stateProvider, $urlRouterProvider){
                 {title: "Novo Estoque"}
             );
         }
+    })
+    
+    /*********************************************************/
+    
+    .state('entrada', {
+        url: "/entrada",
+        templateUrl: 'components/entrada/view/EntradaListView.html',
+        controller: 'EntradaListController'
+    }).state('entrada.edit', {
+        url: "/edit/{id}",
+        onEnter: function ($stateParams, ModalFormService) {
+            ModalFormService.openModal(
+                'components/entrada/view/EntradaFormView.html', 
+                {title: "Editar Entrada"}
+            );
+        }
+    }).state('entrada.new', {
+        url: "/new",
+        onEnter: function (ModalFormService) {
+            ModalFormService.openModal(
+                'components/entrada/view/EntradaFormView.html', 
+                {title: "Novo Entrada"}
+            );
+        }
     });
     
 });

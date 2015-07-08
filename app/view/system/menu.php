@@ -32,7 +32,7 @@
                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estoque <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a ui-sref="estoque">Estoque</a></li>
-                        <li><a ui-sref="estoque">Entrada de Mercadoria</a></li>
+                        <li><a ui-sref="entrada">Entrada de Mercadoria</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

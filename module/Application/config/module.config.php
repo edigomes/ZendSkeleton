@@ -127,6 +127,19 @@ return array(
                     ),
                 ),
             ),
+            'entradaitem' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    //'route' => '/system[/:table][/:id][/:data]',
+                    'route' => '/entradaitem[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\EntradaItem',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -165,7 +178,8 @@ return array(
             'Application\Controller\Fornecedor' => 'Application\Controller\FornecedorController',
             'Application\Controller\ContatoFornecedor' => 'Application\Controller\ContatoFornecedorController',
             'Application\Controller\Estoque' => 'Application\Controller\EstoqueController',
-            'Application\Controller\Entrada' => 'Application\Controller\EntradaController'
+            'Application\Controller\Entrada' => 'Application\Controller\EntradaController',
+            'Application\Controller\EntradaItem' => 'Application\Controller\EntradaItemController'
         ),
     ),
     /*'view_manager' => array(

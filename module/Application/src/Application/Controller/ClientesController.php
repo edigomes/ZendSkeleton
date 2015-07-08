@@ -9,7 +9,7 @@ namespace Application\Controller;
 class ClientesController extends AppAbstractController {
     
     function __construct() {
-        $this->setEntity('Application\Entity\CadCliente');
+        $this->setEntity('Application\Entity\CadCliente', 'c');
     }
 
     public function create($data) {

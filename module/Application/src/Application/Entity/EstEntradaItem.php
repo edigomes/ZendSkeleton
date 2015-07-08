@@ -43,7 +43,7 @@ class EstEntradaItem
      *   @ORM\JoinColumn(name="FK_item", referencedColumnName="PK_item")
      * })
      */
-    private $fkItem;
+    private $EstItem;
 
     /**
      * @var \Application\Entity\EstEntrada
@@ -67,8 +67,8 @@ class EstEntradaItem
         return $this->vuntrib;
     }
 
-    function getFkItem() {
-        return $this->fkItem;
+    function getEstItem() {
+        return $this->EstItem;
     }
 
     function getFkEntrada() {
@@ -87,8 +87,8 @@ class EstEntradaItem
         $this->vuntrib = $vuntrib;
     }
 
-    function setFkItem(\Application\Entity\EstItem $fkItem) {
-        $this->fkItem = $fkItem;
+    function setEstItem(\Application\Entity\EstItem $EstItem) {
+        $this->EstItem = $EstItem;
     }
 
     function setFkEntrada(\Application\Entity\EstEntrada $fkEntrada) {

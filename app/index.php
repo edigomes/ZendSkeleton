@@ -44,6 +44,11 @@
         <script src="components/estoque/controller/EstoqueController.js"></script>
         <script src="components/estoque/controller/EstoqueListController.js"></script>
         
+        <script src="components/entrada/service/EntradaService.js"></script>
+        <script src="components/entrada/service/EntradaItemService.js"></script>
+        <script src="components/entrada/controller/EntradaController.js"></script>
+        <script src="components/entrada/controller/EntradaItemController.js"></script>
+        <script src="components/entrada/controller/EntradaListController.js"></script>
         
         <script src="route/routes.js"></script>
 

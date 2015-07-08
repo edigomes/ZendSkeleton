@@ -15,5 +15,4 @@ app.controller("EntradaListController", function($controller, $scope, EntradaSer
 
     $scope.EntradaList = $scope.loadList();
     
-    
 });
