@@ -3,6 +3,7 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Application\Entity\CadFornecedor;
 
 /**
  * EstEntrada
@@ -111,16 +112,16 @@ class EstEntrada
         $this->ndoc = $ndoc;
     }
 
-    function setDhabertura(\DateTime $dhabertura) {
-        $this->dhabertura = $dhabertura;
+    function setDhabertura($dhabertura) {
+        $this->dhabertura = new \DateTime($dhabertura['date']);
     }
 
-    function setDhfinalizacao(\DateTime $dhfinalizacao) {
-        $this->dhfinalizacao = $dhfinalizacao;
+    function setDhfinalizacao($dhfinalizacao) {
+        $this->dhfinalizacao = new \DateTime($dhfinalizacao['date']);
     }
 
-    function setDhcancelamento(\DateTime $dhcancelamento) {
-        $this->dhcancelamento = $dhcancelamento;
+    function setDhcancelamento($dhcancelamento) {
+        $this->dhcancelamento = new \DateTime($dhcancelamento['date']);
     }
 
     function setObs($obs) {

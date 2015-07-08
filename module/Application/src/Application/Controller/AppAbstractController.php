@@ -213,12 +213,15 @@ class AppAbstractController extends AbstractRestfulController {
      */
     public function update($id, $data) {
 
-        $CadCliente = $this->getEm()->getRepository($this->entity)->find($id);
-
         try {
+            //exit;
+            // Get entity
+            $CadCliente = $this->getEm()->getRepository($this->entity)->find($id);
+            
             // Persist
             $this->getEm()->persist($this->getHydrator()->hydrate($data, $CadCliente));
             $this->getEm()->flush();
+            
         } catch (\Exception $e) {
             var_dump($e);
         }

@@ -1,4 +1,4 @@
-app.controller("EntradaItemController", function($controller, $scope, $stateParams, EntradaItemService) {
+app.controller("EntradaItemController", function($controller, $scope, $stateParams, EntradaItemService, EstoqueService) {
 
     $scope.EntradaItem = {FK_entrada: $stateParams.id}
     
@@ -13,5 +13,8 @@ app.controller("EntradaItemController", function($controller, $scope, $statePara
     );
     
     $scope.itemList = $scope.loadList();
+        
+    // Load itens
+    $scope.EstItem = EstoqueService.query();
 
 });

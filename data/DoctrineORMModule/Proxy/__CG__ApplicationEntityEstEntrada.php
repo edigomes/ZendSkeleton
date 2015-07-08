@@ -64,10 +64,10 @@ class EstEntrada extends \Application\Entity\EstEntrada implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'pkEntrada', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'ndoc', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'dhabertura', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'dhfinalizacao', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'dhcancelamento', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'obs', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'fkFornecedor');
+            return array('__isInitialized__', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'pkEntrada', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'ndoc', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'dhabertura', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'dhfinalizacao', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'dhcancelamento', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'obs', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'CadFornecedor', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'xFornecedor');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'pkEntrada', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'ndoc', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'dhabertura', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'dhfinalizacao', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'dhcancelamento', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'obs', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'fkFornecedor');
+        return array('__isInitialized__', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'pkEntrada', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'ndoc', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'dhabertura', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'dhfinalizacao', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'dhcancelamento', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'obs', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'CadFornecedor', '' . "\0" . 'Application\\Entity\\EstEntrada' . "\0" . 'xFornecedor');
     }
 
     /**
@@ -246,12 +246,23 @@ class EstEntrada extends \Application\Entity\EstEntrada implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function getFkFornecedor()
+    public function getCadFornecedor()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFkFornecedor', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCadFornecedor', array());
 
-        return parent::getFkFornecedor();
+        return parent::getCadFornecedor();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getXFornecedor()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getXFornecedor', array());
+
+        return parent::getXFornecedor();
     }
 
     /**
@@ -279,7 +290,7 @@ class EstEntrada extends \Application\Entity\EstEntrada implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function setDhabertura(\DateTime $dhabertura)
+    public function setDhabertura($dhabertura)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDhabertura', array($dhabertura));
@@ -290,7 +301,7 @@ class EstEntrada extends \Application\Entity\EstEntrada implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function setDhfinalizacao(\DateTime $dhfinalizacao)
+    public function setDhfinalizacao($dhfinalizacao)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDhfinalizacao', array($dhfinalizacao));
@@ -301,7 +312,7 @@ class EstEntrada extends \Application\Entity\EstEntrada implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function setDhcancelamento(\DateTime $dhcancelamento)
+    public function setDhcancelamento($dhcancelamento)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDhcancelamento', array($dhcancelamento));
@@ -323,12 +334,23 @@ class EstEntrada extends \Application\Entity\EstEntrada implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function setFkFornecedor(\Application\Entity\CadFornecedor $fkFornecedor)
+    public function setCadFornecedor(\Application\Entity\CadFornecedor $CadFornecedor)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFkFornecedor', array($fkFornecedor));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCadFornecedor', array($CadFornecedor));
 
-        return parent::setFkFornecedor($fkFornecedor);
+        return parent::setCadFornecedor($CadFornecedor);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setXFornecedor($xFornecedor)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setXFornecedor', array($xFornecedor));
+
+        return parent::setXFornecedor($xFornecedor);
     }
 
 }

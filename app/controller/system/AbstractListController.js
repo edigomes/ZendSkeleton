@@ -36,7 +36,7 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
         var object = $scope.formObject;
         
         // First item
-        if (Object.keys(object)[0].substring(0,2) === "PK") {
+        if (Object.keys(object)[0].substring(0,2) === "PK" || Object.keys(object)[0].substring(0,2) === "pk") {
             id = object[Object.keys(object)[0]];
         }
 

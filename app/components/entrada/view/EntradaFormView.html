@@ -32,13 +32,19 @@
                                 <div class="col-sm-12 col-lg-12">
                                     <div class="form-group">
                                         <label for="codigo">Fornecedor</label>
-                                        <input type="text" ng-model="formObject.CadFornecedor.PK_fornecedor" class="form-control" />
+                                        <select 
+                                            ng-model="formObject.CadFornecedor"
+                                            ng-options="item.xNome for item in CadFornecedor.result track by item.xNome"
+                                            class="form-control">
+                                        </select>
+                                        <!--<input type="text" ng-model="formObject.CadFornecedor.PK_fornecedor" class="form-control" />-->
                                     </div>
                                 </div>
                             </div>
                         </fieldset>
                         
                         <fieldset ng-controller="EntradaItemController">
+                            
                             <legend>Produtos</legend>
                             
                             <div class="row">
@@ -46,7 +52,12 @@
                                 <div class="col-sm-12 col-lg-8">
                                     <div class="form-group">
                                         <label for="codigo">Produto</label>
-                                        <input type="text" ng-model="formObject.EstItem.PK_item" class="form-control" />
+                                        <!--<input type="text" ng-model="formObject.EstItem.PK_item" class="form-control" />-->
+                                        <select 
+                                            ng-model="formObject.EstItem" 
+                                            ng-options="item.xProd for item in EstItem.result track by item.xProd"
+                                            class="form-control">
+                                        </select>
                                     </div>
                                 </div>
                                 
@@ -59,13 +70,20 @@
                                 
                                 <div class="col-sm-6 col-lg-2">
                                     <div class="form-group">
-                                        <label for="codigo">Valor</label>
+                                        <label>Valor</label>
                                         <input type="text" ng-model="formObject.vuntrib" class="form-control" />
                                     </div>
                                 </div>
+                                
                             </div>
                             
                             <div class="row">
+                                <div class="col-lg-1">
+                                    <button class="btn btn-info" ng-click="update()">Salvar</button>
+                                </div>
+                            </div>
+                            
+                            <div class="row" style="margin-top: 10px">
                                 <div class="col-sm-12 col-lg-12">
                                     <table ng-table="itemList" class="table table-striped">
                                         <tr ng-repeat="item in $data">
@@ -106,7 +124,7 @@
     
     <!-- Modal Footer -->
     <div class="modal-footer">
-        <button ng-click="update()" type="button" class="btn btn-primary pull-left">Salvar</button>
+        <button ng-click="update()" type="button" class="btn btn-success pull-left">Salvar</button>
         <button ng-click="cancel()" type="button" class="btn btn-default pull-left">Fechar</button>
     </div>
 
