@@ -8,6 +8,8 @@
         <meta name="MobileOptimized" content="480">
         <link rel="stylesheet" href="view/css/bootstrap.min.css">
         <link rel="stylesheet" href="view/css/style.css">
+        <!--<link rel="stylesheet" href="view/css/test1.css">
+        <link rel="stylesheet" href="view/css/test2.css">-->
         <script src="libs/jquery.min.js"></script>
         <script src="libs/angular.js"></script>
         <script src="libs/angular-ui-router.js"></script>

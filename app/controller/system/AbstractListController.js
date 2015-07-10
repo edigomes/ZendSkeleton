@@ -7,11 +7,12 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
     
     // Required
     $scope.defaultService = defaultService;
-    $scope.masterDefaultObject = formObject; // Stores original object
+    $scope.masterDefaultObject = function() { return formObject; }(); // Stores original object
     $scope.formObject = formObject;
-    
+
     // Show the fornecedor in a form
     $scope.show = function(id) {
+        if (!id) return; 
         $scope.defaultService.show({id: id}, function(obj) {
             $scope.formObject = obj;
         });
@@ -19,9 +20,14 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
     
     // Create new fornecedor
     $scope.create = function() {
-        console.log($scope.formObject);
         $scope.defaultService.create($scope.formObject, function(data){
             if (data.status) {
+                
+                if ($scope.$parent.formObject === undefined) {
+                    $stateParams.id = data.insertId;
+                }
+                
+                //console.log($scope.getId());
                 $.notify(data.message, {globalPosition: "bottom right", className: 'success'});
                 $scope.$root.$broadcast("updateList");
                 $scope.reset();
@@ -32,22 +38,36 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
     // Update fornecedor
     $scope.update = function() {
         
-        var id = null;
-        var object = $scope.formObject;
-        
-        // First item
-        if (Object.keys(object)[0].substring(0,2) === "PK" || Object.keys(object)[0].substring(0,2) === "pk") {
-            id = object[Object.keys(object)[0]];
-        }
+        //var id = null;
+        var object = function() { return $scope.formObject; }();
 
-        if (id !== null) {
-            object.id = id; // Sets id
+        // TODO: Redundant...
+        // resolve foreign keys
+        for (prop in $scope.masterDefaultObject) {
+            if (typeof $scope.masterDefaultObject[prop] === 'function') {
+                //console.log($scope.masterDefaultObject[prop]());
+                object[prop] = $scope.masterDefaultObject[prop]();
+                console.warn($scope.masterDefaultObject[prop]());
+            }
+        }
+        
+        console.warn($scope.masterDefaultObject);
+        //return;
+        //console.warn($scope.formObject); return;
+        //return;
+
+        // First item
+        //if (Object.keys(object)[0].substring(0,2) === "PK" || Object.keys(object)[0].substring(0,2) === "pk") {
+            //id = object[Object.keys(object)[0]];
+        //}
+
+        if ($scope.getId() !== undefined) {
+            object.id = $scope.getId(); // Sets id
             $scope.defaultService.update(object, function(data) {
                 if (data.status) {
                     $scope.$root.$broadcast("updateList");
                     $.notify(data.message, {globalPosition: "bottom right", className: 'success'});
                     //$scope.reset();
-                    console.log($scope.formObject);
                 }
             });
         } else {
@@ -55,7 +75,22 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
         }
     };
     
-    $scope.loadList = function(where, service) {
+    $scope.loadList = function(_where, service) {
+        
+        // Const (entender pq essa merda agora assume as variaveis a antes não assumia.....)
+        var where = function() { return _where; }();
+        
+        // TODO: redundant
+        for (prop in where) {
+            if (typeof where[prop] === 'function') {
+                where[prop] = where[prop]();
+                if (where[prop] === undefined) {
+                    where[prop] = null;
+                }
+            }
+        }
+        
+        console.log(where);
         
         if (!service) {
             service = $scope.defaultService;
@@ -78,9 +113,9 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
                     if (data.result.length < 10) {
                         params.settings().counts = 0;
                     }
-                    
+
                     //Log return data
-                    console.log(data);
+                    console.log(data.result);
                     // set new data
                     $defer.resolve(data.result);
                 });
@@ -99,5 +134,27 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
     $scope.reset = function() {
         $scope.formObject = angular.copy($scope.masterDefaultObject);
     };
+    
+    $scope.getId = function() {
+        
+        if ($scope.$parent.formObject === undefined) {
+            return $stateParams.id;
+        } else {
+            if (Object.keys($scope.formObject)[0].substring(0,2) === "PK" || Object.keys($scope.formObject)[0].substring(0,2) === "pk") {
+                return $scope.formObject[Object.keys($scope.formObject)[0]];
+            } else {
+                return undefined;
+            }
+        }
+
+    };
+    
+    $scope.logId = function() {
+        console.log($scope.getId());
+        console.log($scope.masterDefaultObject);
+        console.log($stateParams.id);
+    };
+    
+    // Autoload object if id is defined
     
 });

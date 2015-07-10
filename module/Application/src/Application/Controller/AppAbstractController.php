@@ -45,16 +45,23 @@ class AppAbstractController extends AbstractRestfulController {
     public function create($data) {
         
         try {
-            $this->getEm()->persist($this->getHydrator()->hydrate($data, new $this->entity));
+            $entity = new $this->entity;
+            $this->getEm()->persist($this->getHydrator()->hydrate($data, $entity));
             $this->getEm()->flush();
         } catch (\Exception $e) {
             var_dump($e);
         }
         
+        $extracted = $this->getHydrator()->extract($entity);
+        $pkName = $this->getEm()->getClassMetadata($this->entity)->getIdentifier()[0];
+        
         return new JsonModel(
             array(
                 "status"=>true,
-                "message"=>"O ".$this->xController." foi salvo"
+                "message"=>"O ".$this->xController." foi salvo",
+                "insertId"=>$extracted[$pkName],
+                "insertObject"=>$extracted
+                //"insertObject"=>$this->getEm()->getClassMetadata($this->entity)->getFieldValue($entity, $this->getEm()->getClassMetadata($this->entity)->getIdentifier())
             )
         );
 
@@ -117,16 +124,37 @@ class AppAbstractController extends AbstractRestfulController {
         
         // Set where from query
         $Where = Json::decode($this->params()->fromQuery('where'));
-        if (!is_null($Where)) {
-            foreach ($Where as $key => $value) {
-                $qb->where($this->alias.".$key = :$key")->setParameter($key, $value);
-            }
-        }
+        
+        //var_dump($Where); exit;
+        //var_dump($qb->getDQL()); exit;
         
         // Seta a busca
         $this->setSearchKeywords($qb);
         
-        $clientes["result"] = $this->paginate($qb);
+        $countPerPage = $this->params()->fromQuery('count');
+        
+        // Busca
+        if (!empty($countPerPage)) {
+            $this->setCountPerPage($countPerPage);
+        }
+        
+        if (!is_null($Where)) {
+            foreach ($Where as $key => $value) {
+                $qb->where($this->alias.".$key = :$key");//->setParameter($key, $value);
+            }
+        }
+        
+        $query = $this->getEm()->createQuery($qb->getDQL())
+            ->setHydrationMode(AbstractQuery::HYDRATE_ARRAY);
+        
+        if (!is_null($Where)) {
+            foreach ($Where as $key => $value) {
+                $query->setParameter($key, $value);
+            }
+        }
+        
+        
+        $clientes["result"] = $this->paginate($query);
         $clientes["pageCount"] = $this->getPageCount();
 
         return new JsonModel($clientes);
@@ -138,17 +166,8 @@ class AppAbstractController extends AbstractRestfulController {
      * @param \Doctrine\ORM\QueryBuilder $qb
      * @return array
      */
-    private function paginate(\Doctrine\ORM\QueryBuilder $qb) {
-        
-        $countPerPage = $this->params()->fromQuery('count');
-        // Busca
-        if (!empty($countPerPage)) {
-            $this->setCountPerPage($countPerPage);
-        }
-        
-        $query = $this->getEm()->createQuery($qb->getDQL())
-            ->setHydrationMode(AbstractQuery::HYDRATE_ARRAY);
-        
+    private function paginate($query) {
+
         $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($query)));
         
         try {

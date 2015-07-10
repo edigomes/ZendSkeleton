@@ -10,6 +10,43 @@ app.service('AbstractService', function() {
         });
     };
     
+    
+    this.update = function() {
+        
+        console.log($parent.$scope.formObject);
+        
+        //var id = null;
+        var object = $scope.formObject;
+        
+        // TODO: Redundant...
+        for (prop in $scope.formObject) {
+            if (typeof $scope.formObject[prop] === 'function') {
+                $scope.formObject[prop] = $scope.formObject[prop]();
+            }
+            //console.log(typeof $scope.formObject[prop]);
+        }
+        //return;
+        //console.log($scope.formObject);
+        
+        // First item
+        //if (Object.keys(object)[0].substring(0,2) === "PK" || Object.keys(object)[0].substring(0,2) === "pk") {
+            //id = object[Object.keys(object)[0]];
+        //}
+
+        if ($scope.getId() !== undefined) {
+            object.id = $scope.getId(); // Sets id
+            $scope.defaultService.update(object, function(data) {
+                if (data.status) {
+                    $scope.$root.$broadcast("updateList");
+                    $.notify(data.message, {globalPosition: "bottom right", className: 'success'});
+                    //$scope.reset();
+                }
+            });
+        } else {
+            $scope.create();
+        }
+    };
+    
     // Create new fornecedor
     /*$scope.create = function() {
         console.log($scope.defaultObject);

@@ -72,6 +72,11 @@ class EstEntrada
      */
     private $xFornecedor;
     
+    function __construct() {
+        $this->dhabertura = new \DateTime("now");
+    }
+
+    
     function getPkEntrada() {
         return $this->pkEntrada;
     }

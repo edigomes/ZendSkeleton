@@ -1,20 +1,24 @@
-app.controller("EntradaItemController", function($controller, $scope, $stateParams, EntradaItemService, EstoqueService) {
+app.controller("EntradaItemController", function($controller, $scope, EntradaItemService, EstoqueService) {
 
-    $scope.EntradaItem = {FK_entrada: $stateParams.id}
-    
+    $scope.EntradaItem = {
+        fkEntrada: function() { 
+            return $scope.$parent.getId(); 
+        }
+    };
+
     angular.extend(this,
         $controller(
             'AbstractListController', {
                 $scope: $scope, 
-                formObject: $scope.EntradaItemController, 
+                formObject: $scope.EntradaItem, 
                 defaultService: EntradaItemService
             }
         )
     );
     
-    $scope.itemList = $scope.loadList();
+    $scope.EntradaItemList = $scope.loadList($scope.EntradaItem);
         
-    // Load itens
+    // Load itens on select
     $scope.EstItem = EstoqueService.query();
 
 });
