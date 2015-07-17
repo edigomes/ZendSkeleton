@@ -10,7 +10,7 @@
             <span class="" aria-label="Left Align">
                 <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                 <!--&nbsp;Novo Cliente <pre>{{defaultData | json}}</pre>-->
-                <!--<pre>{{CadTest | json}}</pre>-->
+                <pre>{{CadFornecedor | json}}</pre>
                 {{title}}
             </span>
 
@@ -29,7 +29,7 @@
                                 <tr>
                                     <td width="47%"><label class="control-label small" for="text">CNPJ / CPF:<br>
                                         </label>
-                                        <input ng-model="formObject.CNPJ_CPF" class="form-control input-sm" type="text" />
+                                        <input ng-model="CadFornecedor.CNPJ_CPF" class="form-control input-sm" type="text" />
                                     </td>
                                     <td width="2%">&nbsp;</td>
                                     <td width="51%"><label class="control-label small" for="text">Endereço:</label>
@@ -128,6 +128,7 @@
     <div class="modal-footer">
         <button ng-click="update(em.CadFornecedor)" type="button" class="btn btn-primary pull-left">Salvar</button>
         <button ng-click="cancel()" type="button" class="btn btn-default pull-left">Fechar</button>
+        <button class="btn btn-info" ng-click="logDefault()">Log Default</button>
     </div>
 
 </div>

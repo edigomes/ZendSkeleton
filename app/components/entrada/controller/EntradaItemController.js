@@ -6,6 +6,7 @@ app.controller("EntradaItemController", function($controller, $scope, EntradaIte
         }
     };
 
+    // Extends default controller
     angular.extend(this,
         $controller(
             'AbstractListController', {
@@ -16,6 +17,7 @@ app.controller("EntradaItemController", function($controller, $scope, EntradaIte
         )
     );
     
+    // Load itens list
     $scope.EntradaItemList = $scope.loadList($scope.EntradaItem);
         
     // Load itens on select

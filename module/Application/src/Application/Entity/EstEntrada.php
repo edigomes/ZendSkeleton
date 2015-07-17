@@ -3,7 +3,6 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Application\Entity\CadFornecedor;
 
 /**
  * EstEntrada
@@ -30,9 +29,9 @@ class EstEntrada
     private $ndoc;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="dhAbertura", type="datetime", nullable=false)
+     * @ORM\Column(name="dhAbertura", type="date", nullable=false)
      */
     private $dhabertura;
 
@@ -102,6 +101,7 @@ class EstEntrada
     }
 
     function getCadFornecedor() {
+        //return array("PK_fornecedor", $this->CadFornecedor->getPK_fornecedor());
         return $this->CadFornecedor;
     }
 

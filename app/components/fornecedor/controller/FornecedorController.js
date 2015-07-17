@@ -1,6 +1,6 @@
 app.controller('FornecedorController', function($scope, $controller, $stateParams, FornecedorService) {
     
-    $scope.CadFornecedor = {};
+    $scope.CadFornecedor = {fk:1};
     
     angular.extend(
         this, 

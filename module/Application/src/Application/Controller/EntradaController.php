@@ -1,14 +1,6 @@
 <?php
 
 namespace Application\Controller;
-use Zend\View\Model\JsonModel;
-use \Doctrine\ORM\AbstractQuery;
-use Zend\Json\Expr;
-use Application\Entity\CadFornecedor;
-
-use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
-use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
-use Zend\Paginator\Paginator;
 
 /**
  * Description of AbstractController

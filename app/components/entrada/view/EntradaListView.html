@@ -44,11 +44,12 @@
             <div class="table table-striped gridStyle" ng-grid="gridOptions"></div>
         </div>-->
         <!-- Table -->
+        <div class="table-responsive">
         <table ng-table="EntradaList" class="table table-striped ng-table-responsive">
             <tr ng-repeat="list in $data">
                 <td style="text-align: left" data-title="'#'">{{list.pkEntrada}}</td>
                 <td data-title="'Fornecedor'"><a href="#/entrada/edit/{{list.pkEntrada}}">{{list.CadFornecedor.xNome}}</a></td>
-                <td data-title="'Abertura'">{{list.dhabertura.date}}</td>
+                <td data-title="'Abertura'">{{list.dhabertura.date | cmdate:'dd/MM/yyyy HH:mm' }}</td>
                 <td data-title="'Fechamento'">{{list.dhfechamento.date}}</td>
                 <td data-title="'Cancelamento'">{{list.dhcancelamento.date}}</td>
                 <!--<td>
@@ -56,6 +57,7 @@
                 </td>-->
             </tr>
         </table>
+        </div>
 
     </div>
 </div>

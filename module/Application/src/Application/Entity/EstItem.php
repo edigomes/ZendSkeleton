@@ -24,21 +24,21 @@ class EstItem
     /**
      * @var integer
      *
-     * @ORM\Column(name="FK_grupo", type="integer", nullable=false)
+     * @ORM\Column(name="FK_grupo", type="integer", nullable=true)
      */
     private $FK_grupo;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="FK_unidade", type="integer", nullable=false)
+     * @ORM\Column(name="FK_unidade", type="integer", nullable=true)
      */
     private $FK_unidade;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="FK_fabricante", type="integer", nullable=false)
+     * @ORM\Column(name="FK_fabricante", type="integer", nullable=true)
      */
     private $FK_fabricante;
 
@@ -47,7 +47,7 @@ class EstItem
      *
      * @ORM\Column(name="dhCadastro", type="datetime", nullable=false)
      */
-    private $dhCadastro = null;
+    private $dhCadastro;
 
     /**
      * @var string
@@ -181,6 +181,11 @@ class EstItem
      * @ORM\Column(name="vUnTrib", type="float", precision=15, scale=4, nullable=false)
      */
     private $vUnTrib;
+    
+    function __construct() {
+        $this->dhCadastro = new \DateTime('now');
+    }
+
     
     function getPK_item() {
         return $this->PK_item;

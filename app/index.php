@@ -19,6 +19,7 @@
         <script src="libs/notify.min.js"></script>
         <script src="modules/ng-table/ng-table.js"></script>
         <script src="modules/angular-resource.min.js"></script>
+        <script src="libs/angular-locale_pt-br.js"></script>
 
         <!-- APP -->
         <script src="app.js"></script>

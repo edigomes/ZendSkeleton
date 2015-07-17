@@ -84,7 +84,7 @@ class EstEntradaItem
     }
 
     function setVuntrib($vuntrib) {
-        $this->vuntrib = $vuntrib;
+        $this->vuntrib = $vuntrib; //str_replace(array("#",","), array("","."), str_replace(".", "#", $vuntrib));
     }
 
     function setEstItem(\Application\Entity\EstItem $EstItem) {
