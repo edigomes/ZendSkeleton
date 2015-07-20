@@ -37,4 +37,21 @@ class Module
             ),
         );
     }
+    
+    public function getServiceConfig() {
+        return array(
+            'factories' => array(
+                'Application\Hydrator' => function () {
+                    
+                },
+                'Application\EntradaService' => function ($sm) {
+                    return new \Application\Service\Entrada($sm->get('Doctrine\ORM\EntityManager'));
+                },
+                'Application\EntradaItemService' => function ($sm) {
+                    return new \Application\Service\EntradaItem($sm->get('Doctrine\ORM\EntityManager'));
+                },
+            )
+        );
+    }
+
 }

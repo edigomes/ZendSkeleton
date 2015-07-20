@@ -26,6 +26,7 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
                 
                 if ($scope.$parent.formObject === undefined) {
                     $scope.setId(data.insertId);
+                    $scope.formObject = data.insertObject;
                 }
                 
                 $.notify(data.message, {globalPosition: "bottom right", className: 'success'});
@@ -37,8 +38,24 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
         });
     };
     
+    // Peforms a deletion of object
+    $scope.remove = function(id) {
+        if (id === undefined) { 
+            alert('Please pass the id!');
+            return;
+        } 
+        if (confirm("Excluir item "+id+"?")) {
+            $scope.defaultService.delete(id, function(data){
+                if (data.status) {
+                    $.notify(data.message, {globalPosition: "bottom right", className: 'success'});
+                    $scope.$root.$broadcast("updateList");
+                }
+            });
+        }
+    };
+    
     // Update
-    $scope.update = function() {
+    $scope.update = function(callback) {
         
         //var toUpdate = $scope.resolveFK($scope.formObject);
         $scope.formObject = $scope.resolveFK($scope.formObject);
@@ -47,11 +64,23 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
             $scope.formObject.id = $scope.getId(); // Sets id
             $scope.defaultService.update($scope.formObject, function(data) {
                 if (data.status) {
+                    // Update all lists
                     $scope.$root.$broadcast("updateList");
-                    $.notify(data.message, {globalPosition: "bottom right", className: 'success'});
+                    
+                    // Reset form if not parent
                     if (!$scope.isParent()) {
                         $scope.reset();
                     }
+                    
+                    // If callback
+                    if (callback) {
+                        callback();
+                    } else {   
+                        $.notify(data.message, {globalPosition: "bottom right", className: 'success'});
+                    }
+                    
+                } else {
+                    $.notify(data.message, {globalPosition: "bottom right", className: 'error'});
                 }
             });
         } else {
@@ -171,5 +200,19 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
     };
     
     // Autoload object if id is defined
+    $scope.getTotal = function(object, column, column2) {
+        if (object === undefined || object.length === 0) {
+            return;
+        }
+        var sum = 0;
+        for (value in object) {
+            if (column2) {
+                sum += object[value][column] * object[value][column2];
+            } else {
+                sum += object[value][column];
+            }
+        }
+        return sum;
+    };
     
 });

@@ -11,6 +11,10 @@ use Zend\Paginator\Paginator;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\AbstractQuery;
+use Zend\Stdlib\Hydrator\ClassMethods;
+use Application\Entity\EstEntrada;
+use Application\Entity\CadFornecedor;
+use Zend\Stdlib\Hydrator\ObjectProperty;
 
 /**
  * Description of AbstractController
@@ -44,6 +48,8 @@ class AppAbstractController extends AbstractRestfulController {
      */
     public function create($data) {
         
+        //var_dump($data); exit;
+        
         try {
             $entity = new $this->entity;
             $this->getEm()->persist($this->getHydrator()->hydrate($data, $entity));
@@ -51,15 +57,31 @@ class AppAbstractController extends AbstractRestfulController {
         } catch (\Exception $e) {
             var_dump($e);
         }
-        
+
+        //$extracted = $this->getHydrator()->extract($entity);
         $extracted = $this->getHydrator()->extract($entity);
+        
         $pkName = $this->getEm()->getClassMetadata($this->entity)->getIdentifier()[0];
+        $insertId = $extracted[$pkName];
+        
+        // Isso vira função (Hydrate recursivo)
+        foreach ($extracted as $key => &$value) {
+            if (is_object($value)) {
+                try {
+                    $value = $this->getHydrator()->extract($value);
+                } catch (\Exception $e) {
+                    continue;
+                }
+            }
+        }
+        
+        //var_dump($entity->toArray());
         
         return new JsonModel(
             array(
                 "status"=>true,
                 "message"=>"O ".$this->xController." foi salvo",
-                "insertId"=>$extracted[$pkName],
+                "insertId"=>$insertId,
                 "insertObject"=>$extracted
                 //"insertObject"=>$this->getEm()->getClassMetadata($this->entity)->getFieldValue($entity, $this->getEm()->getClassMetadata($this->entity)->getIdentifier())
             )
@@ -72,7 +94,18 @@ class AppAbstractController extends AbstractRestfulController {
      * @param type $id
      */
     public function delete($id) {
-        parent::delete($id);
+        
+        $excluir = $this->getEm()->find($this->entity, $id);
+        $this->getEm()->remove($excluir);
+        $this->getEm()->flush();
+        
+        return new JsonModel(
+            array(
+                "status"=>true,
+                "message"=>"O ".$this->xController." foi excluido"
+            )
+        );
+        
     }
     
     /**
@@ -81,7 +114,7 @@ class AppAbstractController extends AbstractRestfulController {
      * @return JsonModel
      */
     public function get($id) {
-        
+        $returnArray = false;
         $qb = $this->getEm()->createQueryBuilder();
         //$qb->select($this->alias)->from($this->entity, $this->alias);
         $qb->select($this->getFullAlias())->from($this->entity, $this->alias);
@@ -100,7 +133,11 @@ class AppAbstractController extends AbstractRestfulController {
         //$data = $this->getHydrator()->extract($qb->getQuery()->getResult()[0]);
         $data = $qb->getQuery()->getResult(AbstractQuery::HYDRATE_ARRAY)[0];
         
-        return new JsonModel($data);
+        if (!$returnArray) {
+            return new JsonModel($data);
+        } else {
+            return $data;
+        }
         
     }
     
@@ -109,6 +146,18 @@ class AppAbstractController extends AbstractRestfulController {
      * @return JsonModel
      */
     public function getList() {
+        
+         // MERDA
+        
+        /*$hydrator = $this->getHydrator();
+        
+        $en = new EstEntrada();
+        $for = new CadFornecedor();
+        $for->setXNome("TESTE");
+        
+        $en->setCadFornecedor($for);
+        
+        var_dump($hydrator->extract($en)); exit;*/
         
         $clientes = array();
         
@@ -128,12 +177,11 @@ class AppAbstractController extends AbstractRestfulController {
         //var_dump($Where); exit;
         //var_dump($qb->getDQL()); exit;
         
-        // Seta a busca
+        // Seta a Where da busca (depois setar os parametros na DQL)
         $this->setSearchKeywords($qb);
         
+        // Registros por página
         $countPerPage = $this->params()->fromQuery('count');
-        
-        // Busca
         if (!empty($countPerPage)) {
             $this->setCountPerPage($countPerPage);
         }
@@ -146,13 +194,19 @@ class AppAbstractController extends AbstractRestfulController {
         
         $query = $this->getEm()->createQuery($qb->getDQL())
             ->setHydrationMode(AbstractQuery::HYDRATE_ARRAY);
-        
+
         if (!is_null($Where)) {
             foreach ($Where as $key => $value) {
                 $query->setParameter($key, $value);
             }
         }
         
+        $keywords = $this->params()->fromQuery('keywords');
+        if (!empty($keywords)) {
+            $query->setParameter('keyword', '%'.$keywords.'%');
+        }
+        
+        //print_r($query->getDQL()); exit;
         
         $clientes["result"] = $this->paginate($query);
         $clientes["pageCount"] = $this->getPageCount();
@@ -195,30 +249,63 @@ class AppAbstractController extends AbstractRestfulController {
             ini_set('xdebug.max_nesting_level', 1000);
             // Varre os campos para montar a busca
             //foreach ($hydrator->extract(new CadCliente()) as $field => $value) {
+            
+            $toSearch = array();
+           
             foreach ($this->getEm()->getClassMetadata($this->entity)->getFieldNames() as $field) {
-
+                
+                $toSearch[] = $this->alias.".".$field;
                 // Caso o cancat de busca não tenha sido inicializado, inicia
-                if (!isset($searchIn)) {
+                
+                /*if (!isset($searchIn)) {
                     $searchIn = $qb->expr()->concat($qb->expr()->literal(''), $this->alias.".".$field);
                     continue;
-                }
-
+                }*/
+                
+                //$searchIn .= ", ";
+                //$searchIn .= $qb->expr()->concat($qb->expr()->literal(' '), $this->alias.".".$field);
+                
                 // Adiciona o concat do field
-                $searchIn = $qb->expr()->concat(
+                /*$searchIn = $qb->expr()->concat(
                     $searchIn,
                     $qb->expr()->concat($qb->expr()->literal(' '), $this->alias.".".$field)
-                );
+                );*/
             }
-
+            
+            // TODO: Fazer função get entity path
+            $entityPath = substr($this->entity, 0, strrpos($this->entity, "\\"))."\\";
+            
+            foreach ($this->join as $value) { // TODO: FAZER FUNCAO
+                
+                foreach ($this->getEm()->getClassMetadata($entityPath.$value["join"])->getFieldNames() as $field) {
+                    
+                    $toSearch[] = $value["alias"].".".$field;
+                    //var_dump($value["alias"].".".$field); exit;
+                    //$searchIn .= ", ";
+                    //$searchIn .= $qb->expr()->concat($qb->expr()->literal(' '), $this->alias.".".$field);
+                    // Adiciona o concat do field
+                    /*$searchIn = $qb->expr()->concat(
+                        $searchIn,
+                        $qb->expr()->concat($qb->expr()->literal(' '), $value["alias"].".".$field)
+                    );*/
+                }
+                
+            }
+            
+            //var_dump($toSearch); exit;
+            foreach ($toSearch as $value) {
+                $qb->orWhere("$value LIKE :keyword");
+            }
+            
+            //$searchIn .= $qb->expr()->concat($qb->expr()->literal(), $searchIn);
+            
             // Adiciona o concat no like da where
-            $qb->add('where', 
+            /*$qb->add('where', 
                 $qb->expr()->like(
                     $searchIn,
                     ':keywords'
                 )
-            );
-
-            $qb->setParameter('keywords', '%'.$keywords.'%');
+            );*/
 
         }
 
@@ -233,9 +320,12 @@ class AppAbstractController extends AbstractRestfulController {
     public function update($id, $data) {
 
         try {
+            //var_dump($data); exit;
             //exit;
             // Get entity
             $CadCliente = $this->getEm()->getRepository($this->entity)->find($id);
+            //$CadCliente = $this->getHydrator()->hydrate($data, $CadCliente);
+            //var_dump($CadCliente); exit;
             
             // Persist
             $this->getEm()->persist($this->getHydrator()->hydrate($data, $CadCliente));
@@ -274,6 +364,7 @@ class AppAbstractController extends AbstractRestfulController {
     public function getHydrator() {
         if (null === $this->hydrator) {
             $this->hydrator = new DoctrineObject($this->getEm(), $this->entity);
+            //$this->hydrator = new ClassMethods();
         }
         return $this->hydrator;
     }
@@ -289,6 +380,7 @@ class AppAbstractController extends AbstractRestfulController {
         }
         
         return $arr;
+
     }
     
     /**

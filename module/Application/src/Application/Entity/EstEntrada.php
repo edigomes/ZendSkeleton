@@ -101,7 +101,6 @@ class EstEntrada
     }
 
     function getCadFornecedor() {
-        //return array("PK_fornecedor", $this->CadFornecedor->getPK_fornecedor());
         return $this->CadFornecedor;
     }
 
@@ -122,18 +121,18 @@ class EstEntrada
     }
 
     function setDhfinalizacao($dhfinalizacao) {
-        $this->dhfinalizacao = new \DateTime($dhfinalizacao['date']);
+        $this->dhfinalizacao = is_null($dhfinalizacao['date'])?null:new \DateTime($dhfinalizacao['date']);
     }
 
     function setDhcancelamento($dhcancelamento) {
-        $this->dhcancelamento = new \DateTime($dhcancelamento['date']);
+        $this->dhcancelamento = is_null($dhcancelamento['date'])?null:new \DateTime($dhcancelamento['date']);
     }
 
     function setObs($obs) {
         $this->obs = $obs;
     }
 
-    function setCadFornecedor(\Application\Entity\CadFornecedor $CadFornecedor) {
+    function setCadFornecedor($CadFornecedor) {
         $this->CadFornecedor = $CadFornecedor;
     }
 

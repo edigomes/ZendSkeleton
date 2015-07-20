@@ -149,15 +149,12 @@ return array(
         ),
         'factories' => array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
-            'Application\Service\Content' => function($sm){
-                $ContentService = new \Application\Service\Content();
-                $ContentService->setServiceLocator($sm);
-                
-                return $ContentService;
-            }
+            //'Application\Service\Entrada' => function($sm){
+                //return new \Application\Service\Entrada($sm->get('Doctrine\ORM\EntityManager'));
+            //}
         ),
         'invokables' => array(
-            'Application\ContentService' => "Application\Service\Content"
+            //'Application\EntradaService' => "Application\Service\Entrada"
         ),
     ),
     'translator' => array(

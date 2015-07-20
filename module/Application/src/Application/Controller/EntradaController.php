@@ -2,6 +2,8 @@
 
 namespace Application\Controller;
 
+use Zend\View\Model\JsonModel;
+
 /**
  * Description of AbstractController
  * @author Edi
@@ -30,7 +32,43 @@ class EntradaController extends AppAbstractController {
     }
 
     public function update($id, $data) {
-        return parent::update($id, $data);
+        
+        $EntradaService = $this->getEntradaService();
+
+        if ($this->params()->fromQuery('finaliza')) {
+            if ($EntradaService->finalizaEntrada($id)) {
+                return new JsonModel(array(
+                    "status"=>true,
+                    "message"=>"Entrada finalizada com sucesso."
+                ));
+            } else {
+                return new JsonModel(array(
+                    "status"=>false,
+                    "message"=>$EntradaService->getErrMsg()
+                ));
+            }
+        } else {
+            if ($EntradaService->update($id, $data)) {
+                return new JsonModel(array(
+                    "status"=>true,
+                    "message"=>"O Registro foi salvo"
+                ));
+            } else {
+                return new JsonModel(array(
+                    "status"=>false,
+                    "message"=>$EntradaService->getErrMsg()
+                ));
+            }
+        }
+        
+    }
+    
+    /**
+     * Return entrada service
+     * @return \Application\Service\Entrada
+     */
+    function getEntradaService() {
+        return $this->getServiceLocator()->get('Application\EntradaService');
     }
 
 }

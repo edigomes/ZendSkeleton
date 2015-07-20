@@ -1,62 +1,58 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
 <ol class="breadcrumb">
-  <li><a href="#">Cadastro</a></li>
-  <li class="active">Entrada</li>
+    <li><a href="#">Estoque</a></li>
+    <li class="active">Entrada</li>
 </ol>
 
-<div>
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading clearfix">
+<div class="panel panel-default">
 
-            <!-- Botão Adicionar -->
-            <div class="btn-toolbar pull-left">
-                <a ui-sref="entrada.new" class="btn btn-primary btn-primary pull-left">
-                    <span class="glyphicon glyphicon-plus-sign"></span>
-                    Adicionar
-                </a>
+    <div class="panel-heading">
+
+        <div class="row">
+            
+            <div class="margin-bottom-sm col-sm-6 col-lg-6">
+                <div class="input-group">
+                    <a ui-sref="entrada.new" class="btn btn-primary btn-success pull-left">
+                        <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Adicionar
+                    </a>
+                </div>
             </div>
 
-            <a ng-click="keywords = ''; $root.$broadcast('updateList')" class="btn btn-primary pull-right col-lg-2">Limpar</a>
-
-            <!-- Search input -->
-            <div class="btn-toolbar pull-right col-xs-3">
-                <input type="text" class="form-control pull-right col-xs-3" placeholder="Search" ng-model="keywords" ng-enter="$root.$broadcast('updateList')">
+            <div class="col-sm-6 col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="keywords = ''; $root.$broadcast('updateList')" type="button">
+                            &nbsp;<span class="glyphicon glyphicon-refresh"></span>
+                        </button>
+                    </span>
+                    <input type="text" id="busca" class="form-control collapse" placeholder="Pesquisa" ng-model="keywords" ng-enter="$root.$broadcast('updateList')">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" ng-model="keywords" ng-click="$root.$broadcast('updateList')" type="button">
+                             &nbsp;<span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
             </div>
-
-            <!-- Single button -->
-            <div class="btn-group pull-right test">
-                <button type="button" style="height: 34px" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="glyphicon glyphicon-filter"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                </ul>
-            </div>
-
         </div>
-        <!--<div class="container-fluid">
-            <div class="table table-striped gridStyle" ng-grid="gridOptions"></div>
-        </div>-->
+
+    </div>
+
+    <div class="panel-collapse">
         <!-- Table -->
         <div class="table-responsive">
-        <table ng-table="EntradaList" class="table table-striped ng-table-responsive">
-            <tr ng-repeat="list in $data">
-                <td style="text-align: left" data-title="'#'">{{list.pkEntrada}}</td>
-                <td data-title="'Fornecedor'"><a href="#/entrada/edit/{{list.pkEntrada}}">{{list.CadFornecedor.xNome}}</a></td>
-                <td data-title="'Abertura'">{{list.dhabertura.date | cmdate:'dd/MM/yyyy HH:mm' }}</td>
-                <td data-title="'Fechamento'">{{list.dhfechamento.date}}</td>
-                <td data-title="'Cancelamento'">{{list.dhcancelamento.date}}</td>
-                <!--<td>
-                    <a class="btn btn-danger"  ng-click="deleteMovie(movie)">Delete</a>
-                </td>-->
-            </tr>
-        </table>
+            <table ng-table="EntradaList" class="table table-striped ng-table-responsive">
+                <tr ng-repeat="list in $data">
+                    <td style="text-align: left" data-title="'#'">{{list.pkEntrada}}</td>
+                    <td data-title="'Fornecedor'"><a href="#/entrada/edit/{{list.pkEntrada}}">{{list.CadFornecedor.xNome}}</a></td>
+                    <td width="200" data-title="'Abertura'">{{list.dhabertura.date | cmdate:'dd/MM/yyyy HH:mm'}}</td>
+                    <td width="200" data-title="'Fechamento'">{{list.dhfinalizacao.date | cmdate:'dd/MM/yyyy HH:mm'}}</td>
+                    <td width="150" data-title="'Cancelamento'">{{list.dhcancelamento.date | cmdate:'dd/MM/yyyy HH:mm'}}</td>
+                    <!--<td>
+                        <a class="btn btn-danger"  ng-click="deleteMovie(movie)">Delete</a>
+                    </td>-->
+                </tr>
+            </table>
         </div>
 
     </div>

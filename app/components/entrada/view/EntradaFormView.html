@@ -32,7 +32,7 @@
                         <fieldset>
                             <legend>Dados da Entrada</legend>
                             <div class="row">
-                                <div class="col-sm-6 col-lg-6">
+                                <div class="col-sm-12 col-lg-6">
                                     <div class="form-group">
                                         <label for="codigo">Fornecedor</label>
                                         <select 
@@ -51,10 +51,16 @@
                                         </div>-->
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-6">
+                                <div class="col-sm-6 col-lg-3">
                                     <div class="form-group">
-                                        <label>Data de Abertura</label>
+                                        <label>Data de Abertura:</label>
                                         <pre>{{ formObject.dhabertura.date  | datetime }}</pre>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-3">
+                                    <div class="form-group">
+                                        <label>Data de Finalização:</label>
+                                        <pre>{{ formObject.dhfinalizacao.date  | datetime }}</pre>
                                     </div>
                                 </div>
                             </div>
@@ -110,13 +116,26 @@
                             <div class="row" style="margin-top: 10px">
                                 <div class="col-sm-12 col-lg-12">
                                     <div class="table-responsive">
-                                        <table ng-table="EntradaItemList" class="table table-bordered ng-table-responsive">
+                                        <table ng-table="EntradaItemList" class="table table-striped ng-table-responsive">
                                             <tr ng-repeat="item in $data">
                                                 <td data-title="'Código'">{{item.EstItem.PK_item}}</td>
                                                 <td data-title="'Descrição'"><a ng-click="show(item.pkEntradaItem)">{{item.EstItem.xProd}}</a></td>
                                                 <td data-title="'Qtde'">{{item.qtrib}}</td>
                                                 <td data-title="'Preço'">{{item.vuntrib | cmdcur : ""}}</td>
                                                 <td data-title="'Total'">{{(item.vuntrib * item.qtrib).toFixed(2) | cmdcur : ""}}</td>
+                                                <td width="50">
+                                                    <button ng-click="remove(item.pkEntradaItem)" type="button" class="btn btn-danger btn-circle btn-xs">
+                                                        <i class="glyphicon glyphicon-trash"></i> 
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td><b>{{getTotal($data, 'qtrib')}}</b></td>
+                                                <td></td>
+                                                <td><b>{{getTotal($data, 'vuntrib', 'qtrib') | cmdcur : ""}}</b></td>
+                                                <td></td>
                                             </tr>
                                     </table>
                                     </div>
@@ -150,9 +169,15 @@
     
     <!-- Modal Footer -->
     <div class="modal-footer">
-        <button ng-click="update()" type="button" class="btn btn-success pull-left">Salvar</button>
-        <button ng-click="cancel()" type="button" class="btn btn-default pull-left">Fechar</button>
-        <!--<button ng-click="logId()" type="button" class="btn btn-default pull-left">Log Id</button>-->
+        <button ng-click="update()" type="button" class="btn btn-success pull-left">
+            <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
+        </button>
+        <button ng-click="finalizaEntrada()" type="button" class="btn btn-primary pull-left">
+            <span class="glyphicon glyphicon-ok"></span> Finalizar
+        </button>
+        <button ng-click="cancel()" type="button" class="btn btn-default pull-left">
+            <span class="glyphicon glyphicon-eye-close"></span> Fechar
+        </button>
     </div>
 
 </div>

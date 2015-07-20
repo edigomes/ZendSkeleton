@@ -334,7 +334,7 @@ class EstEntrada extends \Application\Entity\EstEntrada implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function setCadFornecedor(\Application\Entity\CadFornecedor $CadFornecedor)
+    public function setCadFornecedor($CadFornecedor)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCadFornecedor', array($CadFornecedor));

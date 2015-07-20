@@ -4,6 +4,7 @@ app.factory('EntradaService', function ($resource) {
         create: { method: 'POST'},
         show: { method: 'GET'},
         update: { method: 'PUT'},
+        finaliza: { method: 'PUT', params: {finaliza: true}},
         delete: { method: 'DELETE', params: {id: '@id'}}
     });
 });
