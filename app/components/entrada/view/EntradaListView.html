@@ -40,14 +40,15 @@
 
     <div class="panel-collapse">
         <!-- Table -->
-        <div class="table-responsive">
+        
+        <div class="table-responsive scrollable scroll-y" style="overflow: scroll !important">
             <table ng-table="EntradaList" class="table table-striped ng-table-responsive">
                 <tr ng-repeat="list in $data">
-                    <td style="text-align: left" data-title="'#'">{{list.pkEntrada}}</td>
+                    <td width="50" style="text-align: left" data-title="'#'">{{list.pkEntrada}}</td>
                     <td data-title="'Fornecedor'"><a href="#/entrada/edit/{{list.pkEntrada}}">{{list.CadFornecedor.xNome}}</a></td>
                     <td width="200" data-title="'Abertura'">{{list.dhabertura.date | cmdate:'dd/MM/yyyy HH:mm'}}</td>
                     <td width="200" data-title="'Fechamento'">{{list.dhfinalizacao.date | cmdate:'dd/MM/yyyy HH:mm'}}</td>
-                    <td width="150" data-title="'Cancelamento'">{{list.dhcancelamento.date | cmdate:'dd/MM/yyyy HH:mm'}}</td>
+                    <td width="200" data-title="'Cancelamento'">{{list.dhcancelamento.date | cmdate:'dd/MM/yyyy HH:mm'}}</td>
                     <!--<td>
                         <a class="btn btn-danger"  ng-click="deleteMovie(movie)">Delete</a>
                     </td>-->

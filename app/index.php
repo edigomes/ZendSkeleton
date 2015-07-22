@@ -14,13 +14,14 @@
 
         <!--<link rel="stylesheet" href="view/css/test1.css">
         <link rel="stylesheet" href="view/css/test2.css">-->
-        <script src="libs/jquery.min.js"></script>
+        <!--<script src="libs/jquery.min.js"></script>-->
+        
         <script src="libs/angular.js"></script>
         <script src="libs/angular-ui-router.js"></script>
         <script src="libs/angular-route.js"></script>
         <script src="libs/ui-bootstrap-tpls-0.12.0.min.js"></script>
         <!--<script src="libs/bootstrap.min.js"></script>-->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
         <script src="libs/notify.min.js"></script>
         <script src="modules/ng-table/ng-table.js"></script>
         <script src="modules/angular-resource.min.js"></script>
