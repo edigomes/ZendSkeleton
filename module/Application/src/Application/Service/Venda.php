@@ -2,9 +2,9 @@
 
 namespace Application\Service;
 
-use Application\Entity\EstEntrada;
+use Application\Entity\ComVenda;
 use Application\Entity\EstItem;
-use Application\Entity\EstEntradaItem;
+use Application\Entity\ComVendaItem;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 
 /**
@@ -12,7 +12,7 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
  * Classe demo de uma Model
  * @author edi
  */
-class Entrada {
+class Venda {
     
     // Entity Mananger
     private $em;
@@ -22,7 +22,7 @@ class Entrada {
     }
 
     /**
-     * Atualiza uma Entrada
+     * Atualiza uma Venda
      * @param type $id
      * @param type $data
      * @return JsonModel
@@ -31,18 +31,18 @@ class Entrada {
 
         try {
 
-            $EstEntrada = $this->getEm()->getRepository("Application\Entity\EstEntrada")->find($id);
+            $ComVenda = $this->getEm()->getRepository("Application\Entity\ComVenda")->find($id);
             
             // Verifica se já foi finalizado
-            if ($EstEntrada->getDhfinalizacao() != null) {
+            if ($ComVenda->getDhfinalizacao() != null) {
                 // setErrMsg("mimimimimi");
                 return false;
             }
             
-            $hydrator = new DoctrineObject($this->getEm(), "Application\Entity\EstEntrada");
+            $hydrator = new DoctrineObject($this->getEm(), "Application\Entity\ComVenda");
             
             // Persist
-            $this->getEm()->persist($hydrator->hydrate($data, $EstEntrada));
+            $this->getEm()->persist($hydrator->hydrate($data, $ComVenda));
             $this->getEm()->flush();
            
         } catch (\Exception $e) {
@@ -66,10 +66,10 @@ class Entrada {
     
     /**
      * @param type $id
-     * @return EstEntrada
+     * @return ComVenda
      */
-    public function getEstEntrada($id) {
-        return $this->getEm()->getRepository("Application\Entity\EstEntrada")->find($id);
+    public function getComVenda($id) {
+        return $this->getEm()->getRepository("Application\Entity\ComVenda")->find($id);
     }
     
     /**
@@ -82,37 +82,37 @@ class Entrada {
     
     /**
      * @param type $id
-     * @return EstEntradaItem
+     * @return ComVendaItem
      */
-    public function getEntradaItens($id) {
-        return $this->getEm()->getRepository("Application\Entity\EstEntradaItem")->findBy(
-           array('fkEntrada' => $id)
+    public function getVendaItens($id) {
+        return $this->getEm()->getRepository("Application\Entity\ComVendaItem")->findBy(
+           array('fkVenda' => $id)
            //array('FK_' =>array('value1','value2'))
          );
     }
     
-    public function finalizaEntrada($id) {
+    public function finalizaVenda($id) {
         
         try {
             
-            $EstEntrada = $this->getEstEntrada($id);
+            $ComVenda = $this->getComVenda($id);
             
             // Verifica se já foi finalizado
-            if ($EstEntrada->getDhfinalizacao() != null && $EstEntrada->getDhcancelamento() == null) {
+            if ($ComVenda->getDhfinalizacao() != null && $ComVenda->getDhcancelamento() == null) {
                 // setErrMsg("mimimimimi");
                 return false;
             }
             
             // Seta a data de finalização
-            $EstEntrada->setDhfinalizacao(array('date'=>'now'));
+            $ComVenda->setDhfinalizacao(array('date'=>'now'));
             // Atualiza a entrada
-            $this->getEm()->persist($EstEntrada);
+            $this->getEm()->persist($ComVenda);
             
             // Retorna os itens da reposição
-            $EntradaItens = $this->getEntradaItens($id);
+            $VendaItens = $this->getVendaItens($id);
             
             // Varre o estoque atualizando a quantidade
-            foreach ($EntradaItens as $value) {
+            foreach ($VendaItens as $value) {
                 // Retorna o item
                 $EstItem = $this->getEstItem($value->getEstItem()->getPK_item());
                 // Atualiza o estoque do mesmo
@@ -132,23 +132,23 @@ class Entrada {
         
     }
     
-    public function cancelaEntrada($id) {
+    public function cancelaVenda($id) {
         
         try {
             
-            $EstEntrada = $this->getEstEntrada($id);
+            $ComVenda = $this->getComVenda($id);
             
             // Verifica se já foi finalizado para voltar o estoque
-            if ($EstEntrada->getDhfinalizacao() != null && $EstEntrada->getDhcancelamento() == null) {
+            if ($ComVenda->getDhfinalizacao() != null && $ComVenda->getDhcancelamento() == null) {
 
                 // Atualiza a entrada
-                $this->getEm()->persist($EstEntrada);
+                $this->getEm()->persist($ComVenda);
 
                 // Retorna os itens da reposição
-                $EntradaItens = $this->getEntradaItens($id);
+                $VendaItens = $this->getVendaItens($id);
 
                 // Varre o estoque atualizando a quantidade
-                foreach ($EntradaItens as $value) {
+                foreach ($VendaItens as $value) {
                     // Retorna o item
                     $EstItem = $this->getEstItem($value->getEstItem()->getPK_item());
                     // Atualiza o estoque do mesmo
@@ -160,7 +160,7 @@ class Entrada {
             }
             
             // Seta a data de cancelamento
-            $EstEntrada->setDhcancelamento(array('date' => 'now'));
+            $ComVenda->setDhcancelamento(array('date' => 'now'));
             
             // Realiza todas as operações
             $this->getEm()->flush();

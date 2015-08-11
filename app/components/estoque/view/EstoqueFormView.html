@@ -9,8 +9,8 @@
         </button>
         <h4 class="modal-title" id="myModalLabel">
             <span class="" aria-label="Left Align">
-                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                <!--&nbsp;Novo Cliente <pre>{{customer | json}}</pre>-->
+                <!--<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                &nbsp;Novo Cliente <pre>{{customer | json}}</pre>-->
                 <!--<pre>{{EstItem | json}}</pre>-->
                 {{ title }}
             </span>
@@ -20,207 +20,267 @@
     
     <!-- FormulÃ¡rio Corpo -->
     <div class="modal-body">
-        
-        <tabset>
-            <tab heading="Informações">
-                <div class="panel-body">
-                    <form role="form" id="form1" name="form1" method="post" action="">
-                        <div class="row">
-                            <div class="form-group col-xs-6">
-                                <label for="codigo">Código</label>
-                                <input type="text" ng-model="formObject.PK_item" class="form-control" id="codigo" disabled />
-                            </div>
+        <form id="EstItem" name="EstItem" ng-submit="update()">
+            
+            <div class="md-whiteframe-z0 bg-white">
+                <ul class="nav nav-md nav-tabs nav-lines b-info">
+                    <li class="active">
+                        <a href="" data-toggle="tab" data-target="#tab_1">Info</a>
+                    </li>
+                    <li>
+                        <a href="" data-toggle="tab" data-target="#tab_2">Tributos</a>
+                    </li>
+                </ul>
+                <div class="tab-content p m-b-md b-t b-t-2x mb0">
 
-                            <div class="form-group checkbox col-xs-6" style="margin-top:3%;">
-                              <label>
-                                <input type="checkbox" value="" ng-model="formObject.bloqueado">
-                                Bloqueado
-                              </label>
-                            </div>
-                        </div>
+                    <div role="tabpanel" class="tab-pane animated fadeIn active" id="tab_1">
 
-                        <!--<div class="row">
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">Grupo</label>
-                                <select class="form-control" ng-model="formObject.FK_grupo">
-                                    <option>Escolha um grupo</option>
-                                    <option>Grupo 1</option>
-                                    <option>Grupo 2</option>
-                                    <option>Grupo 3</option>
-                                    <option>Grupo 4</option>
-                                </select>
-                            </div>
+                        <fieldset>
+                            <div class="panel-body">
 
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">Unidade</label>
-                                <select class="form-control" ng-model="formObject.FK_unidade">
-                                    <option>Escolha uma unidade</option>
-                                    <option>Unidade 1</option>
-                                    <option>Unidade 2</option>
-                                    <option>Unidade 3</option>
-                                    <option>Unidade 4</option>
-                                </select>
-                            </div>
-                        </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-3">
+                                        <label for="codigo">Código</label>
+                                        <input type="text" ng-model="formObject.PK_item" class="form-control md-input ng-pristine" id="codigo" disabled />
+                                    </div>
 
-                        <div class="row">
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">Grupo</label>
-                                <select class="form-control" ng-model="formObject.FK_fabricante">
-                                    <option>Escolha um estado</option>
-                                    <option>Fabricante 1</option>
-                                    <option>Fabricante 2</option>
-                                    <option>Fabricante 3</option>
-                                    <option>Fabricante 4</option>
-                                </select>
-                            </div>
+                                    <div class="form-group col-xs-3">
+                                        <label for="codigo">Código Próprio</label>
+                                        <input type="text" ng-model="formObject.codigo" class="form-control md-input ng-pristine" />
+                                    </div>
 
-                            <div class="form-group col-xs-6">
-                                <label for="razaoSocial">Data de cadastro</label>
-                                <input type="text" class="form-control" ng-disabled="true" ng-model="formObject.dhCadastro.date" id="razaoSocial" disabled />
-                            </div>
-                        </div>-->
+                                    <div class="form-group checkbox col-xs-6" style="margin-top:3%;">
+                                        <label>
+                                            <input type="checkbox" value="" ng-model="formObject.bloqueado">
+                                            Bloqueado
+                                        </label>
+                                    </div>
+                                </div>
 
-                        <div class="row">
-                            <div class="form-group col-xs-6">
-                                <label for="nomeFantasia">Nome</label>
-                                <input type="text" class="form-control" ng-model="formObject.xProd" id="nomeFantasia" />
-                            </div>
+                                <!--<div class="row">
+                                    <div class="form-group col-xs-6">
+                                        <label for="form-control">Grupo</label>
+                                        <select class="form-control" ng-model="formObject.FK_grupo">
+                                            <option>Escolha um grupo</option>
+                                            <option>Grupo 1</option>
+                                            <option>Grupo 2</option>
+                                            <option>Grupo 3</option>
+                                            <option>Grupo 4</option>
+                                        </select>
+                                    </div>
 
-                            <div class="form-group col-xs-6">
-                                <label for="ieRg">Marca</label>
-                                <input type="text" class="form-control" ng-model="formObject.marca" id="ieRg" />
-                            </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="form-control">Unidade</label>
+                                        <select class="form-control" ng-model="formObject.FK_unidade">
+                                            <option>Escolha uma unidade</option>
+                                            <option>Unidade 1</option>
+                                            <option>Unidade 2</option>
+                                            <option>Unidade 3</option>
+                                            <option>Unidade 4</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                            <div class="form-group col-xs-6">
-                                <label for="ieRg">Cor</label>
-                                <input type="text" class="form-control" ng-model="formObject.cor" id="ieRg" />
-                            </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-6">
+                                        <label for="form-control">Grupo</label>
+                                        <select class="form-control" ng-model="formObject.FK_fabricante">
+                                            <option>Escolha um estado</option>
+                                            <option>Fabricante 1</option>
+                                            <option>Fabricante 2</option>
+                                            <option>Fabricante 3</option>
+                                            <option>Fabricante 4</option>
+                                        </select>
+                                    </div>
 
-                            <div class="form-group col-xs-6">
-                                <label for="ieRg">NCM</label>
-                                <input type="text" class="form-control" ng-model="formObject.NCM" id="ieRg" />
-                            </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="razaoSocial">Data de cadastro</label>
+                                        <input type="text" class="form-control md-input ng-pristine" ng-disabled="true" ng-model="formObject.dhCadastro.date" id="razaoSocial" disabled />
+                                    </div>
+                                </div>-->
 
-                            <div class="form-group col-xs-6">
-                                <label for="ieRg">EAN</label>
-                                <input type="text" class="form-control" ng-model="formObject.cEAN" id="ieRg" />
-                            </div>
-                        </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-6">
+                                        <label for="nomeFantasia">Nome</label>
+                                        <input type="text" class="form-control md-input ng-pristine" ng-model="formObject.xProd" id="nomeFantasia" />
+                                    </div>
 
-                        <div class="row">
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">Origem</label>
-                                <select class="form-control" ng-model="formObject.origem">
-                                    <option>Escolha uma origem</option>
-                                    <option value="0">Adiquirida de Terceiros</option>
-                                    <option value="1">Produção do Estabelecimento</option>
-                                </select>
-                            </div>
+                                    <div class="form-group col-xs-6">
+                                        <label >Marca</label>
+                                        <input type="text" class="form-control md-input ng-pristine" ng-model="formObject.marca" />
+                                    </div>
 
-                            <div class="form-group col-xs-6">
-                                <label for="foneCli">Quantidade</label>
-                                <input type="text" class="form-control" id="foneCli" ng-model="formObject.quantidade" />
-                            </div>
+                                    <div class="form-group col-xs-3">
+                                        <label >Cor</label>
+                                        <input type="text" class="form-control md-input ng-pristine" ng-model="formObject.cor" />
+                                    </div>
 
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">Natureza</label>
-                                <select class="form-control" ng-model="formObject.natureza">
-                                    <option>Escolha uma natureza</option>
-                                    <option value="0">Nacional</option>
-                                    <option value="1">Importado</option>
-                                </select>
-                            </div>
+                                    <div class="form-group col-xs-3">
+                                        <label >NCM</label>
+                                        <input type="text" mask="88888888" restrict="reject" required ng-model="formObject.NCM" class="form-control md-input ng-pristine" name="NCM" />
+                                    </div>
 
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">CST</label>
-                                <select class="form-control" ng-model="formObject.CST">
-                                    <option>Escolha uma CST</option>
-                                    <option>CST 1</option>
-                                    <option>CST 2</option>
-                                    <option>CST 3</option>
-                                    <option>CST 4</option>
-                                </select>
-                            </div>
-                        </div>
+                                    <div class="form-group col-xs-3">
+                                        <label >Grupo:</label>
+                                    </div>
 
-                        <div class="row">
-                            <div class="form-group col-xs-6">
-                                <label for="endereco">Custo</label>
-                                <input type="text" class="form-control" id="endereco" ng-model="formObject.custo" />
-                            </div>
+                                    <div class="form-group col-xs-3">
+                                        <label >Subgrupo:</label>
+                                    </div>
 
-                            <div class="form-group col-xs-6">
-                                <label for="endereco">IPI</label>
-                                <input type="text" class="form-control" id="endereco" ng-model="formObject.pIPI" />
-                            </div>
+                                </div>
 
-                            <div class="form-group col-xs-6">
-                                <label for="endereco">ST</label>
-                                <input type="text" class="form-control" id="endereco" ng-model="formObject.pST" />
-                            </div>
+                                <div class="row">
 
-                            <div class="form-group col-xs-6">
-                                <label for="endereco">Aliquota</label>
-                                <input type="text" class="form-control" id="endereco" ng-model="formObject.pDifAliquota" />
-                            </div>
+                                    <div class="form-group col-xs-3">
+                                        <label >Código EAN</label>
+                                        <input type="text" mask='9999999999999' restrict="reject" class="form-control md-input ng-pristine" data-ng-model="formObject.cEAN" />
+                                    </div>
 
-                            <div class="form-group col-xs-6">
-                                <label for="endereco">Frete</label>
-                                <input type="text" class="form-control" id="endereco" ng-model="formObject.pFrete" />
-                            </div>
+                                    <div class="form-group col-xs-3">
+                                        <label for="foneCli">Em Estoque</label>
+                                        <input type="text" disabled="disabled" class="form-control md-input ng-pristine" id="foneCli" ng-model="formObject.quantidade" />
+                                    </div>
 
-                            <div class="form-group col-xs-6">
-                                <label for="form-control">PIS CONFINS</label>
-                                <select class="form-control" ng-model="formObject.isentoPisConfins">
-                                    <option>Escolha uma opção</option>
-                                    <option>Sim</option>
-                                    <option>Não</option>
-                                </select>
-                            </div>
-                        </div>
+                                    <div class="form-group col-xs-3">
+                                        <label for="numCli">Desconto Máximo (%):</label>
+                                        <input type="number" max="100" class="form-control md-input ng-pristine" ng-model="formObject.pDescMaximo"/>
+                                    </div>
 
-                        <div class="row">
-                            
-                            <div class="form-group col-xs-6">
-                                <label for="numCli">Desconto Máximo</label>
-                                <input type="text" class="form-control" id="numCli" ng-model="formObject.pDescMaximo"/>
-                            </div>
+                                    <div class="form-group col-xs-3">
+                                        <label for="numCli">Valor Venda</label>
+                                        <input type="text" class="form-control md-input ng-pristine" format="number" ng-model="formObject.vUnTrib"/>
+                                    </div>
 
-                            <div class="form-group col-xs-6">
-                                <label for="numCli">Valor Venda</label>
-                                <input type="text" class="form-control" id="numCli" ng-model="formObject.vUnTrib"/>
-                            </div>
+                                </div>
 
-                        </div>
-                    </form>
+                            </div>
+                        </fieldset>
+
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_2">
+
+                        <fieldset>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="form-group col-xs-6">
+                                        <label for="form-control">Origem</label>
+                                        <select class="form-control md-input ng-pristine" required ng-model="formObject.origem">
+                                            <option>Escolha uma origem</option>
+                                            <option value="0">Adiquirida de Terceiros</option>
+                                            <option value="1">Produção do Estabelecimento</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-xs-6">
+                                        <label for="form-control">Natureza</label>
+                                        <select class="form-control md-input ng-pristine" required ng-model="formObject.natureza">
+                                            <option>Escolha uma natureza</option>
+                                            <option value="0">Nacional</option>
+                                            <option value="1">Estrangeira - Importação direta</option>
+                                            <option value="2">Estrangeira - Adquirida no mercado interno</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-xs-6">
+                                        <label for="form-control">CST ICMS</label>
+                                        <select class="form-control md-input ng-pristine" required ng-model="formObject.CST">
+                                            <option selected value="">Escolha uma opção</option>
+                                            <option value="00">00 - Tributada integralmente</option>
+                                            <option value="10">10 - Tributada e com cobrança do ICMS por substituição tributária</option>
+                                            <option value="20">20 - Com redução de base de cálculo</option>
+                                            <option value="30">30 - Isenta ou não tributada e com cobrança do ICMS por substituição tributária</option>
+                                            <option value="40">40 - Isenta</option>
+                                            <option value="41">41 - Não tributada</option>
+                                            <option value="50">50 - Suspensão</option>
+                                            <option value="51">51 - Diferimento</option>
+                                            <option value="60">60 - ICMS cobrado anteriormente por substituição tributária</option>
+                                            <option value="70">70 - Com redução de base de cálculo e cobrança do ICMS por substituição tributária</option>
+                                            <option value="90">90 - Outras</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-xs-6">
+                                        <label for="form-control">CST PIS COFINS</label>
+                                        <select class="form-control md-input ng-pristine" ng-model="formObject.CSFPISCOFINS">
+                                            <option value="">Isento</option>
+                                            <option value="01">01 - Operação Tributável com Alíquota Básica</option>
+                                            <option value="02">02 - Operação Tributável com Alíquota Diferenciada</option>
+                                            <option value="03">03 - Operação Tributável com Alíquota por Unidade de Medida de Produto</option>
+                                            <option value="04">04 - Operação Tributável Monofásica - Revenda a Alíquota Zero</option>
+                                            <option value="05">05 - Operação Tributável por Substituição Tributária</option>
+                                            <option value="06">06 - Operação Tributável a Alíquota Zero</option>
+                                            <option value="07">07 - Operação Isenta da Contribuição</option>
+                                            <option value="08">08 - Operação sem Incidência da Contribuição</option>
+                                            <option value="09">09 - Operação com Suspensão da Contribuição</option>
+                                            <option value="49">49 - Outras Operações de Saída</option>
+                                            <option value="50">50 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
+                                            <option value="51">51 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno</option>
+                                            <option value="52">52 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação</option>
+                                            <option value="53">53 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno</option>
+                                            <option value="54">54 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
+                                            <option value="55">55 - Operação com Direito a Crédito - Vinculada a Receitas Não Tributadas no Mercado Interno e de Exportação</option>
+                                            <option value="56">56 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação</option>
+                                            <option value="60">60 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
+                                            <option value="61">61 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno</option>
+                                            <option value="62">62 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação</option>
+                                            <option value="63">63 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno</option>
+                                            <option value="64">64 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
+                                            <option value="65">65 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                                            <option value="66">66 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação</option>
+                                            <option value="67">67 - Crédito Presumido - Outras Operações</option>
+                                            <option value="70">70 - Operação de Aquisição sem Direito a Crédito</option>
+                                            <option value="71">71 - Operação de Aquisição com Isenção</option>
+                                            <option value="72">72 - Operação de Aquisição com Suspensão</option>
+                                            <option value="73">73 - Operação de Aquisição a Alíquota Zero</option>
+                                            <option value="74">74 - Operação de Aquisição sem Incidência da Contribuição</option>
+                                            <option value="75">75 - Operação de Aquisição por Substituição Tributária</option>
+                                            <option value="98">98 - Outras Operações de Entrada</option>
+                                            <option value="99">99 - Outras Operações</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-xs-6">
+                                        <label>(%) PIS</label>
+                                        <input type="number" max="100" class="form-control md-input ng-pristine" id="endereco" ng-model="formObject.pPIS" />
+                                    </div>
+
+                                    <div class="form-group col-xs-6">
+                                        <label>(%) COFINS</label>
+                                        <input type="number" max="100" class="form-control md-input ng-pristine" id="endereco" ng-model="formObject.pCOFINS" />
+                                    </div>
+
+                                    <div class="form-group col-xs-6">
+                                        <label for="endereco">Frete (R$):</label>
+                                        <input type="text" class="form-control md-input ng-pristine" format="number" ng-model="formObject.vFrete" />
+                                    </div>
+
+                                    <div class="form-group col-xs-6">
+                                        <label for="endereco">Custo</label>
+                                        <input type="text" class="form-control md-input ng-pristine" format="number" ng-model="formObject.custo" />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+
                 </div>
-            </tab>
-            <tab heading="Contacts" active="tab.active" disabled="tab.disabled">
-                
-                <!-- Table -->
-                <table ng-table="tableParams2" class="table table-striped">
-                    <tr ng-repeat="contact in $data">
-                        <td data-title="'Name'" style="text-align: left">{{contact.xNome}}</td>
-                        <td data-title="'Phone'"><a>{{contact.phone}}</a></td>
-                    </tr>
-                </table>
-
-            </tab>
-            <!--<tab select="alert('selecteddd')">
-                <tab-heading>
-                    <i class="glyphicon glyphicon-bell"></i> Alert!
-                </tab-heading>
-                I've got an HTML heading, and a select callback. Pretty cool!
-            </tab>-->
-        </tabset>
-        
+            </div>
+            
+        </form>
     </div>
     
     <!-- Modal Footer -->
     <div class="modal-footer">
-        <button ng-click="update()" type="button" class="btn btn-primary pull-left">Salvar</button>
-        <button ng-click="cancel()" type="button" class="btn btn-default pull-left">Fechar</button>
+        {{ EstItem.$valid }}
+        <button type="submit" ng-disabled="EstItem.$invalid" form="EstItem" class="btn btn-primary pull-left">Salvar</button>
+        <button type="button" ng-click="cancel()" class="btn btn-default pull-left">Fechar</button>
     </div>
 
 </div>

@@ -70,7 +70,11 @@ class EstEntradaItem
     function getEstItem() {
         return $this->EstItem;
     }
-
+    
+    /**
+     * 
+     * @return \Application\Entity\EstEntrada
+     */
     function getFkEntrada() {
         return $this->fkEntrada;
     }

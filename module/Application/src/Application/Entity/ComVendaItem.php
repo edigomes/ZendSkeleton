@@ -21,24 +21,30 @@ class ComVendaItem
      */
     private $pkVendaItem;
 
-    /**
-     * @var integer
+     /**
+     * @var \Application\Entity\EstItem
      *
-     * @ORM\Column(name="FK_item", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Application\Entity\EstItem")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="FK_item", referencedColumnName="PK_item")
+     * })
      */
-    private $fkItem;
+    private $EstItem;
 
     /**
-     * @var integer
+     * @var \Application\Entity\ComVenda
      *
-     * @ORM\Column(name="FK_venda", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Application\Entity\ComVenda")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="FK_venda", referencedColumnName="PK_venda")
+     * })
      */
-    private $fkVenda;
+    private $ComVenda;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(name="qTrib", type="decimal", precision=15, scale=3, nullable=false)
+     * @ORM\Column(name="qTrib", type="float", precision=15, scale=3, nullable=false)
      */
     private $qtrib;
 
@@ -55,7 +61,54 @@ class ComVendaItem
      * @ORM\Column(name="vDesc", type="decimal", precision=15, scale=4, nullable=true)
      */
     private $vdesc;
+    
+    function getPkVendaItem() {
+        return $this->pkVendaItem;
+    }
 
+    function getEstItem() {
+        return $this->EstItem;
+    }
+
+    function getComVenda() {
+        return $this->ComVenda;
+    }
+
+    function getQtrib() {
+        return $this->qtrib;
+    }
+
+    function getVuntrib() {
+        return $this->vuntrib;
+    }
+
+    function getVdesc() {
+        return $this->vdesc;
+    }
+
+    function setPkVendaItem($pkVendaItem) {
+        $this->pkVendaItem = $pkVendaItem;
+    }
+
+    function setEstItem(\Application\Entity\EstItem $EstItem) {
+        $this->EstItem = $EstItem;
+    }
+
+    function setComVenda(\Application\Entity\ComVenda $ComVenda) {
+        $this->ComVenda = $ComVenda;
+    }
+
+    function setQtrib($qtrib) {
+        $this->qtrib = $qtrib;
+    }
+
+    function setVuntrib($vuntrib) {
+        $this->vuntrib = $vuntrib;
+    }
+
+    function setVdesc($vdesc) {
+        $this->vdesc = $vdesc;
+    }
 
 }
 

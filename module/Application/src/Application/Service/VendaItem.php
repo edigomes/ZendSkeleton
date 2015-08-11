@@ -2,7 +2,7 @@
 
 namespace Application\Service;
 
-use Application\Entity\EstEntradaItem;
+use Application\Entity\ComVendaItem;
 use Application\Entity\EstItem;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 
@@ -11,7 +11,7 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
  * Classe demo de uma Model
  * @author edi
  */
-class EntradaItem {
+class VendaItem {
     
     // Entity Mananger
     private $em;
@@ -22,7 +22,7 @@ class EntradaItem {
     
     public function create($data) {
         
-        $id = $data["fkEntrada"]; 
+        $id = $data["fkVenda"]; 
         
         /*
         try {
@@ -39,12 +39,12 @@ class EntradaItem {
             // Verifica se já foi finalizado
             if ($this->canChange($id)) {
 
-                $EstEntradaItem = new EstEntradaItem();
+                $ComVendaItem = new ComVendaItem();
 
-                $hydrator = new DoctrineObject($this->getEm(), "Application\Entity\EstEntradaItem");
+                $hydrator = new DoctrineObject($this->getEm(), "Application\Entity\ComVendaItem");
 
                 // Persist
-                $this->getEm()->persist($hydrator->hydrate($data, $EstEntradaItem));
+                $this->getEm()->persist($hydrator->hydrate($data, $ComVendaItem));
                 $this->getEm()->flush();
 
                 return true;
@@ -60,7 +60,7 @@ class EntradaItem {
     }
 
     /**
-     * Atualiza uma EntradaItem
+     * Atualiza uma VendaItem
      * @param type $id
      * @param type $data
      * @return JsonModel
@@ -70,18 +70,18 @@ class EntradaItem {
         try {
             
             // Retorna o registro atual
-            $EstEntradaItem = $this->getEm()->getRepository("Application\Entity\EstEntradaItem")->find($id);
+            $ComVendaItem = $this->getEm()->getRepository("Application\Entity\ComVendaItem")->find($id);
             
             // Pega o id da entrada
-            $pkEntrada = $EstEntradaItem->getFkEntrada()->getPkEntrada();
+            $pkVenda = $ComVendaItem->getComVenda()->getPkVenda();
             
             // Verifica se já foi finalizado
-            if ($this->canChange($pkEntrada)) {
+            if ($this->canChange($pkVenda)) {
 
-                $hydrator = new DoctrineObject($this->getEm(), "Application\Entity\EstEntradaItem");
+                $hydrator = new DoctrineObject($this->getEm(), "Application\Entity\ComVendaItem");
 
                 // Persist
-                $this->getEm()->persist($hydrator->hydrate($data, $EstEntradaItem));
+                $this->getEm()->persist($hydrator->hydrate($data, $ComVendaItem));
                 $this->getEm()->flush();
 
                 return true;
@@ -104,19 +104,19 @@ class EntradaItem {
         
         try {
             
-            // Traz o pkEntrada
-            $pkEntrada = $this->getEstEntradaItem($id)->getFkEntrada()->getPkEntrada();
+            // Traz o pkVenda
+            $pkVenda = $this->getComVendaItem($id)->getFkVenda()->getPkVenda();
             
             // Traz a entrada
-            $EstEntrada = $this->getEntrada($pkEntrada);
+            $ComVenda = $this->getVenda($pkVenda);
             
             // Verifica se já foi finalizado
-            if ($EstEntrada->getDhfinalizacao() != null) {
-                //$this->setErrMsg("Não é possível adicionar um item numa Entrada finalizada");
+            if ($ComVenda->getDhfinalizacao() != null) {
+                //$this->setErrMsg("Não é possível adicionar um item numa Venda finalizada");
                 return false;
             } else {
                 
-                $excluir = $this->getEm()->find("Application\Entity\EstEntradaItem", $id);
+                $excluir = $this->getEm()->find("Application\Entity\ComVendaItem", $id);
                 $this->getEm()->remove($excluir);
                 $this->getEm()->flush();
                 
@@ -132,10 +132,10 @@ class EntradaItem {
     
     /**
      * @param type $id
-     * @return EstEntradaItem
+     * @return ComVendaItem
      */
-    public function getEstEntradaItem($id) {
-        return $this->getEm()->getRepository("Application\Entity\EstEntradaItem")->find($id);
+    public function getComVendaItem($id) {
+        return $this->getEm()->getRepository("Application\Entity\ComVendaItem")->find($id);
     }
     
     /**
@@ -148,13 +148,13 @@ class EntradaItem {
     
     /**
      * @param type $id
-     * @return EstEntradaItemItem
+     * @return ComVendaItemItem
      */
-    public function getEntrada($id) {
+    public function getVenda($id) {
 
-        //return $this->getEm()->getRepository("Application\Entity\EstEntrada")
-        //    ->find($this->getEstEntradaItem($id)->getFkEntrada()->getPkEntrada());
-        return $this->getEm()->getRepository("Application\Entity\EstEntrada")
+        //return $this->getEm()->getRepository("Application\Entity\ComVenda")
+        //    ->find($this->getComVendaItem($id)->getFkVenda()->getPkVenda());
+        return $this->getEm()->getRepository("Application\Entity\ComVenda")
             ->find($id);
 
     }
@@ -182,11 +182,11 @@ class EntradaItem {
      */
     function canChange($id) {
 
-        $EstEntrada = $this->getEntrada($id);
-            
+        $ComVenda = $this->getVenda($id);
+        
         // Verifica se já foi finalizado
-        if ($EstEntrada->getDhfinalizacao() != null) {
-            //$this->setErrMsg("Não é possível adicionar um item numa Entrada finalizada");
+        if ($ComVenda->getDhfechamento() != null) {
+            //$this->setErrMsg("Não é possível adicionar um item numa Venda finalizada");
             return false;
         } else {
             return true;

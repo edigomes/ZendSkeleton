@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <!-- FormulÃ¡rio Modal -->
-<div class="modal-content" ng-controller="EntradaController">
+<div class="modal-content" ng-controller="VendaController">
     
     <!-- CabeÃ§alho -->
     <div class="modal-header background">
@@ -11,7 +11,7 @@
             <span class="" aria-label="Left Align">
                 <!--<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                 &nbsp;Novo Cliente <pre>{{customer | json}}</pre>-->
-                <!--<pre>{{EstEntrada | json}}</pre>-->
+                <!--<pre>{{ComVenda | json}}</pre>-->
                 {{ title }}
             </span>
             <span>
@@ -39,31 +39,32 @@
             <div class="tab-content p m-b-md b-t b-t-2x mb0">
                 <div role="tabpanel" class="tab-pane animated fadeIn active" id="tab_1">
                     
-                    <form id="EstEntrada" name="EstEntrada" ng-submit="update()">
+                    <form id="ComVenda" name="ComVenda" ng-submit="update()">
                         
                         <fieldset>
-                            <legend>Dados da Entrada</legend>
+                            <legend>Dados da Venda</legend>
                             <div class="row">
                                 <div class="col-sm-12 col-lg-6">
                                     <div class="md-form-group float-label form-group">
-                                        <label for="codigo">Fornecedor</label>
+                                        <label for="codigo">Cliente</label>
                                         
                                         <!--<select
                                             required
                                             pattern="[A-Za-z]{2,}"
-                                            ng-model="formObject.CadFornecedor"
-                                            ng-options="item.xNome for item in CadFornecedor.result track by item.xNome"
+                                            ng-model="formObject.CadCliente"
+                                            ng-options="item.xNome for item in CadCliente.result track by item.xNome"
                                             class="form-control">
                                         </select>
-                                        {{ formObject.CadFornecedor  }}-->
-                                        <angucomplete-alt id="CadFornecedor" name="CadFornecedor"
-                                            placeholder="Buscar fornecedor"
+                                        {{ formObject.CadCliente  }}-->
+                                        
+                                        <angucomplete-alt id="CadCliente" name="CadCliente"
+                                            placeholder="Buscar cliente"
                                             pause="400"
-                                            selected-object="setCadFornecedor"
-                                            initial-value="formObject.CadFornecedor"
-                                            remote-url="../public/fornecedor?keywords="
+                                            selected-object="setCadCliente"
+                                            initial-value="formObject.CadCliente"
+                                            remote-url="../public/cliente?keywords="
                                             remote-url-data-field="result"
-                                            title-field="xNome, PK_fornecedor"
+                                            title-field="xNome, PK_cliente"
                                             description-field="xFant"
                                             field-required="true"
                                             match-class="highlight"
@@ -96,13 +97,13 @@
                         
                     </form>
                     
-                    <form id="EstEntradaItem" name="EstEntradaItem">
-                        <fieldset ng-controller="EntradaItemController">
+                    <form id="ComVendaItem" name="ComVendaItem">
+                        <fieldset ng-controller="VendaItemController">
 
                             <legend>Produtos</legend>
 
                             <div class="row">
-                                <!--<pre>{{EntradaItem | json}}</pre>-->
+                                <!--<pre>{{VendaItem | json}}</pre>-->
                                 <div class="col-sm-12 col-lg-8">
                                     <div class="md-form-group float-label">
                                         <label for="codigo">Produto</label>
@@ -115,7 +116,7 @@
                                             required="number"
                                             class="form-control">
                                         </select>-->
-                                        
+
                                         <angucomplete-alt id="EstItem" name="EstItem"
                                             placeholder="Buscar produto"
                                             pause="400"
@@ -130,7 +131,7 @@
                                             input-class="md-input ng-pristine ng-untouched ng-valid"/>
                                     </div>
                                 </div>
-
+                                
                                 <div class="col-sm-6 col-lg-2">
                                     <div class="md-form-group float-label">
                                         <label>Quantidade</label>
@@ -150,7 +151,7 @@
 
                             <div class="row">
                                 <div class="col-lg-1">
-                                    <button ng-disabled="EstEntradaItem.$invalid" ng-click="update()" class="btn btn-info">
+                                    <button ng-disabled="ComVendaItem.$invalid" ng-click="update()" class="btn btn-info">
                                         <span class="glyphicon glyphicon-floppy-disk"></span> Salvar Item
                                     </button>
                                 </div>
@@ -159,15 +160,15 @@
                             <div class="row" style="margin-top: 10px">
                                 <div class="col-sm-12 col-lg-12">
                                     <div class="table-responsive">
-                                        <table ng-table="EntradaItemList" class="table table-striped ng-table-responsive dataTable">
+                                        <table ng-table="VendaItemList" class="table table-striped ng-table-responsive dataTable">
                                             <tr ng-repeat="item in $data">
                                                 <td data-title="'Código'">{{item.EstItem.PK_item}}</td>
-                                                <td width="750" data-title="'Descrição'"><a ng-click="show(item.pkEntradaItem)">{{item.EstItem.xProd}}</a></td>
+                                                <td width="750" data-title="'Descrição'"><a ng-click="show(item.pkVendaItem)">{{item.EstItem.xProd}}</a></td>
                                                 <td data-title="'Qtde'">{{item.qtrib | cmddec }}</td>
                                                 <td data-title="'Preço'">{{item.vuntrib | cmdcur : ""}}</td>
                                                 <td data-title="'Total'">{{(item.vuntrib * item.qtrib).toFixed(2) | cmdcur : ""}}</td>
                                                 <td width="20">
-                                                    <button ng-click="remove(item.pkEntradaItem)" class="btn btn-xs btn-default" type="button" tabindex="0">
+                                                    <button ng-click="remove(item.pkVendaItem)" class="btn btn-xs btn-default" type="button" tabindex="0">
                                                         <i class="fa fa-times"></i>
                                                     </button>
                                                 </td>
@@ -192,7 +193,7 @@
                     Lançamento de contas a pagar, ref a esta compra
                 </div>
                 <div role="tabpanel" class="tab-pane animated fadeIn" id="tab_3">
-                    Importação de arquivo XML para entrada automática
+                    Importação de arquivo XML para venda automática
                 </div>
             </div>
         </div>
@@ -201,14 +202,14 @@
     
     <!-- Modal Footer -->
     <div class="modal-footer">
-        {{ EstEntrada.$invalid }}
-        <button ng-disabled="EstEntrada.$invalid" form="EstEntrada" type="submit" class="btn btn-success pull-left">
+        {{ ComVenda.$invalid }}
+        <button ng-disabled="ComVenda.$invalid" form="ComVenda" type="submit" class="btn btn-success pull-left">
             <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
         </button>
-        <button ng-disabled="formObject.dhfinalizacao.date" ng-click="finalizaEntrada()" type="button" class="btn btn-primary pull-left">
+        <button ng-disabled="formObject.dhfinalizacao.date" ng-click="finalizaVenda()" type="button" class="btn btn-primary pull-left">
             <span class="glyphicon glyphicon-ok"></span> Finalizar
         </button>
-        <button ng-disabled="(formObject.dhcancelamento.date!==null)?true:false" ng-click="cancelaEntrada()" type="button" class="btn btn-danger pull-left">
+        <button ng-disabled="(formObject.dhcancelamento.date!==null)?true:false" ng-click="cancelaVenda()" type="button" class="btn btn-danger pull-left">
             <span class="mdi-navigation-cancel"></span> Cancelar
         </button>
         <button ng-click="cancel()" type="button" class="btn btn-default pull-left">

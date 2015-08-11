@@ -1,8 +1,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
 <ol class="breadcrumb">
-    <li><a href="#">Estoque</a></li>
-    <li class="active">Entrada</li>
+    <li><a href="#">Comercial</a></li>
+    <li class="active">Venda</li>
 </ol>
 
 <div class="panel panel-default">
@@ -13,7 +13,7 @@
             
             <div class="margin-bottom-sm col-sm-6 col-lg-6">
                 <div class="input-group">
-                    <a ui-sref="entrada.new" class="btn btn-primary btn-success pull-left">
+                    <a ui-sref="venda.new" class="btn btn-primary btn-success pull-left">
                         <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Adicionar
                     </a>
                 </div>
@@ -42,12 +42,16 @@
         <!-- Table -->
         
         <div class="table-responsive">
-            <table ng-table="EntradaList" class="table table-striped ng-table-responsive">
+            <table ng-table="VendaList" class="table table-striped ng-table-responsive">
                 <tr ng-repeat="list in $data">
-                    <td width="50" style="text-align: left" data-title="'#'">{{list.pkEntrada}}</td>
-                    <td data-title="'Fornecedor'"><a href="#/entrada/edit/{{list.pkEntrada}}">{{list.CadFornecedor.xNome}}</a></td>
+                    <td width="50" style="text-align: left" data-title="'#'">{{list.pkVenda}}</td>
+                    <td data-title="'Cliente'">
+                        <a href="#/venda/edit/{{list.pkVenda}}">
+                            {{list.CadCliente.xNome}} <i class="mdi-action-open-in-new"></i>
+                        </a>
+                    </td>
                     <td width="200" data-title="'Abertura'">{{list.dhabertura.date | cmdate:'dd/MM/yyyy HH:mm'}}</td>
-                    <td width="200" data-title="'Fechamento'">{{list.dhfinalizacao.date | cmdate:'dd/MM/yyyy HH:mm'}}</td>
+                    <td width="200" data-title="'Fechamento'">{{list.dhfechamento.date | cmdate:'dd/MM/yyyy HH:mm'}}</td>
                     <td width="200" data-title="'Cancelamento'">{{list.dhcancelamento.date | cmdate:'dd/MM/yyyy HH:mm'}}</td>
                     <!--<td>
                         <a class="btn btn-danger"  ng-click="deleteMovie(movie)">Delete</a>

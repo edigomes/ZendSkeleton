@@ -1,61 +1,63 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
 <ol class="breadcrumb">
-  <li><a href="#">Cadastro</a></li>
-  <li class="active">Estoque</li>
+  <li><a href="#">Estoque</a></li>
+  <li class="active">Itens</li>
 </ol>
 
 <div>
     <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading clearfix">
+        <div class="panel-heading">
 
-            <!-- Botão Adicionar -->
-            <div class="btn-toolbar pull-left">
-                <a ui-sref="estoque.new" class="btn btn-primary btn-primary pull-left">
-                    <span class="glyphicon glyphicon-plus-sign"></span>
-                    Adicionar
-                </a>
-            </div>
+            <div class="row">
 
-            <a ng-click="keywords = ''; $root.$broadcast('updateList')" class="btn btn-primary pull-right col-xs-1">Limpar</a>
+                <div class="margin-bottom-sm col-sm-6 col-lg-6">
+                    <div class="input-group">
+                        <a ui-sref="estoque.new" class="btn btn-primary btn-success pull-left">
+                            <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Adicionar
+                        </a>
+                    </div>
+                </div>
 
-            <!-- Search input -->
-            <div class="btn-toolbar pull-right col-xs-3">
-                <input type="text" class="form-control pull-right col-xs-3" placeholder="Search" ng-model="keywords" ng-enter="$root.$broadcast('updateList')">
-            </div>
-
-            <!-- Single button -->
-            <div class="btn-group pull-right test">
-                <button type="button" style="height: 34px" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="glyphicon glyphicon-filter"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                </ul>
+                <div class="col-sm-6 col-lg-6">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" ng-click="keywords = ''; $root.$broadcast('updateList')" type="button">
+                                &nbsp;<span class="glyphicon glyphicon-refresh"></span>
+                            </button>
+                        </span>
+                        <input type="text" id="busca" class="form-control collapse" placeholder="Pesquisa" ng-model="keywords" ng-enter="$root.$broadcast('updateList')">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" ng-model="keywords" ng-click="$root.$broadcast('updateList')" type="button">
+                                &nbsp;<span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
             </div>
 
         </div>
-        <!--<div class="container-fluid">
-            <div class="table table-striped gridStyle" ng-grid="gridOptions"></div>
-        </div>-->
+
         <!-- Table -->
-        <table ng-table="EstoqueList" class="table table-striped ng-table-responsive">
-            <tr ng-repeat="list in $data">
-                <td style="text-align: left" data-title="'#'">{{list.PK_item}}</td>
-                <td data-title="'Código'">{{list.codigo}}</td>
-                <td data-title="'Descrição'"><a href="#/estoque/edit/{{list.PK_item}}">{{list.xProd}}</a></td>
-                <td data-title="'Quantidade'">{{list.quantidade}}</td>
-                <td data-title="'Preço'">{{list.vUnTrib}}</td>
-                <!--<td>
-                    <a class="btn btn-danger"  ng-click="deleteMovie(movie)">Delete</a>
-                </td>-->
-            </tr>
-        </table>
+        <div class="table-responsive">
+            <table ng-table="EstoqueList" class="table table-striped ng-table-responsive">
+                <tr ng-repeat="list in $data">
+                    <td width="50" style="text-align: left" data-title="'#'">{{list.PK_item}}</td>
+                    <td width="100" data-title="'Código'">{{list.codigo}}</td>
+                    <td data-title="'Descrição'">
+                        <a title="Editar" href="#/estoque/edit/{{list.PK_item}}">
+                            {{list.xProd}} <i class="mdi-action-open-in-new"></i>
+                        </a>
+                    </td>
+                    <td width="100" data-title="'Quantidade'">{{list.quantidade | cmddec }}</td>
+                    <td width="100" data-title="'Preço'">{{list.vUnTrib | cmdcur}}</td>
+                    <!--<td>
+                        <a class="btn btn-danger"  ng-click="deleteMovie(movie)">Delete</a>
+                    </td>-->
+                </tr>
+            </table>
+        </div>
 
     </div>
 </div>

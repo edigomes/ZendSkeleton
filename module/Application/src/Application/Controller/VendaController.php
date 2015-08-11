@@ -8,11 +8,11 @@ use Zend\View\Model\JsonModel;
  * Description of AbstractController
  * @author Edi
  */
-class EntradaController extends AppAbstractController {
+class VendaController extends AppAbstractController {
     
     function __construct() {
-        $this->setEntity('Application\Entity\EstEntrada', "e");
-        $this->addJoin("CadFornecedor", "f");
+        $this->setEntity('Application\Entity\ComVenda', "e");
+        $this->addJoin("CadCliente", "c");
     }
 
     public function create($data) {
@@ -33,25 +33,25 @@ class EntradaController extends AppAbstractController {
 
     public function update($id, $data) {
         
-        $EntradaService = $this->getEntradaService();
+        $VendaService = $this->getVendaService();
 
         if ($this->params()->fromQuery('finaliza')) {
             
-            if ($EntradaService->finalizaEntrada($id)) {
+            if ($VendaService->finalizaVenda($id)) {
                 return new JsonModel(array(
                     "status"=>true,
-                    "message"=>"Entrada finalizada com sucesso."
+                    "message"=>"Venda finalizada com sucesso."
                 ));
             } else {
                 return new JsonModel(array(
                     "status"=>false,
-                    "message"=>$EntradaService->getErrMsg()
+                    "message"=>$VendaService->getErrMsg()
                 ));
             }
             
         } else if ($this->params()->fromQuery('cancela')) {
             
-            if ($EntradaService->cancelaEntrada($id)) {
+            if ($VendaService->cancelaVenda($id)) {
                 return new JsonModel(array(
                     "status"=>true,
                     "message"=>"Esta entrada foi cancelada"
@@ -59,12 +59,12 @@ class EntradaController extends AppAbstractController {
             } else {
                 return new JsonModel(array(
                     "status"=>false,
-                    "message"=>$EntradaService->getErrMsg()
+                    "message"=>$VendaService->getErrMsg()
                 ));
             }
            
         } else {
-            if ($EntradaService->update($id, $data)) {
+            if ($VendaService->update($id, $data)) {
                 return new JsonModel(array(
                     "status"=>true,
                     "message"=>"O Registro foi salvo"
@@ -72,7 +72,7 @@ class EntradaController extends AppAbstractController {
             } else {
                 return new JsonModel(array(
                     "status"=>false,
-                    "message"=>$EntradaService->getErrMsg()
+                    "message"=>$VendaService->getErrMsg()
                 ));
             }
         }
@@ -81,10 +81,10 @@ class EntradaController extends AppAbstractController {
     
     /**
      * Return entrada service
-     * @return \Application\Service\Entrada
+     * @return \Application\Service\Venda
      */
-    function getEntradaService() {
-        return $this->getServiceLocator()->get('Application\EntradaService');
+    function getVendaService() {
+        return $this->getServiceLocator()->get('Application\VendaService');
     }
 
 }

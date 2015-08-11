@@ -7,11 +7,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
         <link rel="stylesheet" href="view/css/style.css">
+        <link rel="stylesheet" href="libs/angucomplete-alt.css">
         
         <link rel="stylesheet" href="libs/assets/animate.css/animate.css" type="text/css" />
         <link rel="stylesheet" href="libs/assets/font-awesome/css/font-awesome.css" type="text/css" />
         <link rel="stylesheet" href="libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
         <link rel="stylesheet" href="libs/jquery/waves/dist/waves.css" type="text/css" />
+        
+        <link rel="stylesheet" href="libs/angular/ngToast/ngToast.min.css" type="text/css" />
+        <link rel="stylesheet" href="libs/angular/ngToast/ngToast-animations.min.css" type="text/css" />
 
         <link rel="stylesheet" href="view/styles/material-design-icons.css" type="text/css" />
         <link rel="stylesheet" href="view/styles/font.css" type="text/css" />
@@ -20,7 +24,7 @@
     </head>
     <body>
         <div class="app" ng-app="app">
-
+        <toast></toast>
             <!-- aside -->
             <aside id="aside" class="app-aside modal fade " role="menu">
                 <div class="left">
@@ -79,7 +83,7 @@
                                                     </a>
                                                     <ul class="nav nav-sub">
                                                         <li><a md-ink-ripple ui-sref="entrada">Entrada de Mercadoria</a></li>
-                                                        <li><a md-ink-ripple ui-sref="estoque">Lista de Itens</a></li>       
+                                                        <li><a md-ink-ripple ui-sref="estoque">Itens</a></li>       
                                                     </ul>
                                                 </li>
                                                 <li>
@@ -119,23 +123,8 @@
                                                         <span>Comercial</span>
                                                     </a>
                                                     <ul class="nav nav-sub">
-                                                        <li><a md-ink-ripple href>Menu levels 1</a></li>
-                                                        <li>
-                                                            <a md-ink-ripple href>
-                                                                <span class="pull-right text-muted">
-                                                                    <i class="fa fa-caret-down"></i>
-                                                                </span>
-                                                                <span class="font-normal">Menu levels 2</span>
-                                                            </a>
-                                                            <ul class="nav nav-sub">
-                                                                <li>
-                                                                    <a md-ink-ripple href>Menu levels 2.1</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a md-ink-ripple href>Menu levels 2.2</a>
-                                                                </li>
-                                                            </ul>          
-                                                        </li>        
+                                                        <!--<li><a md-ink-ripple ui-sref="venda">Cotação</a></li>-->
+                                                        <li><a md-ink-ripple ui-sref="venda">Venda</a></li>       
                                                     </ul>
                                                 </li>
                                                 <li>
@@ -332,7 +321,7 @@
                         <a md-ink-ripple  data-toggle="modal" data-target="#aside" class="navbar-item pull-left visible-xs visible-sm"><i class="mdi-navigation-menu i-24"></i></a>
                         <!-- / -->
                         <!-- Page title - Bind to $state's title -->
-                        <div class="navbar-item pull-left h4">Entrada de Mercadoria</div>
+                        <div class="navbar-item pull-left h4"><!--Entrada de Mercadoria--></div>
                         <!-- / -->
                         <!-- Common tools -->
                         <ul class="nav navbar-tool pull-right">
@@ -565,7 +554,6 @@
                 </div>
             </div>
 
-
         </div>
 
         <script src="libs/jquery/jquery/dist/jquery.js"></script>
@@ -586,8 +574,12 @@
         <!--<script src="libs/bootstrap.min.js"></script>-->
         <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
         <script src="libs/notify.min.js"></script>
+        <script src="libs/ngMask.min.js"></script>
+        <script src="libs/angucomplete-alt.min.js"></script>
         <script src="modules/ng-table/ng-table.js"></script>
         <script src="modules/angular-resource.min.js"></script>
+        <script src="libs/angular/ngToast/ngToast.min.js"></script>
+        <script src="libs/angular/ngToast/angular-sanitize.js"></script>
         <script src="libs/angular-locale_pt-br.js"></script>
 
         <!-- APP -->
@@ -621,6 +613,14 @@
         <script src="components/entrada/controller/EntradaController.js"></script>
         <script src="components/entrada/controller/EntradaItemController.js"></script>
         <script src="components/entrada/controller/EntradaListController.js"></script>
+        
+        <script src="components/venda/service/VendaService.js"></script>
+        <script src="components/venda/service/VendaItemService.js"></script>
+        <script src="components/venda/controller/VendaController.js"></script>
+        <script src="components/venda/controller/VendaItemController.js"></script>
+        <script src="components/venda/controller/VendaListController.js"></script>
+        
+        <script src="factory/ToastService.js"></script>
         
         <script src="route/routes.js"></script>
         

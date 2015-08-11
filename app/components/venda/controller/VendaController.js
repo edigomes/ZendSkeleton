@@ -1,11 +1,11 @@
-app.controller('EntradaController', function($scope, $controller, $stateParams, EntradaService, FornecedorService, ToastService) {
+app.controller('VendaController', function($scope, $controller, $stateParams, VendaService, CustomersService, ToastService) {
     angular.extend(
         this,
         $controller(
             'AbstractListController', {
                 $scope: $scope,
-                formObject: $scope.EstEntrada = {},
-                defaultService: EntradaService
+                formObject: $scope.ComVenda = {},
+                defaultService: VendaService
             }
         )
     );
@@ -13,14 +13,14 @@ app.controller('EntradaController', function($scope, $controller, $stateParams, 
     // ???
     $scope.show($stateParams.id);
     
-    // Carrega fornecedores
-    $scope.CadFornecedor = FornecedorService.query();
+    // Carrega clientees
+    $scope.CadCliente = CustomersService.query();
     
     // Finaliza
-    $scope.finalizaEntrada = function() {
+    $scope.finalizaVenda = function() {
         $scope.update({
             callback: function() {
-                EntradaService.finaliza($scope.formObject, function(data) {
+                VendaService.finaliza($scope.formObject, function(data) {
                     ToastService.show(data);
                 });
             } // Obrigatório: este mêtodo prepara o id e as foreign keys
@@ -29,21 +29,21 @@ app.controller('EntradaController', function($scope, $controller, $stateParams, 
     };
     
     // Finaliza
-    $scope.cancelaEntrada = function() {
+    $scope.cancelaVenda = function() {
         
         // Resolve fk (documentar isto)
-        if (confirm("Voc\u00ea est\u00e1 prestes a cancelar esta entrada, todo estoque ser\u00e1 retornado, clique em OK para confirmar.")) {
-            EntradaService.cancela($scope.resolveFK($scope.formObject), function(data) {
+        if (confirm("Voc\u00ea est\u00e1 prestes a cancelar esta venda, todo estoque ser\u00e1 retornado, clique em OK para confirmar.")) {
+            VendaService.cancela($scope.resolveFK($scope.formObject), function(data) {
                 ToastService.show(data);
             });
         }
         
     };
     
-    // Callback autocomplete fornecedor
-    $scope.setCadFornecedor = function($item) {
+    // Callback autocomplete cliente
+    $scope.setCadCliente = function($item) {
         if ($item) {
-            $scope.formObject.CadFornecedor = $item.originalObject;
+            $scope.formObject.CadCliente = $item.originalObject;
         }
     };
     

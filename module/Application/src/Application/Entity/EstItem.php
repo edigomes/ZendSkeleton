@@ -70,26 +70,25 @@ class EstItem
      */
     private $marca;
 
-    /**
-     * @var integer
+    /**string
      *
-     * @ORM\Column(name="cor", type="integer", nullable=true)
+     * @ORM\Column(name="cor", type="string", nullable=true)
      */
     private $cor;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="NCM", type="integer", nullable=false)
+     * @ORM\Column(name="NCM", type="string", nullable=false)
      */
     private $NCM;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="cEAN", type="integer", nullable=true)
+     * @ORM\Column(name="cEAN", type="bigint", nullable=true)
      */
-    private $cEAN;
+    private $cEAN = null;
 
     /**
      * @var integer
@@ -153,20 +152,34 @@ class EstItem
      * @ORM\Column(name="pDifAliquota", type="float", precision=15, scale=2, nullable=true)
      */
     private $pDifAliquota;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="pCOFINS", type="float", precision=15, scale=2, nullable=true)
+     */
+    private $pCOFINS;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="pPIS", type="float", precision=15, scale=2, nullable=true)
+     */
+    private $pPIS;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="pFrete", type="float", precision=15, scale=2, nullable=true)
+     * @ORM\Column(name="vFrete", type="float", precision=15, scale=2, nullable=true)
      */
-    private $pFrete;
+    private $vFrete;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isentoPisCofins", type="boolean", nullable=true)
+     * @ORM\Column(name="CSFPISCOFINS", type="string", length=2, nullable=false)
      */
-    private $isentoPisCofins;
+    private $CSFPISCOFINS;
 
     /**
      * @var float
@@ -267,12 +280,8 @@ class EstItem
         return $this->pDifAliquota;
     }
 
-    function getPFrete() {
-        return $this->pFrete;
-    }
-
-    function getIsentoPisCofins() {
-        return $this->isentoPisCofins;
+    function getVFrete() {
+        return $this->vFrete;
     }
 
     function getPDescMaximo() {
@@ -324,7 +333,11 @@ class EstItem
     }
 
     function setCEAN($cEAN) {
-        $this->cEAN = $cEAN;
+        if (!empty($cEAN)) {
+            $this->cEAN = $cEAN;
+        } else {
+            $this->cEAN = null;
+        }
     }
 
     function setOrigem($origem) {
@@ -363,12 +376,8 @@ class EstItem
         $this->pDifAliquota = $pDifAliquota;
     }
 
-    function setPFrete($pFrete) {
-        $this->pFrete = $pFrete;
-    }
-
-    function setIsentoPisCofins($isentoPisCofins) {
-        $this->isentoPisCofins = $isentoPisCofins;
+    function setVFrete($vFrete) {
+        $this->vFrete = $vFrete;
     }
 
     function setPDescMaximo($pDescMaximo) {
@@ -377,6 +386,30 @@ class EstItem
 
     function setVUnTrib($vUnTrib) {
         $this->vUnTrib = $vUnTrib;
+    }
+
+    function getCSFPISCOFINS() {
+        return $this->CSFPISCOFINS;
+    }
+
+    function setCSFPISCOFINS($CSFPISCOFINS) {
+        $this->CSFPISCOFINS = $CSFPISCOFINS;
+    }
+    
+    function getPCOFINS() {
+        return $this->pCOFINS;
+    }
+
+    function setPCOFINS($pCOFINS) {
+        $this->pCOFINS = $pCOFINS;
+    }
+    
+    function getPPIS() {
+        return $this->pPIS;
+    }
+
+    function setPPIS($pPIS) {
+        $this->pPIS = $pPIS;
     }
 
 }

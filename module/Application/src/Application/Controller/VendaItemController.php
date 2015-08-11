@@ -8,18 +8,18 @@ use Zend\View\Model\JsonModel;
  * Description of AbstractController
  * @author Edi
  */
-class EntradaItemController extends AppAbstractController {
+class VendaItemController extends AppAbstractController {
     
     function __construct() {
-        $this->setEntity('Application\Entity\EstEntradaItem', "e");
+        $this->setEntity('Application\Entity\ComVendaItem', "e");
         $this->addJoin("EstItem", "i");
     }
 
     public function create($data) {
-        // Returns EntradaItemService
-        $EntradaItemService = $this->getEntradaItemService();
+        // Returns VendaItemService
+        $VendaItemService = $this->getVendaItemService();
         
-        if ($EntradaItemService->create($data)) {
+        if ($VendaItemService->create($data)) {
             return new JsonModel(array(
                 "status"=>true,
                 "message"=>"O Registro foi salvo"
@@ -27,17 +27,17 @@ class EntradaItemController extends AppAbstractController {
         } else {
             return new JsonModel(array(
                 "status"=>false,
-                "message"=>$EntradaItemService->getErrMsg()
+                "message"=>$VendaItemService->getErrMsg()
             ));
         }
     }
 
     public function delete($id) {
         
-        // Returns EntradaItemService
-        $EntradaItemService = $this->getEntradaItemService();
+        // Returns VendaItemService
+        $VendaItemService = $this->getVendaItemService();
         
-        if ($EntradaItemService->delete($id)) {
+        if ($VendaItemService->delete($id)) {
             return new JsonModel(array(
                 "status"=>true,
                 "message"=>"O Registro foi removido"
@@ -45,7 +45,7 @@ class EntradaItemController extends AppAbstractController {
         } else {
             return new JsonModel(array(
                 "status"=>false,
-                "message"=>$EntradaItemService->getErrMsg()
+                "message"=>$VendaItemService->getErrMsg()
             ));
         }
     }
@@ -60,10 +60,10 @@ class EntradaItemController extends AppAbstractController {
 
     public function update($id, $data) {
         
-        // Returns EntradaItemService
-        $EntradaItemService = $this->getEntradaItemService();
+        // Returns VendaItemService
+        $VendaItemService = $this->getVendaItemService();
         
-        if ($EntradaItemService->update($id, $data)) {
+        if ($VendaItemService->update($id, $data)) {
             return new JsonModel(array(
                 "status"=>true,
                 "message"=>"O Registro foi salvo"
@@ -71,7 +71,7 @@ class EntradaItemController extends AppAbstractController {
         } else {
             return new JsonModel(array(
                 "status"=>false,
-                "message"=>$EntradaItemService->getErrMsg()
+                "message"=>$VendaItemService->getErrMsg()
             ));
         }
         
@@ -79,10 +79,10 @@ class EntradaItemController extends AppAbstractController {
     
     /**
      * Return entrada service
-     * @return \Application\Service\EntradaItem
+     * @return \Application\Service\VendaItem
      */
-    function getEntradaItemService() {
-        return $this->getServiceLocator()->get('Application\EntradaItemService');
+    function getVendaItemService() {
+        return $this->getServiceLocator()->get('Application\VendaItemService');
     }
 
 }

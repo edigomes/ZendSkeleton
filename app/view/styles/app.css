@@ -1378,8 +1378,13 @@ a.list-group-item.hover {
   padding-bottom: 6px;
 }
 
-.panel-body {
+/****ORIGINAL*****/
+/*.panel-body {
   padding: 16px 24px;
+}*/
+
+.panel-body {
+  padding: 16px 0px;
 }
 
 .panel-footer {

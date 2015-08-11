@@ -1,7 +1,7 @@
-app.controller("EntradaItemController", function($controller, $scope, EntradaItemService, EstoqueService) {
+app.controller("VendaItemController", function($controller, $scope, VendaItemService, EstoqueService) {
 
-    $scope.EntradaItem = {
-        fkEntrada: function() { 
+    $scope.VendaItem = {
+        ComVenda: function() { 
             return $scope.$parent.getId(); 
         }
     };
@@ -11,17 +11,17 @@ app.controller("EntradaItemController", function($controller, $scope, EntradaIte
         $controller(
             'AbstractListController', {
                 $scope: $scope, 
-                formObject: $scope.EntradaItem, 
-                defaultService: EntradaItemService
+                formObject: $scope.VendaItem, 
+                defaultService: VendaItemService
             }
         )
     );
     
     // Load itens list
-    $scope.EntradaItemList = $scope.loadList($scope.EntradaItem);
+    $scope.VendaItemList = $scope.loadList($scope.VendaItem);
         
     // Load itens on select
-    //$scope.EstItem = EstoqueService.query();
+    $scope.EstItem = EstoqueService.query();
     
     // Callback autocomplete fornecedor
     $scope.setEstItem = function($item) {

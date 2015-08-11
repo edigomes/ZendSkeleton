@@ -1,5 +1,5 @@
 //app.controller("AbstractListController", function($rootScope, $location, $scope, defaultService, ngTableParams, ModalFormService) {
-app.controller("AbstractListController", function($rootScope, $location, $stateParams, $scope, formObject, defaultService, ngTableParams) {
+app.controller("AbstractListController", function($rootScope, $location, $stateParams, $scope, formObject, defaultService, ngTableParams, ToastService) {
     
     // Sets active tab on menu
     $rootScope.activetab = $location.path();
@@ -15,6 +15,7 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
     $scope.show = function(id) {
         if (!id) return; 
         $scope.defaultService.show({id: id}, function(obj) {
+            //$scope.$broadcast('angucomplete-alt:clearInput');
             $scope.formObject = obj;
         });
     };
@@ -22,6 +23,7 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
     // Create new fornecedor
     $scope.create = function() {
         $scope.defaultService.create($scope.formObject, function(data){
+            
             if (data.status) {
                 
                 if ($scope.$parent.formObject === undefined) {
@@ -29,12 +31,18 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
                     $scope.formObject = data.insertObject;
                 }
                 
-                $.notify(data.message, {globalPosition: "bottom right", className: 'success'});
+                ToastService.show(data);
+                
                 $scope.$root.$broadcast("updateList");
-                if (!$scope.isParent()) {
-                    $scope.reset();
-                }
+                
+            } else {
+                ToastService.show(data);
             }
+            
+            if (!$scope.isParent()) {
+                $scope.reset();
+            }
+            
         });
     };
     
@@ -45,17 +53,27 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
             return;
         } 
         if (confirm("Excluir item "+id+"?")) {
-            $scope.defaultService.delete(id, function(data){
-                if (data.status) {
-                    $.notify(data.message, {globalPosition: "bottom right", className: 'success'});
-                    $scope.$root.$broadcast("updateList");
-                }
+            $scope.defaultService.delete({id: id}, function(data){
+                ToastService.show(data);
+                $scope.$root.$broadcast("updateList");
             });
         }
     };
     
     // Update
-    $scope.update = function(callback) {
+    //$scope.update = function(callback) {
+    $scope.update = function(options) {
+        
+        if (options) {
+        
+            //if (options.validate !== undefined && !options.validate) {
+                //ToastService.showError(decodeURI("Alguns campos obrigat\u00f3rios n\u00e3o foram preenchidos"));
+                //return false;
+            //}
+        
+        } else {
+            options = {};
+        }
         
         //var toUpdate = $scope.resolveFK($scope.formObject);
         $scope.formObject = $scope.resolveFK($scope.formObject);
@@ -73,14 +91,21 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
                     }
                     
                     // If callback
-                    if (callback) {
-                        callback();
-                    } else {   
-                        $.notify(data.message, {globalPosition: "bottom right", className: 'success'});
+                    if (options.callback !== undefined) {
+                        options.callback();
+                    } else {
+                        ToastService.show(data);
                     }
                     
                 } else {
-                    $.notify(data.message, {globalPosition: "bottom right", className: 'error'});
+                    
+                    ToastService.show(data);
+                    
+                    // Reset form if not parent
+                    if (!$scope.isParent()) {
+                        $scope.reset();
+                    }
+                    
                 }
             });
         } else {
@@ -105,8 +130,15 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
             //}
         }, {
             total: 0,           // length of data
+            counts: [], // hide page counts control
             getData: function($defer, params) {
                 service.query({page : params.page(), count: params.count(), keywords: $scope.keywords, where: $scope.resolveFK(where)}, function(data) {
+                    
+                    if (data.result === undefined) {
+                        alert("Retorno inesperado do REST, por favor verifique a resposta!");
+                        return false;
+                    }
+                    
                     // update table params
                     params.total(data.pageCount*params.count());
                     
@@ -132,6 +164,9 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
     };
     
     $scope.reset = function() {
+        // Reset autocomplete
+        //$scope.$broadcast('angucomplete-alt:clearInput');
+        // Copia o estado inicial do form para reseta-lo
         $scope.formObject = angular.copy($scope.masterDefaultObject);
     };
     
@@ -179,6 +214,7 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
     $scope.resolveFK = function(objToResolve) {
         
         var toResolve = angular.copy(objToResolve);
+        var resolveu = false;
         
         for (prop in toResolve) {
             if (typeof toResolve[prop] === 'function') {
@@ -188,6 +224,7 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
                     var value = toResolve[prop]();
                     if (value !== undefined) {
                         toResolve[prop] = value;
+                        resolveu = true;
                     } else {
                         toResolve[prop] = null;
                     }
@@ -195,6 +232,12 @@ app.controller("AbstractListController", function($rootScope, $location, $stateP
             }
         }
         
+        // Adiciona o id para o rest
+        if (toResolve !== undefined && !resolveu) {
+            toResolve.id = $scope.getId();
+        }
+        
+        // Retorno
         return toResolve;
         
     };

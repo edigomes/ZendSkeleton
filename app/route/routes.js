@@ -66,7 +66,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         onEnter: function ($stateParams, ModalFormService) {
             ModalFormService.openModal(
                 'components/estoque/view/EstoqueFormView.html', 
-                {title: "Editar Estoque"}
+                {title: "Alterar Item"}
             );
         }
     }).state('estoque.new', {
@@ -74,7 +74,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         onEnter: function (ModalFormService) {
             ModalFormService.openModal(
                 'components/estoque/view/EstoqueFormView.html', 
-                {title: "Novo Estoque"}
+                {title: "Novo Item"}
             );
         }
     })
@@ -99,6 +99,30 @@ app.config(function($stateProvider, $urlRouterProvider){
             ModalFormService.openModal(
                 'components/entrada/view/EntradaFormView.html', 
                 {title: "Novo Entrada"}
+            );
+        }
+    })
+    
+    /*********************************************************/
+    
+    .state('venda', {
+        url: "/venda",
+        templateUrl: 'components/venda/view/VendaListView.html',
+        controller: 'VendaListController'
+    }).state('venda.edit', {
+        url: "/edit/{id}",
+        onEnter: function ($stateParams, ModalFormService) {
+            ModalFormService.openModal(
+                'components/venda/view/VendaFormView.html', 
+                {title: "Editar Venda"}
+            );
+        }
+    }).state('venda.new', {
+        url: "/new",
+        onEnter: function (ModalFormService) {
+            ModalFormService.openModal(
+                'components/venda/view/VendaFormView.html', 
+                {title: "Nova Venda"}
             );
         }
     });

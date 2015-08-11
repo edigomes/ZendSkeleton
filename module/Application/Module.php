@@ -50,6 +50,12 @@ class Module
                 'Application\EntradaItemService' => function ($sm) {
                     return new \Application\Service\EntradaItem($sm->get('Doctrine\ORM\EntityManager'));
                 },
+                'Application\VendaService' => function ($sm) {
+                    return new \Application\Service\Venda($sm->get('Doctrine\ORM\EntityManager'));
+                },
+                'Application\VendaItemService' => function ($sm) {
+                    return new \Application\Service\VendaItem($sm->get('Doctrine\ORM\EntityManager'));
+                },
             )
         );
     }

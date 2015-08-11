@@ -64,10 +64,10 @@ class EstItem extends \Application\Entity\EstItem implements \Doctrine\ORM\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'PK_item', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'FK_grupo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'FK_unidade', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'FK_fabricante', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'dhCadastro', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'codigo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'xProd', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'marca', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'cor', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'NCM', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'cEAN', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'origem', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'quantidade', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'bloqueado', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'natureza', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'CST', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'custo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pIPI', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pST', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pDifAliquota', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pFrete', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'isentoPisCofins', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pDescMaximo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'vUnTrib');
+            return array('__isInitialized__', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'PK_item', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'FK_grupo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'FK_unidade', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'FK_fabricante', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'dhCadastro', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'codigo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'xProd', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'marca', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'cor', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'NCM', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'cEAN', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'origem', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'quantidade', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'bloqueado', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'natureza', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'CST', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'custo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pIPI', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pST', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pDifAliquota', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pCOFINS', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pPIS', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'vFrete', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'CSFPISCOFINS', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pDescMaximo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'vUnTrib');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'PK_item', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'FK_grupo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'FK_unidade', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'FK_fabricante', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'dhCadastro', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'codigo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'xProd', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'marca', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'cor', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'NCM', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'cEAN', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'origem', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'quantidade', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'bloqueado', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'natureza', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'CST', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'custo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pIPI', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pST', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pDifAliquota', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pFrete', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'isentoPisCofins', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pDescMaximo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'vUnTrib');
+        return array('__isInitialized__', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'PK_item', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'FK_grupo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'FK_unidade', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'FK_fabricante', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'dhCadastro', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'codigo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'xProd', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'marca', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'cor', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'NCM', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'cEAN', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'origem', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'quantidade', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'bloqueado', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'natureza', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'CST', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'custo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pIPI', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pST', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pDifAliquota', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pCOFINS', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pPIS', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'vFrete', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'CSFPISCOFINS', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'pDescMaximo', '' . "\0" . 'Application\\Entity\\EstItem' . "\0" . 'vUnTrib');
     }
 
     /**
@@ -385,23 +385,12 @@ class EstItem extends \Application\Entity\EstItem implements \Doctrine\ORM\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getPFrete()
+    public function getVFrete()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPFrete', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVFrete', array());
 
-        return parent::getPFrete();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getIsentoPisCofins()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIsentoPisCofins', array());
-
-        return parent::getIsentoPisCofins();
+        return parent::getVFrete();
     }
 
     /**
@@ -638,23 +627,12 @@ class EstItem extends \Application\Entity\EstItem implements \Doctrine\ORM\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setPFrete($pFrete)
+    public function setVFrete($vFrete)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPFrete', array($pFrete));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVFrete', array($vFrete));
 
-        return parent::setPFrete($pFrete);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setIsentoPisCofins($isentoPisCofins)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIsentoPisCofins', array($isentoPisCofins));
-
-        return parent::setIsentoPisCofins($isentoPisCofins);
+        return parent::setVFrete($vFrete);
     }
 
     /**
@@ -677,6 +655,72 @@ class EstItem extends \Application\Entity\EstItem implements \Doctrine\ORM\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVUnTrib', array($vUnTrib));
 
         return parent::setVUnTrib($vUnTrib);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCSFPISCOFINS()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCSFPISCOFINS', array());
+
+        return parent::getCSFPISCOFINS();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCSFPISCOFINS($CSFPISCOFINS)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCSFPISCOFINS', array($CSFPISCOFINS));
+
+        return parent::setCSFPISCOFINS($CSFPISCOFINS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPCOFINS()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPCOFINS', array());
+
+        return parent::getPCOFINS();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPCOFINS($pCOFINS)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPCOFINS', array($pCOFINS));
+
+        return parent::setPCOFINS($pCOFINS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPPIS()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPPIS', array());
+
+        return parent::getPPIS();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPPIS($pPIS)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPPIS', array($pPIS));
+
+        return parent::setPPIS($pPIS);
     }
 
 }

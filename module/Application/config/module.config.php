@@ -140,6 +140,32 @@ return array(
                     ),
                 ),
             ),
+            'venda' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    //'route' => '/system[/:table][/:id][/:data]',
+                    'route' => '/venda[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Venda',
+                    ),
+                ),
+            ),
+            'vendaitem' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    //'route' => '/system[/:table][/:id][/:data]',
+                    'route' => '/vendaitem[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\VendaItem',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -176,7 +202,9 @@ return array(
             'Application\Controller\ContatoFornecedor' => 'Application\Controller\ContatoFornecedorController',
             'Application\Controller\Estoque' => 'Application\Controller\EstoqueController',
             'Application\Controller\Entrada' => 'Application\Controller\EntradaController',
-            'Application\Controller\EntradaItem' => 'Application\Controller\EntradaItemController'
+            'Application\Controller\EntradaItem' => 'Application\Controller\EntradaItemController',
+            'Application\Controller\Venda' => 'Application\Controller\VendaController',
+            'Application\Controller\VendaItem' => 'Application\Controller\VendaItemController'
         ),
     ),
     /*'view_manager' => array(

@@ -31,7 +31,7 @@ class EstEntrada
     /**
      * @var \Date
      *
-     * @ORM\Column(name="dhAbertura", type="date", nullable=false)
+     * @ORM\Column(name="dhAbertura", type="datetime", nullable=false)
      */
     private $dhabertura;
 

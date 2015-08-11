@@ -11,6 +11,16 @@ a:hover {
     cursor: pointer;
 }
 
+
+
+.modal-body {
+    padding: 0px !important;
+}
+
+.mb0 {
+    margin-bottom: 0px !important;
+}
+
 .ngGrid {
     height: 400px;
 }
@@ -48,12 +58,17 @@ body {
 .navbar-md .navbar-toggle {margin: 6px 12px 6px 0px; padding: 6px 7px 6px 7px;}
 .navbar-md .navbar-toggle .icon-bar {width: 19px;}*/
 
+.highlight {
+    color: red;
+}
+
 .ng-table th {
   text-align: left !important;
 }
 
 .ng-table-pager {
-    padding: 15px !important;
+    padding-left: 15px !important;
+    margin-top: -13px;
 }
 
 .ng-table-pagination {
@@ -63,6 +78,12 @@ body {
 @media (max-width:768px) { 
     .margin-bottom-sm {
         margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 992px) {
+    .modal-lg {
+        width: 1000px !important;
     }
 }
 

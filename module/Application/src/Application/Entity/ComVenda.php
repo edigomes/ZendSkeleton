@@ -22,11 +22,14 @@ class ComVenda
     private $pkVenda;
 
     /**
-     * @var integer
+     * @var \Application\Entity\CadCliente
      *
-     * @ORM\Column(name="FK_cliente", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Application\Entity\CadCliente")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="FK_cliente", referencedColumnName="PK_cliente")
+     * })
      */
-    private $fkCliente;
+    private $CadCliente;
 
     /**
      * @var \DateTime
@@ -55,7 +58,54 @@ class ComVenda
      * @ORM\Column(name="dhUltAlteracao", type="datetime", nullable=true)
      */
     private $dhultalteracao;
+    
+    function getPkVenda() {
+        return $this->pkVenda;
+    }
 
+    function getCadCliente() {
+        return $this->CadCliente;
+    }
 
+    function getDhabertura() {
+        return $this->dhabertura;
+    }
+
+    function getDhfechamento() {
+        return $this->dhfechamento;
+    }
+
+    function getDhcancelamento() {
+        return $this->dhcancelamento;
+    }
+
+    function getDhultalteracao() {
+        return $this->dhultalteracao;
+    }
+
+    function setPkVenda($pkVenda) {
+        $this->pkVenda = $pkVenda;
+    }
+
+    function setCadCliente(\Application\Entity\CadCliente $CadCliente) {
+        $this->CadCliente = $CadCliente;
+    }
+
+    function setDhabertura(\DateTime $dhabertura) {
+        $this->dhabertura = new \DateTime($dhabertura['date']);
+    }
+
+    function setDhfechamento(\DateTime $dhfechamento) {
+        $this->dhfechamento = is_null($dhfechamento['date'])?null:new \DateTime($dhfechamento['date']);
+    }
+
+    function setDhcancelamento(\DateTime $dhcancelamento) {
+        $this->dhcancelamento = is_null($dhcancelamento['date'])?null:new \DateTime($dhcancelamento['date']);
+    }
+
+    function setDhultalteracao(\DateTime $dhultalteracao) {
+        $this->dhultalteracao = is_null($dhultalteracao['date'])?null:new \DateTime($dhultalteracao['date']);
+    }
+    
 }
 
